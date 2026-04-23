@@ -4,6 +4,7 @@ extends Node2D
 var data: Dictionary = {}
 var radius: float = 80.0
 var found: bool = false
+var highlighted: bool = false
 
 func setup(interactable_data: Dictionary) -> void:
 	data = interactable_data
@@ -29,6 +30,13 @@ func mark_found() -> void:
 	queue_redraw()
 
 
+func set_highlighted(value: bool) -> void:
+	if highlighted == value:
+		return
+	highlighted = value
+	queue_redraw()
+
+
 func _draw() -> void:
 	if found and interaction_type() == "clue":
 		return
@@ -39,9 +47,15 @@ func _draw() -> void:
 		fill = Color8(62, 132, 184)
 	elif interaction_type() == "support_phone":
 		fill = Color8(57, 102, 201)
+	if highlighted:
+		var pulse: float = 4.0 + sin(Time.get_ticks_msec() / 220.0) * 2.0
+		draw_circle(Vector2.ZERO, 31.0 + pulse, Color(fill.r, fill.g, fill.b, 0.20))
+		draw_circle(Vector2.ZERO, 30.0 + pulse, fill, false, 4.0)
 	draw_circle(Vector2.ZERO, 17.0, fill)
 	draw_circle(Vector2.ZERO, 17.0, Color8(248, 244, 232), false, 3.0)
 	draw_string(ThemeDB.fallback_font, Vector2(-18, 34), _short_label(), HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color8(24, 38, 52))
+	if highlighted:
+		draw_string(ThemeDB.fallback_font, Vector2(-34, -34), "目标", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color8(24, 38, 52))
 
 
 func _short_label() -> String:

@@ -13,9 +13,9 @@ const PHASE_ALL_CLEAR := "AllClear"
 var phase: String = PHASE_OPENING
 var elapsed: float = 0.0
 var alert_elapsed: float = 0.0
-var alert_delay: float = 35.0
-var assistance_delay: float = 420.0
-var police_eta: float = 420.0
+var alert_delay: float = 55.0
+var assistance_delay: float = 180.0
+var police_eta: float = 180.0
 var clues_found: int = 0
 var map_reads: int = 0
 var official_info_read: bool = false
@@ -77,11 +77,11 @@ func record_interaction(interaction: Dictionary) -> String:
 	match interaction_type:
 		"map_board":
 			map_reads += 1
-			return "地图板：确认当前位置和出口，不要依赖右上角常驻小地图。"
+			return "地图板已读取：当前位置、主出口和服务通道已更新到路线判断。"
 		"official_notice":
 			official_info_read = true
 			begin_alert()
-			return "官方警报：优先听学校和应急部门信息，不跟随未经确认的传言。"
+			return "官方警报已确认：进入警报态，目标改为撤离、服务通道或等待援助。"
 		"door_lock":
 			door_lock_checked = true
 			return "门锁检查：合格避险空间应可上锁、避开视线、远离玻璃暴露。"
@@ -118,6 +118,7 @@ func hud_state(location: String, bottles: int) -> Dictionary:
 		"clues": clues_found,
 		"police_eta": police_eta,
 		"objective": _objective_text(),
+		"mission": _mission_text(),
 	}
 
 
@@ -129,3 +130,18 @@ func _objective_text() -> String:
 	if phase == PHASE_ALERT:
 		return "选择低暴露路线：主出口、服务通道或安全等待。"
 	return "查看复盘。"
+
+
+func _mission_text() -> String:
+	if phase == PHASE_OPENING:
+		return "Enter 开始导览；先读地图板，再确认官方警报。"
+	if phase == PHASE_EXPLORE:
+		var map_done: String = "✓ 地图板" if map_reads > 0 else "□ 地图板"
+		var door_done: String = "✓ 门锁" if door_lock_checked else "□ 门锁"
+		var alert_done: String = "✓ 手机警报" if official_info_read else "□ 手机警报"
+		return "%s   %s   %s\n导览阶段不会奖励冲出口。" % [map_done, door_done, alert_done]
+	if phase == PHASE_ALERT:
+		var clue_text: String = "线索 %d/3" % clues_found
+		var wait_text: String = "ETA %ds" % int(police_eta)
+		return "%s   %s\nA 主出口窗口  B 服务通道  C 合格空间等待" % [clue_text, wait_text]
+	return "本局结束，查看复盘。"

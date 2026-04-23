@@ -100,6 +100,7 @@ func _start_game() -> void:
 	noises.clear()
 	_reset_actors()
 	ui.show_opening()
+	ui.update_hud(_hud_state(), "Enter 开始导览")
 
 
 func _begin_play() -> void:
@@ -156,6 +157,7 @@ func _update_play(delta: float) -> void:
 	for robot in robots:
 		robot.tick(delta, player.position, scenario.phase)
 	_check_exits()
+	_update_objective_markers()
 	ui.update_hud(_hud_state(), _interaction_prompt())
 
 
@@ -219,6 +221,7 @@ func _interact() -> void:
 		nearest.mark_found()
 		nearest.data["found"] = true
 	_on_toast(message)
+	_update_objective_markers()
 
 
 func _throw_bottle() -> void:
@@ -265,6 +268,9 @@ func _check_exits() -> void:
 	var exit_data: Dictionary = level.exit_at(player.position)
 	if exit_data.is_empty():
 		return
+	if scenario.phase != "Alert":
+		_on_toast("导览阶段不能撤离：先确认官方警报和路线信息。")
+		return
 	var exit_type: String = str(exit_data.get("type", ""))
 	if exit_type == "main":
 		if _main_exit_guarded():
@@ -277,6 +283,30 @@ func _check_exits() -> void:
 			_on_toast("服务通道未确认：需要三条线索后才能使用。")
 			return
 		scenario.finish("服务通道撤离 / Service Route", "你通过线索确认了低暴露服务路线，并避开主出口风险。", "secret_exit")
+
+
+func _update_objective_markers() -> void:
+	var target_types: Array[String] = []
+	if scenario.phase == "Explore":
+		if scenario.map_reads <= 0:
+			target_types = ["map_board"]
+		elif not scenario.door_lock_checked:
+			target_types = ["door_lock"]
+		elif not scenario.official_info_read:
+			target_types = ["official_notice"]
+	elif scenario.phase == "Alert" and scenario.clues_found < 3:
+		target_types = ["clue"]
+	for item in interactables:
+		var should_highlight: bool = target_types.has(item.interaction_type())
+		if item.interaction_type() == "clue" and item.found:
+			should_highlight = false
+		item.set_highlighted(should_highlight)
+	var active_exits: Array[String] = []
+	if scenario.phase == "Alert":
+		active_exits.append("main")
+		if scenario.clues_found >= 3:
+			active_exits.append("secret")
+	level.set_active_exit_types(active_exits)
 
 
 func _main_exit_guarded() -> bool:

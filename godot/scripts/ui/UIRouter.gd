@@ -3,16 +3,17 @@ extends CanvasLayer
 
 const MapGuideScript := preload("res://scripts/ui/MapGuide.gd")
 
-const INK := Color8(24, 38, 52)
-const MUTED := Color8(88, 103, 113)
-const PAPER := Color8(239, 243, 232, 244)
-const PAPER_DARK := Color8(210, 224, 216, 244)
-const NAVY := Color8(18, 36, 50, 236)
-const BLUE := Color8(39, 112, 151)
-const TEAL := Color8(42, 139, 151)
-const GREEN := Color8(73, 145, 108)
-const YELLOW := Color8(236, 181, 58)
-const RED := Color8(198, 70, 66)
+const INK := Color8(23, 33, 40)
+const MUTED := Color8(76, 87, 94)
+const PAPER := Color8(246, 248, 240, 246)
+const GLASS := Color8(246, 248, 240, 220)
+const NAVY := Color8(16, 34, 46, 238)
+const BLUE := Color8(36, 113, 150)
+const TEAL := Color8(36, 148, 157)
+const GREEN := Color8(70, 146, 101)
+const YELLOW := Color8(235, 178, 52)
+const RED := Color8(199, 67, 61)
+const WHITE := Color8(250, 250, 244)
 
 signal start_requested
 signal resume_requested
@@ -21,20 +22,23 @@ signal menu_requested
 signal exit_requested
 
 var root: Control
-var menu_panel: PanelContainer
-var opening_panel: PanelContainer
+var menu_panel: Panel
+var opening_panel: Panel
 var hud_panel: Control
-var phone_panel: PanelContainer
-var map_panel: PanelContainer
-var pause_panel: PanelContainer
-var debrief_panel: PanelContainer
-var toast_label: Label
+var phone_panel: Panel
+var map_panel: Panel
+var pause_panel: Panel
+var debrief_panel: Panel
+var mission_panel: Panel
+var toast_panel: Panel
+var alert_panel: Panel
 var location_label: Label
 var objective_label: Label
+var mission_label: Label
 var status_label: Label
 var alert_label: Label
 var interaction_label: Label
-var toast_panel: PanelContainer
+var toast_label: Label
 var phone_timeline_label: Label
 var phone_side_label: Label
 var map_route_label: Label
@@ -63,20 +67,23 @@ func show_menu() -> void:
 
 func show_opening() -> void:
 	_hide_all()
+	hud_panel.visible = true
 	opening_panel.visible = true
+	_set_hud_dimmed(true)
 
 
 func show_play() -> void:
 	_hide_all()
 	hud_panel.visible = true
+	_set_hud_dimmed(false)
 
 
 func show_phone(state: Dictionary) -> void:
 	_hide_all()
 	hud_panel.visible = true
 	phone_panel.visible = true
-	phone_timeline_label.text = "08:55  导览开始：确认最近地图板、出口与服务通道位置。\n\n09:02  官方提醒：紧急状态下优先读取学校通知，不传播未确认信息。\n\n09:07  当前建议：如果警报触发，先确认位置，再选择低暴露路线或合格安全空间。"
-	phone_side_label.text = "当前目标\n%s\n\n资源\n瓶子 %d   线索 %d/3\n\n警方 ETA\n%ds\n\n原则\n用官方信息校正路线；不要为了探索返回高暴露走廊。" % [
+	phone_timeline_label.text = "08:55  导览开始：确认地图板、出口、门锁和服务通道。\n\n09:02  官方提醒：紧急状态以学校通知和应急部门信息为准。\n\n09:07  当前建议：不要盲走，先确认位置，再选择低暴露路线。"
+	phone_side_label.text = "目标\n%s\n\n资源\n瓶子 %d   线索 %d/3\n\n警方 ETA\n%ds\n\n最近原则\n官方信息 > 现场传言；低暴露路线 > 好奇探索。" % [
 		state.get("objective", ""),
 		int(state.get("bottles", 0)),
 		int(state.get("clues", 0)),
@@ -89,7 +96,7 @@ func show_map(level_data: Dictionary, player_position: Vector2, state: Dictionar
 	hud_panel.visible = true
 	map_panel.visible = true
 	map_guide.update_map(level_data, player_position)
-	map_route_label.text = "当前位置：%s\n\n主出口：高风险，只有守卫离开视线时可尝试。\n\n服务通道：需要 %d/3 条线索，齐全后低暴露撤离。\n\n等待援助：必须留在合格安全空间，直到警方 ETA 归零。" % [
+	map_route_label.text = "当前位置\n%s\n\n主出口\n高风险。守卫离开视线或被噪声引开后才有窗口。\n\n服务通道\n需要 %d/3 条线索。齐全后可低暴露撤离。\n\n等待援助\n进入合格安全空间，保持低暴露直到 ETA 归零。" % [
 		state.get("location", ""),
 		int(state.get("clues", 0)),
 	]
@@ -105,7 +112,7 @@ func show_debrief(title: String, body: String, state: Dictionary) -> void:
 	_hide_all()
 	debrief_panel.visible = true
 	debrief_title.text = title
-	debrief_body.text = "%s\n\n路径判断\n1. 官方信息优先：手机、广播、地图板比传言可靠。\n2. 空间判断：可锁门、避开玻璃、远离公共走廊的空间更合格。\n3. 路线判断：主出口暴露高，服务通道需要线索确认。\n\n本局记录：线索 %d/3，地图板读取 %d 次。" % [
+	debrief_body.text = "%s\n\n复盘\n1. 是否先确认官方信息。\n2. 是否利用地图板判断路线，而不是在走廊里试错。\n3. 是否使用书架、房间和门锁降低暴露。\n4. 是否把主出口、服务通道、等待援助三条路线区分清楚。\n\n记录：线索 %d/3，地图板读取 %d 次。" % [
 		body,
 		int(state.get("clues", 0)),
 		int(state.get("map_reads", 0)),
@@ -113,28 +120,26 @@ func show_debrief(title: String, body: String, state: Dictionary) -> void:
 
 
 func update_hud(state: Dictionary, interaction_text: String) -> void:
-	location_label.text = "位置  %s" % str(state.get("location", ""))
-	objective_label.text = "目标  %s" % str(state.get("objective", ""))
-	status_label.text = "瓶子 %d   线索 %d/3   ETA %ds" % [
+	var phase: String = str(state.get("phase", "Explore"))
+	location_label.text = str(state.get("location", ""))
+	objective_label.text = str(state.get("objective", ""))
+	mission_label.text = str(state.get("mission", ""))
+	status_label.text = "瓶子 %d  线索 %d/3  ETA %ds" % [
 		int(state.get("bottles", 0)),
 		int(state.get("clues", 0)),
 		int(state.get("police_eta", 0)),
 	]
-	var phase: String = str(state.get("phase", "Explore"))
-	alert_label.text = "官方警报  确认信息 / 降低暴露 / 选择低风险路线" if phase == "Alert" else "导览状态  熟悉地图板 / 门锁 / 官方警报 / 服务路线"
+	alert_label.text = "官方警报：确认信息，避开高暴露区域" if phase == "Alert" else "导览：熟悉地图板、门锁、手机警报"
+	alert_panel.add_theme_stylebox_override("panel", _style_box(RED if phase == "Alert" else NAVY, YELLOW, 8, 2))
 	interaction_label.text = interaction_text
 
 
 func toast(message: String) -> void:
 	toast_label.text = message
 	toast_panel.visible = true
-	toast_label.visible = true
 	var tween: Tween = create_tween()
 	tween.tween_interval(4.0)
-	tween.tween_callback(func() -> void:
-		toast_label.visible = false
-		toast_panel.visible = false
-	)
+	tween.tween_callback(func() -> void: toast_panel.visible = false)
 
 
 func _hide_all() -> void:
@@ -144,42 +149,28 @@ func _hide_all() -> void:
 
 
 func _build_menu() -> void:
-	menu_panel = _panel("MainMenu", Rect2(0.055, 0.08, 0.89, 0.82), PAPER, BLUE)
-	var body: HBoxContainer = _content_hbox(menu_panel, "Body", 36)
-	var hero: VBoxContainer = _vbox("Hero", 22)
-	hero.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_child(hero)
-	hero.add_child(_eyebrow("LIBRARY + STUDENT CENTER"))
-	hero.add_child(_label("Campus Shield", 58, INK))
-	hero.add_child(_label("叙事型潜行校园安全教育游戏", 28, BLUE))
-	hero.add_child(_label("通过游戏体验，学习在潜在紧急情况下如何确认信息、降低暴露并保护自己。", 22, INK))
-	hero.add_child(_guide_card("第一关目标", "跟随导览机器人熟悉地图板、手机警报、门锁和服务通道。警报后选择撤离、服务通道或等待援助。", GREEN))
-	hero.add_child(_guide_card("表达边界", "危险以视野、封锁、广播和 NPC 行为表达；不展示血腥、武器细节或攻击者视角。", YELLOW))
-	var actions: VBoxContainer = _vbox("Actions", 18)
-	actions.custom_minimum_size = Vector2(360, 0)
-	body.add_child(actions)
-	actions.add_child(_label("开始设置", 25, INK))
-	actions.add_child(_info_chip("模式  剧情关卡", TEAL))
-	actions.add_child(_info_chip("路线  主出口 / 服务通道 / 等待援助", GREEN))
-	actions.add_child(_info_chip("操作  WASD / E / Q / M / Tab / Esc", BLUE))
-	var start_button: Button = _button("开始游戏 / Start", true)
+	menu_panel = _panel("MainMenu", Rect2(0.06, 0.08, 0.88, 0.82), PAPER, BLUE, 8)
+	_add_label(menu_panel, "Campus Shield", Rect2(0.06, 0.08, 0.56, 0.14), 54, INK)
+	_add_label(menu_panel, "图书馆 + 学生中心 / 潜行教育关卡", Rect2(0.06, 0.22, 0.58, 0.06), 24, BLUE)
+	_add_label(menu_panel, "通过游戏体验，学习在潜在紧急情况下如何确认信息、降低暴露并保护自己。", Rect2(0.06, 0.31, 0.58, 0.12), 22, INK)
+	_add_sign(menu_panel, Rect2(0.06, 0.50, 0.26, 0.12), "主出口", "高风险撤离窗口", RED)
+	_add_sign(menu_panel, Rect2(0.35, 0.50, 0.26, 0.12), "服务通道", "收集 3 条线索", GREEN)
+	_add_sign(menu_panel, Rect2(0.06, 0.66, 0.55, 0.10), "等待援助", "进入合格安全空间，坚持到 ETA 归零", YELLOW)
+	_add_label(menu_panel, "WASD 移动  E 交互  Q 抛瓶子  M 地图板  Tab 手机  Esc 暂停", Rect2(0.06, 0.82, 0.58, 0.06), 17, MUTED)
+	_add_label(menu_panel, "开始", Rect2(0.70, 0.18, 0.20, 0.05), 28, INK)
+	var start_button: Button = _button(menu_panel, "开始游戏", Rect2(0.68, 0.30, 0.24, 0.11), true)
 	start_button.pressed.connect(func() -> void: start_requested.emit())
-	actions.add_child(start_button)
-	var quit_button: Button = _button("退出游戏 / Quit", false)
+	var quit_button: Button = _button(menu_panel, "退出", Rect2(0.68, 0.45, 0.24, 0.09), false)
 	quit_button.pressed.connect(func() -> void: exit_requested.emit())
-	actions.add_child(quit_button)
+	_add_label(menu_panel, "第一关目标清晰：读地图、确认警报、找线索、避开巡逻、完成三种结局之一。", Rect2(0.68, 0.63, 0.24, 0.18), 18, MUTED)
 	root.add_child(menu_panel)
 
 
 func _build_opening() -> void:
-	opening_panel = _panel("Opening", Rect2(0.09, 0.12, 0.82, 0.72), PAPER, TEAL)
-	var body: VBoxContainer = _content_vbox(opening_panel, "Body", 36, 20)
-	body.add_child(_eyebrow("ORIENTATION"))
-	body.add_child(_label("开场导览", 46, INK))
-	body.add_child(_guide_card("1. 到校导览", "导览机器人先介绍地图板、楼层门牌、教室门锁和可读的出口标识。", BLUE))
-	body.add_child(_guide_card("2. 日常任务", "玩家在图书馆和学生中心之间熟悉路线，并收集服务通道线索。", GREEN))
-	body.add_child(_guide_card("3. 警报突发", "进入警报态后，通过手机、广播和地图终端确认信息，再决定转移或等待。", RED))
-	body.add_child(_label("按 Enter 开始关卡。", 24, BLUE))
+	opening_panel = _panel("Opening", Rect2(0.13, 0.70, 0.74, 0.22), Color8(246, 248, 240, 235), TEAL, 8)
+	_add_label(opening_panel, "导览任务", Rect2(0.035, 0.12, 0.16, 0.16), 25, INK)
+	_add_label(opening_panel, "1. 读最近地图板  2. 查官方手机警报  3. 记住服务通道线索位置", Rect2(0.23, 0.13, 0.64, 0.13), 20, INK)
+	_add_label(opening_panel, "按 Enter 开始。警报后不要盲目冲出口，先确认路线。", Rect2(0.23, 0.52, 0.64, 0.13), 18, MUTED)
 	root.add_child(opening_panel)
 
 
@@ -187,280 +178,179 @@ func _build_hud() -> void:
 	hud_panel = Control.new()
 	hud_panel.name = "HUD"
 	hud_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
-	alert_label = _hud_chip("AlertStrip", Rect2(0.18, 0.025, 0.64, 0.062), NAVY, YELLOW, 18)
-	location_label = _hud_chip("LocationChip", Rect2(0.018, 0.105, 0.29, 0.060), NAVY, TEAL, 16)
-	objective_label = _hud_chip("ObjectiveChip", Rect2(0.325, 0.105, 0.36, 0.060), NAVY, GREEN, 16)
-	status_label = _hud_chip("StatusChip", Rect2(0.715, 0.105, 0.267, 0.060), NAVY, YELLOW, 16)
-	interaction_label = _hud_chip("ActionBar", Rect2(0.28, 0.905, 0.44, 0.068), Color8(20, 43, 57, 238), TEAL, 17)
-	toast_label = _hud_chip("ToastTray", Rect2(0.018, 0.785, 0.47, 0.092), Color8(22, 43, 54, 232), YELLOW, 15)
-	toast_panel = _chip_panel(toast_label)
-	toast_panel.visible = false
 	root.add_child(hud_panel)
+	alert_panel = _hud_panel("AlertStrip", Rect2(0.30, 0.020, 0.40, 0.060), NAVY, YELLOW)
+	alert_label = _label(alert_panel, "", Rect2(0.04, 0.18, 0.92, 0.60), 17, WHITE)
+	var location_panel: Panel = _hud_panel("LocationChip", Rect2(0.020, 0.035, 0.25, 0.075), NAVY, TEAL)
+	_add_label(location_panel, "位置", Rect2(0.04, 0.08, 0.25, 0.30), 13, Color8(201, 231, 230))
+	location_label = _label(location_panel, "", Rect2(0.04, 0.40, 0.92, 0.48), 15, WHITE)
+	var objective_panel: Panel = _hud_panel("ObjectiveChip", Rect2(0.020, 0.125, 0.32, 0.100), Color8(21, 48, 54, 235), GREEN)
+	_add_label(objective_panel, "当前目标", Rect2(0.035, 0.08, 0.30, 0.26), 13, Color8(206, 236, 215))
+	objective_label = _label(objective_panel, "", Rect2(0.035, 0.40, 0.92, 0.48), 15, WHITE)
+	mission_panel = _hud_panel("MissionPanel", Rect2(0.020, 0.245, 0.32, 0.135), Color8(244, 248, 240, 226), GREEN)
+	_add_label(mission_panel, "任务清单", Rect2(0.035, 0.08, 0.30, 0.22), 13, GREEN)
+	mission_label = _label(mission_panel, "", Rect2(0.035, 0.33, 0.92, 0.58), 14, INK)
+	var status_panel: Panel = _hud_panel("StatusChip", Rect2(0.735, 0.035, 0.245, 0.075), NAVY, YELLOW)
+	status_label = _label(status_panel, "", Rect2(0.055, 0.25, 0.90, 0.50), 16, WHITE)
+	var action_panel: Panel = _hud_panel("ActionBar", Rect2(0.30, 0.905, 0.40, 0.065), Color8(20, 43, 57, 238), TEAL)
+	interaction_label = _label(action_panel, "", Rect2(0.04, 0.20, 0.92, 0.58), 16, WHITE)
+	toast_panel = _hud_panel("ToastTray", Rect2(0.020, 0.815, 0.42, 0.080), Color8(22, 43, 54, 236), YELLOW)
+	toast_label = _label(toast_panel, "", Rect2(0.04, 0.18, 0.92, 0.62), 15, WHITE)
+	toast_panel.visible = false
 
 
 func _build_phone() -> void:
-	phone_panel = _panel("Phone", Rect2(0.18, 0.07, 0.64, 0.86), PAPER, TEAL)
-	var body: VBoxContainer = _content_vbox(phone_panel, "Body", 30, 16)
-	body.add_child(_modal_header("手机信息终端", "Official Phone / Tab 或 Esc 关闭"))
-	var columns: HBoxContainer = _hbox("PhoneColumns", 22)
-	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body.add_child(columns)
-	var timeline: PanelContainer = _card_box("官方通知时间线", BLUE)
-	timeline.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var timeline_body: VBoxContainer = _card_body(timeline)
-	phone_timeline_label = _label("", 18, INK)
-	phone_timeline_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	timeline_body.add_child(phone_timeline_label)
-	columns.add_child(timeline)
-	var side: PanelContainer = _card_box("当前判断", GREEN)
-	side.custom_minimum_size = Vector2(300, 0)
-	var side_body: VBoxContainer = _card_body(side)
-	phone_side_label = _label("", 18, INK)
-	phone_side_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	side_body.add_child(phone_side_label)
-	columns.add_child(side)
+	phone_panel = _panel("Phone", Rect2(0.18, 0.08, 0.64, 0.82), PAPER, TEAL, 8)
+	_add_label(phone_panel, "手机信息终端", Rect2(0.04, 0.05, 0.40, 0.06), 30, INK)
+	_add_label(phone_panel, "Tab / Esc 关闭", Rect2(0.72, 0.065, 0.20, 0.04), 15, MUTED)
+	var left: Panel = _child_panel(phone_panel, "PhoneTimeline", Rect2(0.04, 0.17, 0.54, 0.74), Color8(255, 255, 247, 230), BLUE)
+	_add_label(left, "官方通知时间线", Rect2(0.04, 0.04, 0.45, 0.07), 20, BLUE)
+	phone_timeline_label = _label(left, "", Rect2(0.04, 0.16, 0.90, 0.76), 18, INK)
+	var right: Panel = _child_panel(phone_panel, "PhoneStatus", Rect2(0.62, 0.17, 0.34, 0.74), Color8(255, 255, 247, 230), GREEN)
+	_add_label(right, "当前判断", Rect2(0.06, 0.04, 0.45, 0.07), 20, GREEN)
+	phone_side_label = _label(right, "", Rect2(0.06, 0.16, 0.88, 0.76), 18, INK)
 	root.add_child(phone_panel)
 
 
 func _build_map() -> void:
-	map_panel = _panel("MapTerminal", Rect2(0.04, 0.055, 0.92, 0.86), PAPER, BLUE)
-	var body: VBoxContainer = _content_vbox(map_panel, "Body", 28, 16)
-	body.add_child(_modal_header("楼层导览牌", "Floor Guide / 只可在地图板附近打开"))
-	var columns: HBoxContainer = _hbox("MapColumns", 22)
-	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body.add_child(columns)
+	map_panel = _panel("MapTerminal", Rect2(0.04, 0.06, 0.92, 0.84), PAPER, BLUE, 8)
+	_add_label(map_panel, "楼层导览牌", Rect2(0.035, 0.045, 0.32, 0.06), 30, INK)
+	_add_label(map_panel, "只可在场景地图板附近打开", Rect2(0.61, 0.060, 0.28, 0.04), 15, MUTED)
 	map_guide = MapGuideScript.new()
-	map_guide.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	map_guide.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	map_guide.custom_minimum_size = Vector2(680, 430)
-	columns.add_child(map_guide)
-	var side: PanelContainer = _card_box("路线状态", YELLOW)
-	side.custom_minimum_size = Vector2(350, 0)
-	var side_body: VBoxContainer = _card_body(side)
-	map_route_label = _label("", 18, INK)
-	map_route_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	side_body.add_child(map_route_label)
-	side_body.add_child(_info_chip("图例  绿=合格避险空间  黄=出口/导视  红=高暴露区域", YELLOW))
-	side_body.add_child(_label("Esc / Enter 关闭地图终端", 16, MUTED))
-	columns.add_child(side)
+	map_guide.anchor_left = 0.035
+	map_guide.anchor_top = 0.15
+	map_guide.anchor_right = 0.68
+	map_guide.anchor_bottom = 0.93
+	map_guide.offset_left = 0
+	map_guide.offset_top = 0
+	map_guide.offset_right = 0
+	map_guide.offset_bottom = 0
+	map_panel.add_child(map_guide)
+	var side: Panel = _child_panel(map_panel, "MapRoute", Rect2(0.71, 0.15, 0.25, 0.78), Color8(255, 255, 247, 230), YELLOW)
+	_add_label(side, "路线状态", Rect2(0.06, 0.04, 0.70, 0.07), 21, INK)
+	map_route_label = _label(side, "", Rect2(0.06, 0.16, 0.88, 0.72), 17, INK)
 	root.add_child(map_panel)
 
 
 func _build_pause() -> void:
-	pause_panel = _panel("Pause", Rect2(0.24, 0.18, 0.52, 0.62), PAPER, YELLOW)
-	var body: HBoxContainer = _content_hbox(pause_panel, "Body", 34)
-	var actions: VBoxContainer = _vbox("Actions", 16)
-	actions.custom_minimum_size = Vector2(300, 0)
-	body.add_child(actions)
-	actions.add_child(_eyebrow("PAUSED"))
-	actions.add_child(_label("暂停", 40, INK))
-	var resume_button: Button = _button("继续游戏 / Resume", true)
+	pause_panel = _panel("Pause", Rect2(0.30, 0.20, 0.40, 0.55), PAPER, YELLOW, 8)
+	_add_label(pause_panel, "暂停", Rect2(0.08, 0.08, 0.40, 0.09), 36, INK)
+	var resume_button: Button = _button(pause_panel, "继续游戏", Rect2(0.08, 0.25, 0.36, 0.13), true)
 	resume_button.pressed.connect(func() -> void: resume_requested.emit())
-	actions.add_child(resume_button)
-	var menu_button: Button = _button("返回主菜单 / Main Menu", false)
+	var menu_button: Button = _button(pause_panel, "返回主菜单", Rect2(0.08, 0.43, 0.36, 0.12), false)
 	menu_button.pressed.connect(func() -> void: menu_requested.emit())
-	actions.add_child(menu_button)
-	var quit_button: Button = _button("退出游戏 / Quit", false)
+	var quit_button: Button = _button(pause_panel, "退出游戏", Rect2(0.08, 0.60, 0.36, 0.12), false)
 	quit_button.pressed.connect(func() -> void: exit_requested.emit())
-	actions.add_child(quit_button)
-	var help: PanelContainer = _card_box("快捷键", BLUE)
-	help.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_card_body(help).add_child(_label("Esc 继续\nM 仅在地图板附近打开导览\nTab 打开手机\nQ 抛瓶子制造噪声窗口\nE 与地图板、门锁、线索互动", 18, INK))
-	body.add_child(help)
+	_add_label(pause_panel, "M 近地图板打开导览\nTab 手机\nQ 抛瓶子制造噪声窗口\nE 与线索、门锁、地图板互动", Rect2(0.52, 0.25, 0.38, 0.45), 17, MUTED)
 	root.add_child(pause_panel)
 
 
 func _build_debrief() -> void:
-	debrief_panel = _panel("Debrief", Rect2(0.08, 0.09, 0.84, 0.78), PAPER, GREEN)
-	var body: VBoxContainer = _content_vbox(debrief_panel, "Body", 34, 18)
-	body.add_child(_eyebrow("DEBRIEF"))
-	debrief_title = _label("", 40, INK)
-	body.add_child(debrief_title)
-	debrief_body = _label("", 19, INK)
-	debrief_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body.add_child(debrief_body)
-	var actions: HBoxContainer = _hbox("DebriefActions", 18)
-	var restart_button: Button = _button("重新开始 / Restart", true)
+	debrief_panel = _panel("Debrief", Rect2(0.10, 0.10, 0.80, 0.76), PAPER, GREEN, 8)
+	_add_label(debrief_panel, "复盘", Rect2(0.05, 0.05, 0.22, 0.07), 30, GREEN)
+	debrief_title = _label(debrief_panel, "", Rect2(0.05, 0.15, 0.65, 0.08), 34, INK)
+	debrief_body = _label(debrief_panel, "", Rect2(0.05, 0.27, 0.64, 0.55), 19, INK)
+	var restart_button: Button = _button(debrief_panel, "重新开始", Rect2(0.73, 0.28, 0.20, 0.10), true)
 	restart_button.pressed.connect(func() -> void: restart_requested.emit())
-	actions.add_child(restart_button)
-	var menu_button: Button = _button("返回主菜单 / Main Menu", false)
+	var menu_button: Button = _button(debrief_panel, "主菜单", Rect2(0.73, 0.43, 0.20, 0.10), false)
 	menu_button.pressed.connect(func() -> void: menu_requested.emit())
-	actions.add_child(menu_button)
-	body.add_child(actions)
 	root.add_child(debrief_panel)
 
 
-func _panel(panel_name: String, anchors: Rect2, fill: Color, border: Color) -> PanelContainer:
-	var panel: PanelContainer = PanelContainer.new()
+func _panel(panel_name: String, anchors: Rect2, fill: Color, border: Color, radius: int) -> Panel:
+	var panel: Panel = Panel.new()
 	panel.name = panel_name
-	panel.anchor_left = anchors.position.x
-	panel.anchor_top = anchors.position.y
-	panel.anchor_right = anchors.position.x + anchors.size.x
-	panel.anchor_bottom = anchors.position.y + anchors.size.y
-	panel.offset_left = 0
-	panel.offset_top = 0
-	panel.offset_right = 0
-	panel.offset_bottom = 0
+	_anchor(panel, anchors)
 	panel.visible = false
-	panel.add_theme_stylebox_override("panel", _style_box(fill, border, 20, 2))
+	panel.add_theme_stylebox_override("panel", _style_box(fill, border, radius, 2))
 	return panel
 
 
-func _content_vbox(panel: PanelContainer, node_name: String, margin: int, separation: int) -> VBoxContainer:
-	var margin_node: MarginContainer = _margin_container(margin)
-	var box: VBoxContainer = _vbox(node_name, separation)
-	margin_node.add_child(box)
-	panel.add_child(margin_node)
-	return box
-
-
-func _content_hbox(panel: PanelContainer, node_name: String, margin: int) -> HBoxContainer:
-	var margin_node: MarginContainer = _margin_container(margin)
-	var box: HBoxContainer = _hbox(node_name, 28)
-	margin_node.add_child(box)
-	panel.add_child(margin_node)
-	return box
-
-
-func _margin_container(margin: int) -> MarginContainer:
-	var margin_node: MarginContainer = MarginContainer.new()
-	margin_node.set_anchors_preset(Control.PRESET_FULL_RECT)
-	margin_node.offset_left = margin
-	margin_node.offset_top = margin
-	margin_node.offset_right = -margin
-	margin_node.offset_bottom = -margin
-	return margin_node
-
-
-func _vbox(node_name: String, separation: int = 18) -> VBoxContainer:
-	var box: VBoxContainer = VBoxContainer.new()
-	box.name = node_name
-	box.add_theme_constant_override("separation", separation)
-	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	return box
-
-
-func _hbox(node_name: String, separation: int = 24) -> HBoxContainer:
-	var box: HBoxContainer = HBoxContainer.new()
-	box.name = node_name
-	box.add_theme_constant_override("separation", separation)
-	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	return box
-
-
-func _card_box(title: String, accent: Color) -> PanelContainer:
-	var panel: PanelContainer = PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", _style_box(Color8(255, 255, 247, 218), accent, 16, 2))
-	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	var margin_node: MarginContainer = _margin_container(18)
-	margin_node.name = "Margin"
-	var box: VBoxContainer = _vbox("CardBody", 12)
-	box.add_child(_label(title, 20, accent))
-	margin_node.add_child(box)
-	panel.add_child(margin_node)
+func _child_panel(parent: Control, panel_name: String, anchors: Rect2, fill: Color, border: Color) -> Panel:
+	var panel: Panel = _panel(panel_name, anchors, fill, border, 8)
+	panel.visible = true
+	parent.add_child(panel)
 	return panel
 
 
-func _card_body(card: PanelContainer) -> VBoxContainer:
-	return card.get_node("Margin/CardBody") as VBoxContainer
+func _hud_panel(panel_name: String, anchors: Rect2, fill: Color, border: Color) -> Panel:
+	var panel: Panel = _panel(panel_name, anchors, fill, border, 8)
+	panel.visible = true
+	hud_panel.add_child(panel)
+	return panel
 
 
-func _guide_card(title: String, body: String, accent: Color) -> PanelContainer:
-	var card: PanelContainer = PanelContainer.new()
-	card.add_theme_stylebox_override("panel", _style_box(Color8(255, 255, 247, 214), accent, 16, 1))
-	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var margin_node: MarginContainer = _margin_container(16)
-	var box: VBoxContainer = _vbox("GuideCard", 8)
-	box.add_child(_label(title, 20, accent))
-	box.add_child(_label(body, 17, INK))
-	margin_node.add_child(box)
-	card.add_child(margin_node)
-	return card
+func _add_sign(parent: Control, anchors: Rect2, title: String, body: String, accent: Color) -> void:
+	var sign: Panel = _child_panel(parent, "%sSign" % title, anchors, Color8(255, 255, 247, 222), accent)
+	_add_label(sign, title, Rect2(0.06, 0.10, 0.85, 0.34), 20, accent)
+	_add_label(sign, body, Rect2(0.06, 0.52, 0.88, 0.30), 15, INK)
 
 
-func _modal_header(title: String, hint: String) -> HBoxContainer:
-	var header: HBoxContainer = _hbox("ModalHeader", 18)
-	var title_label: Label = _label(title, 30, INK)
-	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	header.add_child(title_label)
-	header.add_child(_label(hint, 16, MUTED))
-	return header
-
-
-func _info_chip(text: String, accent: Color) -> Label:
-	var label: Label = _label(text, 16, accent)
-	label.add_theme_constant_override("outline_size", 1)
-	label.add_theme_color_override("font_outline_color", Color8(255, 255, 247))
-	return label
-
-
-func _eyebrow(text: String) -> Label:
-	var label: Label = _label(text, 15, TEAL)
-	label.add_theme_constant_override("outline_size", 1)
-	label.add_theme_color_override("font_outline_color", Color8(255, 255, 247))
-	return label
-
-
-func _button(text: String, primary: bool) -> Button:
+func _button(parent: Control, text: String, anchors: Rect2, primary: bool) -> Button:
 	var button: Button = Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(300, 58)
 	button.focus_mode = Control.FOCUS_ALL
+	_anchor(button, anchors)
 	button.add_theme_font_size_override("font_size", 19)
-	var fill: Color = BLUE if primary else Color8(245, 247, 239)
+	var fill: Color = BLUE if primary else WHITE
 	var border: Color = BLUE if primary else TEAL
-	var font: Color = Color8(248, 247, 238) if primary else INK
-	button.add_theme_stylebox_override("normal", _style_box(fill, border, 14, 2))
-	button.add_theme_stylebox_override("hover", _style_box(fill.lightened(0.08), border, 14, 2))
-	button.add_theme_stylebox_override("pressed", _style_box(fill.darkened(0.08), border, 14, 2))
-	button.add_theme_stylebox_override("focus", _style_box(Color8(250, 232, 152, 190), YELLOW, 14, 3))
+	var font: Color = WHITE if primary else INK
+	button.add_theme_stylebox_override("normal", _style_box(fill, border, 8, 2))
+	button.add_theme_stylebox_override("hover", _style_box(fill.lightened(0.08), border, 8, 2))
+	button.add_theme_stylebox_override("pressed", _style_box(fill.darkened(0.08), border, 8, 2))
+	button.add_theme_stylebox_override("focus", _style_box(Color8(250, 232, 152, 215), YELLOW, 8, 3))
 	button.add_theme_color_override("font_color", font)
 	button.add_theme_color_override("font_hover_color", font)
 	button.add_theme_color_override("font_pressed_color", font)
+	parent.add_child(button)
 	return button
 
 
-func _label(text: String, size: int, color: Color = INK) -> Label:
+func _add_label(parent: Control, text: String, anchors: Rect2, size: int, color: Color) -> Label:
+	var label: Label = _label(parent, text, anchors, size, color)
+	return label
+
+
+func _label(parent: Control, text: String, anchors: Rect2, size: int, color: Color) -> Label:
 	var label: Label = Label.new()
 	label.text = text
+	_anchor(label, anchors)
 	label.add_theme_font_size_override("font_size", size)
 	label.add_theme_color_override("font_color", color)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.clip_text = true
-	return label
-
-
-func _hud_chip(node_name: String, anchors: Rect2, fill: Color, accent: Color, font_size: int) -> Label:
-	var panel: PanelContainer = _panel(node_name, anchors, fill, accent)
-	panel.visible = true
-	panel.add_theme_stylebox_override("panel", _style_box(fill, accent, 14, 2))
-	var margin_node: MarginContainer = _margin_container(10)
-	var label: Label = _label("", font_size, Color8(248, 247, 238))
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	label.add_theme_constant_override("outline_size", 1)
-	label.add_theme_color_override("font_outline_color", Color8(0, 0, 0, 120))
-	margin_node.add_child(label)
-	panel.add_child(margin_node)
-	hud_panel.add_child(panel)
+	parent.add_child(label)
 	return label
 
 
-func _chip_panel(label: Label) -> PanelContainer:
-	return label.get_parent().get_parent() as PanelContainer
+func _anchor(control: Control, anchors: Rect2) -> void:
+	control.anchor_left = anchors.position.x
+	control.anchor_top = anchors.position.y
+	control.anchor_right = anchors.position.x + anchors.size.x
+	control.anchor_bottom = anchors.position.y + anchors.size.y
+	control.offset_left = 0
+	control.offset_top = 0
+	control.offset_right = 0
+	control.offset_bottom = 0
 
 
-func _style_box(fill: Color, border: Color, radius: int = 16, border_width: int = 2) -> StyleBoxFlat:
+func _set_hud_dimmed(dimmed: bool) -> void:
+	var alpha: float = 0.55 if dimmed else 1.0
+	for child: Node in hud_panel.get_children():
+		if child is CanvasItem:
+			(child as CanvasItem).modulate.a = alpha
+	if toast_panel != null:
+		toast_panel.modulate.a = 1.0
+
+
+func _style_box(fill: Color, border: Color, radius: int = 8, border_width: int = 2) -> StyleBoxFlat:
 	var style: StyleBoxFlat = StyleBoxFlat.new()
 	style.bg_color = fill
 	style.border_color = border
 	style.set_border_width_all(border_width)
 	style.set_corner_radius_all(radius)
-	style.shadow_color = Color8(0, 0, 0, 54)
-	style.shadow_size = 10
+	style.shadow_color = Color8(0, 0, 0, 48)
+	style.shadow_size = 8
 	style.shadow_offset = Vector2(0, 3)
 	return style

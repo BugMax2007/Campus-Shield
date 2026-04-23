@@ -21,6 +21,7 @@ var cover: Array[Rect2] = []
 var cover_details: Array[Dictionary] = []
 var exits: Array[Dictionary] = []
 var signage: Array[Dictionary] = []
+var active_exit_types: Array[String] = []
 
 func setup(level_data: Dictionary) -> void:
 	data = level_data
@@ -88,6 +89,13 @@ func exit_at(point: Vector2) -> Dictionary:
 	return {}
 
 
+func set_active_exit_types(types: Array[String]) -> void:
+	if active_exit_types == types:
+		return
+	active_exit_types = types
+	queue_redraw()
+
+
 func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, world_size), COLOR_GRASS)
 	draw_rect(Rect2(150, 190, 2520, 1440), COLOR_WALKWAY)
@@ -108,8 +116,13 @@ func _draw() -> void:
 		draw_rect(rect, COLOR_WALL)
 	for exit_data: Dictionary in exits:
 		var exit_rect: Rect2 = exit_data["rect"]
+		var exit_type: String = str(exit_data.get("type", ""))
+		var active: bool = active_exit_types.has(exit_type)
+		if active:
+			draw_rect(exit_rect.grow(10.0), Color(COLOR_SIGN.r, COLOR_SIGN.g, COLOR_SIGN.b, 0.22))
+			draw_rect(exit_rect.grow(6.0), COLOR_SIGN, false, 4.0)
 		draw_rect(exit_rect, COLOR_SIGN, false, 5.0)
-		_draw_label(str(exit_data.get("id", "exit")), exit_rect.position + Vector2(12, 36), 16)
+		_draw_label(_exit_label(exit_data), exit_rect.position + Vector2(12, 36), 16)
 	for sign: Dictionary in signage:
 		var sign_rect: Rect2 = sign["rect"]
 		draw_rect(sign_rect, COLOR_SIGN)
@@ -150,6 +163,14 @@ func _draw_bookshelf_lines(rect: Rect2) -> void:
 
 func _draw_label(text: String, pos: Vector2, size: int) -> void:
 	draw_string(ThemeDB.fallback_font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, size, COLOR_TEXT)
+
+
+func _exit_label(exit_data: Dictionary) -> String:
+	if str(exit_data.get("type", "")) == "main":
+		return "主出口"
+	if str(exit_data.get("type", "")) == "secret":
+		return "服务通道"
+	return str(exit_data.get("id", "exit"))
 
 
 func _segment_intersects_rect(a: Vector2, b: Vector2, rect: Rect2) -> bool:

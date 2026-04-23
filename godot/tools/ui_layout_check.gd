@@ -22,6 +22,8 @@ func _run() -> void:
 			_show_screen(ui, screen, level_data)
 			await process_frame
 			_check_visible_controls(ui.root, screen, resolution)
+			if screen in ["opening", "gameplay", "alert"]:
+				_check_no_blocking_overlay(ui.root, screen, resolution)
 			if screen in ["gameplay", "alert"]:
 				_check_hud_visible(ui, screen, resolution)
 				_check_hud_overlap(ui, screen, resolution)
@@ -100,3 +102,17 @@ func _check_hud_visible(ui, screen: String, resolution: Vector2i) -> void:
 			visible_chips += 1
 	if visible_chips < 4:
 		failures.append("%s HUD has only %d visible chips at %s" % [screen, visible_chips, str(resolution)])
+
+
+func _check_no_blocking_overlay(control: Control, screen: String, resolution: Vector2i) -> void:
+	if not control.visible:
+		return
+	if control is Panel:
+		var rect: Rect2 = control.get_global_rect()
+		var coverage: float = rect.size.x * rect.size.y / float(resolution.x * resolution.y)
+		var limit: float = 0.24 if screen == "opening" else 0.14
+		if coverage > limit:
+			failures.append("%s has blocking panel %s coverage %.2f at %s" % [screen, control.name, coverage, str(resolution)])
+	for child: Node in control.get_children():
+		if child is Control:
+			_check_no_blocking_overlay(child as Control, screen, resolution)
