@@ -1,0 +1,452 @@
+{
+  "version": "phase1_scene_graph_v2",
+  "scenes": [
+    {
+      "id": "outdoor_main",
+      "building_key": "building.campus",
+      "floor_label_key": "floor.outdoor",
+      "width": 4200,
+      "height": 2500,
+      "theme_color": "#5f8f62",
+      "spawn_validation_radius": 16,
+      "collisions": [
+        [0, 0, 4200, 40],
+        [0, 0, 40, 2500],
+        [4160, 0, 40, 2500],
+        [0, 2460, 4200, 40],
+        [1420, 640, 1280, 140],
+        [1420, 1680, 1280, 120],
+        [1680, 780, 120, 900],
+        [2550, 920, 540, 500]
+      ],
+      "nav_blockers": [
+        [0, 0, 4200, 40],
+        [0, 0, 40, 2500],
+        [4160, 0, 40, 2500],
+        [0, 2460, 4200, 40],
+        [1420, 640, 1280, 140],
+        [1420, 1680, 1280, 120],
+        [1680, 780, 120, 900],
+        [2550, 920, 540, 500]
+      ],
+      "rooms": [
+        { "id": "quad", "label_key": "room.quad", "rect": [1100, 780, 1860, 900] },
+        { "id": "north_gate", "label_key": "room.north_gate", "rect": [1700, 140, 760, 320] },
+        { "id": "east_road", "label_key": "room.east_road", "rect": [3050, 560, 980, 1600] },
+        { "id": "west_road", "label_key": "room.west_road", "rect": [160, 560, 900, 1600] },
+        { "id": "admin_outpost", "label_key": "room.admin_outpost", "rect": [520, 1740, 460, 320] }
+      ],
+      "safe_areas": [
+        {
+          "id": "outdoor_admin_shellter",
+          "label_key": "trigger.outdoor_admin_shelter",
+          "tags": ["lockable", "out_of_sight", "not_public_corridor", "not_glass_exposed"],
+          "rect": [560, 1780, 380, 240]
+        }
+      ],
+      "risk_areas": [
+        {
+          "id": "outdoor_quad_open",
+          "label_key": "trigger.outdoor_quad_open",
+          "tags": ["open", "public"],
+          "rect": [1180, 860, 1740, 700]
+        },
+        {
+          "id": "outdoor_north_gate",
+          "label_key": "trigger.outdoor_north_gate",
+          "tags": ["chokepoint", "guarded"],
+          "rect": [1730, 140, 720, 320]
+        }
+      ],
+      "props": [
+        { "id": "outdoor_bench_1", "type": "desk_cluster", "solid": true, "rect": [1180, 1860, 160, 70] },
+        { "id": "outdoor_bench_2", "type": "desk_cluster", "solid": true, "rect": [1380, 1860, 160, 70] },
+        { "id": "outdoor_planter_1", "type": "divider", "solid": true, "rect": [2960, 900, 90, 280] },
+        { "id": "outdoor_planter_2", "type": "divider", "solid": true, "rect": [2960, 1260, 90, 280] }
+      ],
+      "exit_zones": [
+        {
+          "id": "zone_north_gate_escape",
+          "label_key": "interaction.exit_north_gate",
+          "action": "north_exit",
+          "trigger_mode": "press",
+          "state_rules": ["Alert", "Shelter", "AllClear"],
+          "rect": [1940, 120, 260, 180]
+        }
+      ],
+      "map_boards": [
+        [1460, 860, 42, 42],
+        [3340, 1120, 42, 42],
+        [680, 1120, 42, 42]
+      ],
+      "links": [
+        {
+          "id": "link_outdoor_to_library",
+          "label_key": "transfer.enter_library_f1",
+          "target_scene_id": "library_f1",
+          "target_spawn_id": "spawn_library_f1_entrance",
+          "locked_on_alert": false,
+          "rect": [3360, 680, 120, 170]
+        },
+        {
+          "id": "link_outdoor_to_student_center",
+          "label_key": "transfer.to_student_center_f1",
+          "target_scene_id": "student_center_f1",
+          "target_spawn_id": "spawn_sc_f1_entrance",
+          "locked_on_alert": true,
+          "rect": [3380, 1540, 120, 190]
+        }
+      ],
+      "spawns": [
+        { "id": "spawn_outdoor_center", "label_key": "spawn.outdoor_center", "rect": [2020, 1240, 24, 24] },
+        { "id": "spawn_outdoor_west", "label_key": "spawn.outdoor_west", "rect": [860, 1280, 24, 24] },
+        { "id": "spawn_outdoor_east", "label_key": "spawn.outdoor_east", "rect": [3300, 1280, 24, 24] }
+      ]
+    },
+    {
+      "id": "library_f1",
+      "building_key": "building.library",
+      "floor_label_key": "floor.library_f1",
+      "width": 2600,
+      "height": 1700,
+      "theme_color": "#8aad71",
+      "spawn_validation_radius": 16,
+      "collisions": [
+        [0, 0, 2600, 40],
+        [0, 0, 40, 1700],
+        [2560, 0, 40, 1700],
+        [0, 1660, 2600, 40],
+        [1160, 240, 80, 1260],
+        [1460, 260, 980, 80],
+        [1460, 620, 980, 80],
+        [1460, 980, 980, 80]
+      ],
+      "nav_blockers": [
+        [0, 0, 2600, 40],
+        [0, 0, 40, 1700],
+        [2560, 0, 40, 1700],
+        [0, 1660, 2600, 40],
+        [1160, 240, 80, 1260],
+        [1460, 260, 980, 80],
+        [1460, 620, 980, 80],
+        [1460, 980, 980, 80]
+      ],
+      "rooms": [
+        { "id": "lib_lobby", "label_key": "room.lib_lobby", "rect": [120, 1040, 980, 520] },
+        { "id": "lib_archive", "label_key": "room.lib_archive", "rect": [120, 220, 980, 760] },
+        { "id": "lib_service_desk", "label_key": "room.lib_service_desk", "rect": [120, 860, 980, 160] },
+        { "id": "lib_classroom_101", "label_key": "room.lib_classroom_101", "rect": [1300, 220, 560, 340] },
+        { "id": "lib_classroom_102", "label_key": "room.lib_classroom_102", "rect": [1880, 220, 540, 340] },
+        { "id": "lib_reading_hall", "label_key": "room.lib_reading_hall", "rect": [1300, 700, 1120, 820] },
+        { "id": "lib_stairwell", "label_key": "room.lib_stairwell", "rect": [740, 1220, 360, 260] }
+      ],
+      "safe_areas": [
+        {
+          "id": "library_archive_safe",
+          "label_key": "trigger.library_archive_safe",
+          "tags": ["lockable", "out_of_sight", "not_public_corridor", "not_glass_exposed"],
+          "rect": [180, 280, 860, 620]
+        }
+      ],
+      "risk_areas": [
+        {
+          "id": "library_glass_edge",
+          "label_key": "trigger.library_glass_edge",
+          "tags": ["glass_exposed", "public"],
+          "rect": [2280, 220, 140, 1260]
+        }
+      ],
+      "props": [
+        { "id": "lib_f1_shelf_1", "type": "bookshelf", "solid": true, "rect": [1360, 760, 80, 220] },
+        { "id": "lib_f1_shelf_2", "type": "bookshelf", "solid": true, "rect": [1480, 760, 80, 220] },
+        { "id": "lib_f1_shelf_3", "type": "bookshelf", "solid": true, "rect": [1600, 760, 80, 220] },
+        { "id": "lib_f1_shelf_4", "type": "bookshelf", "solid": true, "rect": [1720, 760, 80, 220] },
+        { "id": "lib_f1_shelf_5", "type": "bookshelf", "solid": true, "rect": [1840, 760, 80, 220] },
+        { "id": "lib_f1_shelf_6", "type": "bookshelf", "solid": true, "rect": [1960, 760, 80, 220] },
+        { "id": "lib_f1_shelf_7", "type": "bookshelf", "solid": true, "rect": [2080, 760, 80, 220] },
+        { "id": "lib_f1_shelf_8", "type": "bookshelf", "solid": true, "rect": [2200, 760, 80, 220] },
+        { "id": "lib_f1_desk_a", "type": "service_desk", "solid": true, "rect": [320, 900, 240, 70] },
+        { "id": "lib_f1_desk_b", "type": "service_desk", "solid": true, "rect": [620, 900, 240, 70] },
+        { "id": "lib_f1_reading_table_1", "type": "desk_cluster", "solid": true, "rect": [1500, 1120, 220, 70] },
+        { "id": "lib_f1_reading_table_2", "type": "desk_cluster", "solid": true, "rect": [1780, 1120, 220, 70] },
+        { "id": "lib_f1_reading_table_3", "type": "desk_cluster", "solid": true, "rect": [2060, 1120, 180, 70] },
+        { "id": "lib_f1_reading_table_4", "type": "desk_cluster", "solid": true, "rect": [1500, 1310, 220, 70] },
+        { "id": "lib_f1_reading_table_5", "type": "desk_cluster", "solid": true, "rect": [1780, 1310, 220, 70] },
+        { "id": "lib_f1_reading_divider", "type": "divider", "solid": true, "rect": [1700, 1030, 60, 420] }
+      ],
+      "exit_zones": [],
+      "map_boards": [
+        [190, 1080, 40, 40]
+      ],
+      "links": [
+        {
+          "id": "link_library_to_outdoor",
+          "label_key": "transfer.to_outdoor_main",
+          "target_scene_id": "outdoor_main",
+          "target_spawn_id": "spawn_outdoor_east",
+          "locked_on_alert": false,
+          "rect": [2460, 1100, 100, 180]
+        },
+        {
+          "id": "link_library_f1_to_f2",
+          "label_key": "transfer.to_library_f2",
+          "target_scene_id": "library_f2",
+          "target_spawn_id": "spawn_library_f2_stairs",
+          "locked_on_alert": false,
+          "rect": [820, 1260, 130, 160]
+        }
+      ],
+      "spawns": [
+        { "id": "spawn_library_f1_entrance", "label_key": "spawn.library_f1_entrance", "rect": [2340, 1220, 24, 24] },
+        { "id": "spawn_library_f1_stairs", "label_key": "spawn.library_f1_stairs", "rect": [760, 1320, 24, 24] }
+      ]
+    },
+    {
+      "id": "library_f2",
+      "building_key": "building.library",
+      "floor_label_key": "floor.library_f2",
+      "width": 2400,
+      "height": 1600,
+      "theme_color": "#7fa566",
+      "spawn_validation_radius": 16,
+      "collisions": [
+        [0, 0, 2400, 40],
+        [0, 0, 40, 1600],
+        [2360, 0, 40, 1600],
+        [0, 1560, 2400, 40],
+        [1040, 220, 80, 1240],
+        [1500, 640, 860, 80]
+      ],
+      "nav_blockers": [
+        [0, 0, 2400, 40],
+        [0, 0, 40, 1600],
+        [2360, 0, 40, 1600],
+        [0, 1560, 2400, 40],
+        [1040, 220, 80, 1240],
+        [1500, 640, 860, 80]
+      ],
+      "rooms": [
+        { "id": "lib2_stacks", "label_key": "room.lib2_stacks", "rect": [120, 220, 860, 1120] },
+        { "id": "lib2_study", "label_key": "room.lib2_study", "rect": [1160, 220, 1260, 360] },
+        { "id": "lib2_service", "label_key": "room.lib2_service", "rect": [1160, 700, 1260, 640] },
+        { "id": "lib2_stairwell", "label_key": "room.lib2_stairwell", "rect": [820, 1220, 320, 260] },
+        { "id": "lib2_storage", "label_key": "room.lib2_storage", "rect": [1160, 1360, 420, 160] }
+      ],
+      "safe_areas": [
+        {
+          "id": "library_f2_study_safe",
+          "label_key": "trigger.library_f2_study_safe",
+          "tags": ["lockable", "out_of_sight", "not_public_corridor", "not_glass_exposed"],
+          "rect": [1200, 250, 1180, 300]
+        }
+      ],
+      "risk_areas": [
+        {
+          "id": "library_f2_open_lane",
+          "label_key": "trigger.library_f2_open_lane",
+          "tags": ["public", "open"],
+          "rect": [120, 1380, 2200, 120]
+        }
+      ],
+      "props": [
+        { "id": "lib_f2_shelf_1", "type": "bookshelf", "solid": true, "rect": [200, 320, 90, 220] },
+        { "id": "lib_f2_shelf_2", "type": "bookshelf", "solid": true, "rect": [330, 320, 90, 220] },
+        { "id": "lib_f2_shelf_3", "type": "bookshelf", "solid": true, "rect": [460, 320, 90, 220] },
+        { "id": "lib_f2_shelf_4", "type": "bookshelf", "solid": true, "rect": [590, 320, 90, 220] },
+        { "id": "lib_f2_shelf_5", "type": "bookshelf", "solid": true, "rect": [720, 320, 90, 220] },
+        { "id": "lib_f2_shelf_6", "type": "bookshelf", "solid": true, "rect": [200, 620, 90, 220] },
+        { "id": "lib_f2_shelf_7", "type": "bookshelf", "solid": true, "rect": [330, 620, 90, 220] },
+        { "id": "lib_f2_shelf_8", "type": "bookshelf", "solid": true, "rect": [460, 620, 90, 220] },
+        { "id": "lib_f2_shelf_9", "type": "bookshelf", "solid": true, "rect": [590, 620, 90, 220] },
+        { "id": "lib_f2_shelf_10", "type": "bookshelf", "solid": true, "rect": [720, 620, 90, 220] },
+        { "id": "lib_f2_table_a", "type": "desk_cluster", "solid": true, "rect": [1320, 760, 210, 90] },
+        { "id": "lib_f2_table_b", "type": "desk_cluster", "solid": true, "rect": [1600, 760, 210, 90] },
+        { "id": "lib_f2_table_c", "type": "desk_cluster", "solid": true, "rect": [1880, 760, 210, 90] }
+      ],
+      "exit_zones": [
+        {
+          "id": "zone_secret_tunnel",
+          "label_key": "interaction.secret_tunnel_entry",
+          "action": "secret_tunnel",
+          "trigger_mode": "press",
+          "state_rules": ["Alert", "Shelter", "AllClear"],
+          "rect": [120, 1420, 180, 120]
+        }
+      ],
+      "map_boards": [
+        [980, 1260, 40, 40]
+      ],
+      "links": [
+        {
+          "id": "link_library_f2_to_f1",
+          "label_key": "transfer.down_library_f1",
+          "target_scene_id": "library_f1",
+          "target_spawn_id": "spawn_library_f1_stairs",
+          "locked_on_alert": false,
+          "rect": [900, 1260, 130, 170]
+        }
+      ],
+      "spawns": [
+        { "id": "spawn_library_f2_stairs", "label_key": "spawn.library_f2_stairs", "rect": [980, 1320, 24, 24] }
+      ]
+    },
+    {
+      "id": "student_center_f1",
+      "building_key": "building.student_center",
+      "floor_label_key": "floor.student_center_f1",
+      "width": 2600,
+      "height": 1800,
+      "theme_color": "#b48b62",
+      "spawn_validation_radius": 16,
+      "collisions": [
+        [0, 0, 2600, 40],
+        [0, 0, 40, 1800],
+        [2560, 0, 40, 1800],
+        [0, 1760, 2600, 40],
+        [1080, 240, 80, 1320],
+        [1560, 700, 980, 80],
+        [1560, 1120, 980, 80]
+      ],
+      "nav_blockers": [
+        [0, 0, 2600, 40],
+        [0, 0, 40, 1800],
+        [2560, 0, 40, 1800],
+        [0, 1760, 2600, 40],
+        [1080, 240, 80, 1320],
+        [1560, 700, 980, 80],
+        [1560, 1120, 980, 80]
+      ],
+      "rooms": [
+        { "id": "sc1_lobby", "label_key": "room.sc1_lobby", "rect": [120, 1200, 920, 500] },
+        { "id": "sc1_counsel", "label_key": "room.sc1_counsel", "rect": [120, 220, 920, 860] },
+        { "id": "sc1_office_suite", "label_key": "room.sc1_office_suite", "rect": [120, 1080, 920, 120] },
+        { "id": "sc1_classroom_101", "label_key": "room.sc1_classroom_101", "rect": [1260, 220, 560, 420] },
+        { "id": "sc1_classroom_102", "label_key": "room.sc1_classroom_102", "rect": [1840, 220, 560, 420] },
+        { "id": "sc1_activity_room", "label_key": "room.sc1_activity_room", "rect": [1260, 800, 560, 860] },
+        { "id": "sc1_atrium", "label_key": "room.sc1_atrium", "rect": [1840, 800, 560, 860] },
+        { "id": "sc1_stairwell", "label_key": "room.sc1_stairwell", "rect": [780, 1280, 280, 320] }
+      ],
+      "safe_areas": [
+        {
+          "id": "sc_counsel_safe",
+          "label_key": "trigger.sc_counsel_safe",
+          "tags": ["lockable", "out_of_sight", "not_public_corridor", "not_glass_exposed"],
+          "rect": [180, 300, 820, 700]
+        }
+      ],
+      "risk_areas": [
+        {
+          "id": "sc_atrium_risk",
+          "label_key": "trigger.sc_atrium_risk",
+          "tags": ["glass_exposed", "public"],
+          "rect": [1860, 820, 520, 820]
+        }
+      ],
+      "props": [
+        { "id": "sc_f1_class_101_desks", "type": "classroom_block", "solid": true, "rect": [1320, 300, 420, 220] },
+        { "id": "sc_f1_class_102_desks", "type": "classroom_block", "solid": true, "rect": [1900, 300, 420, 220] },
+        { "id": "sc_f1_office_counter", "type": "service_desk", "solid": true, "rect": [260, 1120, 520, 60] },
+        { "id": "sc_f1_activity_divider", "type": "divider", "solid": true, "rect": [1500, 980, 70, 540] },
+        { "id": "sc_f1_activity_tables", "type": "desk_cluster", "solid": true, "rect": [1280, 1160, 480, 120] }
+      ],
+      "exit_zones": [],
+      "map_boards": [
+        [180, 1240, 40, 40]
+      ],
+      "links": [
+        {
+          "id": "link_student_center_to_outdoor",
+          "label_key": "transfer.to_outdoor_main",
+          "target_scene_id": "outdoor_main",
+          "target_spawn_id": "spawn_outdoor_east",
+          "locked_on_alert": false,
+          "rect": [2480, 1240, 80, 200]
+        },
+        {
+          "id": "link_student_center_f1_to_f2",
+          "label_key": "transfer.to_student_center_f2",
+          "target_scene_id": "student_center_f2",
+          "target_spawn_id": "spawn_sc_f2_stairs",
+          "locked_on_alert": true,
+          "rect": [900, 1320, 140, 180]
+        }
+      ],
+      "spawns": [
+        { "id": "spawn_sc_f1_entrance", "label_key": "spawn.sc_f1_entrance", "rect": [2360, 1320, 24, 24] },
+        { "id": "spawn_sc_f1_stairs", "label_key": "spawn.sc_f1_stairs", "rect": [920, 1390, 24, 24] }
+      ]
+    },
+    {
+      "id": "student_center_f2",
+      "building_key": "building.student_center",
+      "floor_label_key": "floor.student_center_f2",
+      "width": 2300,
+      "height": 1500,
+      "theme_color": "#a67d55",
+      "spawn_validation_radius": 16,
+      "collisions": [
+        [0, 0, 2300, 40],
+        [0, 0, 40, 1500],
+        [2260, 0, 40, 1500],
+        [0, 1460, 2300, 40],
+        [980, 220, 80, 1140],
+        [1420, 640, 840, 80]
+      ],
+      "nav_blockers": [
+        [0, 0, 2300, 40],
+        [0, 0, 40, 1500],
+        [2260, 0, 40, 1500],
+        [0, 1460, 2300, 40],
+        [980, 220, 80, 1140],
+        [1420, 640, 840, 80]
+      ],
+      "rooms": [
+        { "id": "sc2_meeting", "label_key": "room.sc2_meeting", "rect": [120, 220, 820, 1040] },
+        { "id": "sc2_media", "label_key": "room.sc2_media", "rect": [1120, 220, 480, 360] },
+        { "id": "sc2_staff", "label_key": "room.sc2_staff", "rect": [1640, 220, 560, 360] },
+        { "id": "sc2_classroom_201", "label_key": "room.sc2_classroom_201", "rect": [1120, 760, 480, 520] },
+        { "id": "sc2_classroom_202", "label_key": "room.sc2_classroom_202", "rect": [1640, 760, 560, 520] },
+        { "id": "sc2_stairwell", "label_key": "room.sc2_stairwell", "rect": [760, 1180, 320, 220] }
+      ],
+      "safe_areas": [
+        {
+          "id": "sc2_staff_safe",
+          "label_key": "trigger.sc2_staff_safe",
+          "tags": ["lockable", "out_of_sight", "not_public_corridor", "not_glass_exposed"],
+          "rect": [1680, 260, 500, 280]
+        }
+      ],
+      "risk_areas": [
+        {
+          "id": "sc2_open_bridge",
+          "label_key": "trigger.sc2_open_bridge",
+          "tags": ["public", "open"],
+          "rect": [1120, 1320, 1080, 100]
+        }
+      ],
+      "props": [
+        { "id": "sc_f2_meeting_tables", "type": "desk_cluster", "solid": true, "rect": [220, 520, 620, 140] },
+        { "id": "sc_f2_media_console", "type": "service_desk", "solid": true, "rect": [1180, 300, 360, 90] },
+        { "id": "sc_f2_class_201_desks", "type": "classroom_block", "solid": true, "rect": [1180, 840, 360, 220] },
+        { "id": "sc_f2_class_202_desks", "type": "classroom_block", "solid": true, "rect": [1700, 840, 420, 220] }
+      ],
+      "exit_zones": [],
+      "map_boards": [
+        [860, 1200, 40, 40]
+      ],
+      "links": [
+        {
+          "id": "link_student_center_f2_to_f1",
+          "label_key": "transfer.down_student_center_f1",
+          "target_scene_id": "student_center_f1",
+          "target_spawn_id": "spawn_sc_f1_stairs",
+          "locked_on_alert": false,
+          "rect": [820, 1240, 140, 180]
+        }
+      ],
+      "spawns": [
+        { "id": "spawn_sc_f2_stairs", "label_key": "spawn.sc_f2_stairs", "rect": [900, 1260, 24, 24] }
+      ]
+    }
+  ]
+}

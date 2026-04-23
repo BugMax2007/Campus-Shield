@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "campus-safe-game"
+version = "0.1.0"
+description = "A bilingual 2D campus safety education prototype built with pygame-ce."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "pygame-ce>=2.5.7",
+  "PyTMX>=3.32",
+]
+
+[project.optional-dependencies]
+hf = [
+  "transformers>=4.49",
+  "torch>=2.6",
+]
+
+[project.scripts]
+campus-safe-game = "campus_safe_game.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

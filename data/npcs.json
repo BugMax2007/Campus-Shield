@@ -1,0 +1,87 @@
+[
+  {
+    "id": "orientation_leader",
+    "zone": "quad",
+    "x": 1100,
+    "y": 520,
+    "mood": "helper",
+    "label_key": "npc.orientation_leader.name",
+    "intro_key": "npc.orientation_leader.intro",
+    "alert_key": "npc.orientation_leader.alert",
+    "success_key": "npc.orientation_leader.success",
+    "needs_key": "npc.orientation_leader.needs",
+    "request_type": "check_official",
+    "education_key": "official_sources"
+  },
+  {
+    "id": "academic_professor",
+    "zone": "academic_hall",
+    "x": 460,
+    "y": 310,
+    "mood": "calm",
+    "label_key": "npc.academic_professor.name",
+    "intro_key": "npc.academic_professor.intro",
+    "alert_key": "npc.academic_professor.alert",
+    "success_key": "npc.academic_professor.success",
+    "needs_key": "npc.academic_professor.needs",
+    "request_type": "safe_room_check",
+    "education_key": "secure_room"
+  },
+  {
+    "id": "library_student",
+    "zone": "library",
+    "x": 1820,
+    "y": 320,
+    "mood": "confused",
+    "label_key": "npc.library_student.name",
+    "intro_key": "npc.library_student.intro",
+    "alert_key": "npc.library_student.alert",
+    "success_key": "npc.library_student.success",
+    "needs_key": "npc.library_student.needs",
+    "request_type": "check_official",
+    "education_key": "official_sources"
+  },
+  {
+    "id": "student_center_peer",
+    "zone": "student_center",
+    "x": 1840,
+    "y": 980,
+    "mood": "panicked",
+    "label_key": "npc.student_center_peer.name",
+    "intro_key": "npc.student_center_peer.intro",
+    "alert_key": "npc.student_center_peer.alert",
+    "success_key": "npc.student_center_peer.success",
+    "needs_key": "npc.student_center_peer.needs",
+    "request_type": "safe_room_check",
+    "education_key": "shelter_in_place"
+  },
+  {
+    "id": "dorm_ra",
+    "zone": "dorm",
+    "x": 500,
+    "y": 1070,
+    "mood": "helper",
+    "label_key": "npc.dorm_ra.name",
+    "intro_key": "npc.dorm_ra.intro",
+    "alert_key": "npc.dorm_ra.alert",
+    "success_key": "npc.dorm_ra.success",
+    "needs_key": "npc.dorm_ra.needs",
+    "request_type": "safe_room_check",
+    "education_key": "card_access"
+  },
+  {
+    "id": "safety_officer",
+    "zone": "safety_health",
+    "x": 1160,
+    "y": 1160,
+    "mood": "helper",
+    "label_key": "npc.safety_officer.name",
+    "intro_key": "npc.safety_officer.intro",
+    "alert_key": "npc.safety_officer.alert",
+    "success_key": "npc.safety_officer.success",
+    "needs_key": "npc.safety_officer.needs",
+    "request_type": "check_official",
+    "education_key": "mental_health_support"
+  }
+]
+

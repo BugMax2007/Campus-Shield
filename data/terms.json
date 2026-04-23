@@ -1,0 +1,10 @@
+[
+  {"id": "emergency_alert", "title_key": "term.emergency_alert.title", "body_key": "term.emergency_alert.body", "category": "official_info"},
+  {"id": "official_sources", "title_key": "term.official_sources.title", "body_key": "term.official_sources.body", "category": "official_info"},
+  {"id": "secure_room", "title_key": "term.secure_room.title", "body_key": "term.secure_room.body", "category": "space_choice"},
+  {"id": "situational_awareness", "title_key": "term.situational_awareness.title", "body_key": "term.situational_awareness.body", "category": "situational_awareness"},
+  {"id": "route_planning", "title_key": "term.route_planning.title", "body_key": "term.route_planning.body", "category": "situational_awareness"},
+  {"id": "decoy_noise", "title_key": "term.decoy_noise.title", "body_key": "term.decoy_noise.body", "category": "space_choice"},
+  {"id": "multi_floor_navigation", "title_key": "term.multi_floor_navigation.title", "body_key": "term.multi_floor_navigation.body", "category": "situational_awareness"},
+  {"id": "robot_guidance", "title_key": "term.robot_guidance.title", "body_key": "term.robot_guidance.body", "category": "knowledge_collection"}
+]

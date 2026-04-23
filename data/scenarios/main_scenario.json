@@ -1,0 +1,73 @@
+{
+  "scenario_id": "phase1_multi_floor_escape_v1",
+  "opening_sequence": [
+    {
+      "title_key": "opening.1.title",
+      "body_key": "opening.1.body",
+      "duration": 7
+    },
+    {
+      "title_key": "opening.2.title",
+      "body_key": "opening.2.body",
+      "duration": 8
+    },
+    {
+      "title_key": "opening.3.title",
+      "body_key": "opening.3.body",
+      "duration": 8
+    }
+  ],
+  "alert_waves": [
+    {
+      "at": 55,
+      "phase": "Alert",
+      "title_key": "alert.wave1.title",
+      "body_key": "alert.wave1.body",
+      "incident_scene_id": "student_center_f1",
+      "blocked_link_ids": ["link_outdoor_to_student_center"]
+    },
+    {
+      "at": 120,
+      "phase": "Shelter",
+      "title_key": "alert.wave2.title",
+      "body_key": "alert.wave2.body",
+      "incident_scene_id": "outdoor_main",
+      "blocked_link_ids": ["link_outdoor_to_student_center", "link_student_center_f1_to_f2"]
+    },
+    {
+      "at": 420,
+      "phase": "AllClear",
+      "title_key": "alert.wave3.title",
+      "body_key": "alert.wave3.body",
+      "incident_scene_id": "outdoor_main",
+      "blocked_link_ids": []
+    }
+  ],
+  "ending_conditions": {
+    "survive_seconds": 420,
+    "required_clues": 3
+  },
+  "clue_chain": [
+    "clue_library_terminal",
+    "clue_robot_dock",
+    "clue_sc_notice_board"
+  ],
+  "safe_room_tags": [
+    "lockable",
+    "out_of_sight",
+    "not_public_corridor",
+    "not_glass_exposed"
+  ],
+  "fail_conditions": [
+    "captured",
+    "high_risk_area",
+    "ignored_official_updates",
+    "left_safe_room_after_shelter"
+  ],
+  "debrief_notes": [
+    "debrief.note.alert_first",
+    "debrief.note.bottle_timing",
+    "debrief.note.multi_floor_route",
+    "debrief.note.secret_clues"
+  ]
+}

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="75" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="64">
+ <objectgroup id="1" name="ground">
+  <object id="1" name="Academic Hall" x="120" y="160" width="560" height="360">
+   <properties>
+    <property name="zone_id" value="academic_hall"/>
+    <property name="label_key" value="zone.academic_hall.name"/>
+    <property name="description_key" value="zone.academic_hall.description"/>
+    <property name="color" value="#6d9eeb"/>
+   </properties>
+  </object>
+  <object id="2" name="Library" x="1500" y="140" width="560" height="360">
+   <properties>
+    <property name="zone_id" value="library"/>
+    <property name="label_key" value="zone.library.name"/>
+    <property name="description_key" value="zone.library.description"/>
+    <property name="color" value="#93c47d"/>
+   </properties>
+  </object>
+  <object id="3" name="Quad" x="760" y="360" width="900" height="480">
+   <properties>
+    <property name="zone_id" value="quad"/>
+    <property name="label_key" value="zone.quad.name"/>
+    <property name="description_key" value="zone.quad.description"/>
+    <property name="color" value="#b6d7a8"/>
+   </properties>
+  </object>
+  <object id="4" name="Student Center" x="1600" y="820" width="520" height="360">
+   <properties>
+    <property name="zone_id" value="student_center"/>
+    <property name="label_key" value="zone.student_center.name"/>
+    <property name="description_key" value="zone.student_center.description"/>
+    <property name="color" value="#f6b26b"/>
+   </properties>
+  </object>
+  <object id="5" name="Dorm" x="180" y="930" width="580" height="380">
+   <properties>
+    <property name="zone_id" value="dorm"/>
+    <property name="label_key" value="zone.dorm.name"/>
+    <property name="description_key" value="zone.dorm.description"/>
+    <property name="color" value="#c27ba0"/>
+   </properties>
+  </object>
+  <object id="6" name="Safety &amp; Health" x="960" y="1040" width="500" height="290">
+   <properties>
+    <property name="zone_id" value="safety_health"/>
+    <property name="label_key" value="zone.safety_health.name"/>
+    <property name="description_key" value="zone.safety_health.description"/>
+    <property name="color" value="#76a5af"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="2" name="collision">
+  <object id="10" x="0" y="0" width="2400" height="40"/>
+  <object id="11" x="0" y="0" width="40" height="1600"/>
+  <object id="12" x="2360" y="0" width="40" height="1600"/>
+  <object id="13" x="0" y="1560" width="2400" height="40"/>
+  <object id="14" x="1400" y="820" width="150" height="230"/>
+  <object id="15" x="780" y="960" width="140" height="120"/>
+  <object id="16" x="1520" y="520" width="180" height="130"/>
+ </objectgroup>
+ <objectgroup id="3" name="props">
+  <object id="20" name="Academic Hall Sign" x="300" y="120" width="160" height="24"/>
+  <object id="21" name="Library Sign" x="1710" y="100" width="140" height="24"/>
+  <object id="22" name="Student Center Sign" x="1730" y="780" width="160" height="24"/>
+  <object id="23" name="Dorm Sign" x="380" y="890" width="100" height="24"/>
+  <object id="24" name="Safety Sign" x="1080" y="1000" width="180" height="24"/>
+ </objectgroup>
+ <objectgroup id="4" name="doors">
+  <object id="30" name="Student Atrium Door" x="1585" y="900" width="20" height="80">
+   <properties>
+    <property name="door_id" value="door_student_atrium"/>
+    <property name="label_key" value="interaction.student_center_atrium.label"/>
+    <property name="blocks_on_alert" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="31" name="Quad Center Walkway" x="1160" y="835" width="120" height="20">
+   <properties>
+    <property name="door_id" value="door_quad_center"/>
+    <property name="label_key" value="zone.quad.name"/>
+    <property name="blocks_on_alert" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="triggers">
+  <object id="40" name="Academic Safe Room" x="240" y="220" width="170" height="130">
+   <properties>
+    <property name="trigger_id" value="academic_safe_room"/>
+    <property name="kind" value="safe_room"/>
+    <property name="zone_id" value="academic_hall"/>
+    <property name="label_key" value="trigger.academic_safe_room.label"/>
+    <property name="tags" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+   </properties>
+  </object>
+  <object id="41" name="Library Archive" x="1700" y="220" width="150" height="120">
+   <properties>
+    <property name="trigger_id" value="library_archive"/>
+    <property name="kind" value="safe_room"/>
+    <property name="zone_id" value="library"/>
+    <property name="label_key" value="trigger.library_archive.label"/>
+    <property name="tags" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+   </properties>
+  </object>
+  <object id="42" name="Dorm Study" x="280" y="1000" width="170" height="150">
+   <properties>
+    <property name="trigger_id" value="dorm_study_room"/>
+    <property name="kind" value="safe_room"/>
+    <property name="zone_id" value="dorm"/>
+    <property name="label_key" value="trigger.dorm_study_room.label"/>
+    <property name="tags" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+   </properties>
+  </object>
+  <object id="43" name="Health Counsel Room" x="1020" y="1100" width="160" height="120">
+   <properties>
+    <property name="trigger_id" value="health_counsel_room"/>
+    <property name="kind" value="safe_room"/>
+    <property name="zone_id" value="safety_health"/>
+    <property name="label_key" value="trigger.health_counsel_room.label"/>
+    <property name="tags" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+   </properties>
+  </object>
+  <object id="44" name="Quad Open Lawn" x="820" y="420" width="780" height="350">
+   <properties>
+    <property name="trigger_id" value="quad_open_lawn"/>
+    <property name="kind" value="risk_zone"/>
+    <property name="zone_id" value="quad"/>
+    <property name="label_key" value="trigger.quad_open_lawn.label"/>
+    <property name="tags" value="open,public"/>
+   </properties>
+  </object>
+  <object id="45" name="Student Atrium" x="1710" y="900" width="260" height="170">
+   <properties>
+    <property name="trigger_id" value="student_atrium"/>
+    <property name="kind" value="risk_zone"/>
+    <property name="zone_id" value="student_center"/>
+    <property name="label_key" value="trigger.student_atrium.label"/>
+    <property name="tags" value="glass_exposed,public"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="spawn">
+  <object id="50" name="Quad Spawn" x="1170" y="650" width="24" height="24">
+   <properties>
+    <property name="spawn_id" value="spawn_quad"/>
+    <property name="zone_id" value="quad"/>
+    <property name="label_key" value="spawn.spawn_quad"/>
+   </properties>
+  </object>
+  <object id="51" name="Academic Spawn" x="430" y="380" width="24" height="24">
+   <properties>
+    <property name="spawn_id" value="spawn_academic"/>
+    <property name="zone_id" value="academic_hall"/>
+    <property name="label_key" value="spawn.spawn_academic"/>
+   </properties>
+  </object>
+  <object id="52" name="Dorm Spawn" x="460" y="1160" width="24" height="24">
+   <properties>
+    <property name="spawn_id" value="spawn_dorm"/>
+    <property name="zone_id" value="dorm"/>
+    <property name="label_key" value="spawn.spawn_dorm"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="ui_markers">
+  <object id="60" name="Academic Marker" x="390" y="340">
+   <properties>
+    <property name="zone_id" value="academic_hall"/>
+   </properties>
+  </object>
+  <object id="61" name="Library Marker" x="1780" y="320">
+   <properties>
+    <property name="zone_id" value="library"/>
+   </properties>
+  </object>
+  <object id="62" name="Quad Marker" x="1180" y="590">
+   <properties>
+    <property name="zone_id" value="quad"/>
+   </properties>
+  </object>
+  <object id="63" name="Student Center Marker" x="1850" y="990">
+   <properties>
+    <property name="zone_id" value="student_center"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
+

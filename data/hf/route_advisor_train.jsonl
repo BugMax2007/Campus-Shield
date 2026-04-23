@@ -1,0 +1,10 @@
+{"text":"phase=Explore; scene=library_f1; room=lib_lobby; safe=false; clues=0/3; bottles=3; gate_reason=open; route_gate=室外层; route_secret=图书馆 2 层","label":"map_and_plan"}
+{"text":"phase=Explore; scene=student_center_f1; room=sc1_lobby; safe=false; clues=1/3; bottles=2; gate_reason=open; route_gate=室外层; route_secret=图书馆 2 层","label":"collect_clues"}
+{"text":"phase=Alert; scene=library_f1; room=lib_reading_hall; safe=false; clues=1/3; bottles=2; gate_reason=guardline; route_gate=室外层; route_secret=图书馆 2 层","label":"relocate_safe"}
+{"text":"phase=Alert; scene=outdoor_main; room=north_gate; safe=false; clues=3/3; bottles=1; gate_reason=open; route_gate=当前场景; route_secret=图书馆 2 层","label":"take_gate_now"}
+{"text":"phase=Alert; scene=outdoor_main; room=north_gate; safe=false; clues=2/3; bottles=2; gate_reason=guardline; route_gate=当前场景; route_secret=图书馆 2 层","label":"distract_guard"}
+{"text":"phase=Shelter; scene=library_f2; room=lib2_study; safe=true; clues=3/3; bottles=1; gate_reason=move; route_gate=室外层; route_secret=当前场景","label":"take_secret_now"}
+{"text":"phase=Shelter; scene=student_center_f2; room=sc2_staff; safe=true; clues=3/3; bottles=2; gate_reason=guardline; route_gate=室外层; route_secret=图书馆 2 层","label":"relocate_to_secret"}
+{"text":"phase=Shelter; scene=library_archive; room=lib_archive; safe=true; clues=2/3; bottles=1; gate_reason=guardline; route_gate=室外层; route_secret=图书馆 2 层; remaining=55","label":"hold_for_police"}
+{"text":"phase=Alert; scene=student_center_f1; room=sc1_classroom_101; safe=true; clues=1/3; bottles=3; gate_reason=guardline; route_gate=室外层; route_secret=图书馆 2 层","label":"collect_clues"}
+{"text":"phase=Alert; scene=library_f2; room=lib2_stacks; safe=true; clues=3/3; bottles=2; gate_reason=guardline; route_gate=室外层; route_secret=当前场景","label":"take_secret_now"}
