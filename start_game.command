@@ -12,5 +12,5 @@ fi
 
 export PYTHONPATH="$SCRIPT_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
 
-echo "Launching Campus Safe..."
+echo "Launching Campus Shield..."
 python3 -m campus_safe_game.main "$@"

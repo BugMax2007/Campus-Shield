@@ -1,11 +1,11 @@
 @echo off
 setlocal EnableExtensions
-title Campus Safe Launcher
+title Campus Shield Launcher
 
 set "SCRIPT_DIR=%~dp0"
 cd /d "%SCRIPT_DIR%"
 
-echo === Campus Safe Windows Launcher ===
+echo === Campus Shield Windows Launcher ===
 echo Project: %SCRIPT_DIR%
 echo.
 
@@ -28,7 +28,7 @@ if defined PYTHONPATH (
     set "PYTHONPATH=%SCRIPT_DIR%src"
 )
 
-echo Launching Campus Safe...
+echo Launching Campus Shield...
 "%PYTHON_EXE%" %PYTHON_FLAGS% -m campus_safe_game.main %*
 set "EXIT_CODE=%errorlevel%"
 if not "%EXIT_CODE%"=="0" (

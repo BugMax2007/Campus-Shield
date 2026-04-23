@@ -7,7 +7,7 @@ from .game import AppConfig, CampusSafeGame
 
 
 def parse_args() -> AppConfig:
-    parser = argparse.ArgumentParser(description="Campus Safe Game prototype")
+    parser = argparse.ArgumentParser(description="Campus Shield")
     parser.add_argument("--mode", choices=["story", "practice"], default="story")
     parser.add_argument("--lang", choices=["zh-CN", "en-US"], default="zh-CN")
     parser.add_argument("--spawn", default="random")

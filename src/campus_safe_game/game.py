@@ -140,7 +140,7 @@ class SessionState:
 class CampusSafeGame:
     def __init__(self, base_path: Path, config: AppConfig) -> None:
         pygame.init()
-        pygame.display.set_caption("Campus Safe")
+        pygame.display.set_caption("Campus Shield")
         self.base_path = base_path
         self.config = config
         self.fullscreen = config.fullscreen

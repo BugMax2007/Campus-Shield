@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "campus-safe-game"
+name = "campus-shield"
 version = "0.1.0"
-description = "A bilingual 2D campus safety education prototype built with pygame-ce."
+description = "A bilingual 2D campus safety education game built with pygame-ce."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -20,7 +20,7 @@ hf = [
 ]
 
 [project.scripts]
-campus-safe-game = "campus_safe_game.main:main"
+campus-shield = "campus_safe_game.main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

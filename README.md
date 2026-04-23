@@ -1,6 +1,6 @@
-# Campus Safe Game Prototype
+# Campus Shield
 
-This repository contains a playable Python prototype for a bilingual 2D campus safety education game. It is designed as an educational tool for Chinese high-school students preparing to study abroad and focuses on official alerts, safe-space selection, and campus support systems.
+Campus Shield is a playable bilingual 2D campus safety education game. It is designed as an educational tool for Chinese high-school students preparing to study abroad and focuses on official alerts, safe-space selection, route judgment, and campus support systems. Through game experiences, players learn what they should do in a potential emergency to better protect themselves.
 
 ## Features
 
