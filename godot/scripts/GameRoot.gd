@@ -88,6 +88,7 @@ func _build_ui() -> void:
 	ui.resume_requested.connect(_resume_play)
 	ui.restart_requested.connect(_start_game)
 	ui.menu_requested.connect(_return_to_menu)
+	ui.exit_requested.connect(_quit_game)
 	ui.show_menu()
 
 
@@ -112,6 +113,10 @@ func _return_to_menu() -> void:
 	mode = MODE_MENU
 	player.enabled = false
 	ui.show_menu()
+
+
+func _quit_game() -> void:
+	get_tree().quit()
 
 
 func _resume_play() -> void:
@@ -294,6 +299,9 @@ func _add_noise(noise_position: Vector2) -> void:
 
 func _on_player_seen(_raider_id: String) -> void:
 	_on_toast("你被发现了：立刻打断视线，利用书架或房间遮挡。")
+	for raider in raiders:
+		if raider.actor_id != _raider_id:
+			raider.force_investigate(player.position)
 
 
 func _on_player_caught(_raider_id: String) -> void:

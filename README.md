@@ -2,14 +2,14 @@
 
 Campus Shield is a playable bilingual 2D campus safety education game. It is designed as an educational tool for Chinese high-school students preparing to study abroad and focuses on official alerts, safe-space selection, route judgment, and campus support systems. Through game experiences, players learn what they should do in a potential emergency to better protect themselves.
 
-## Features
+## Current Primary Build
 
-- Top-down 2D campus with 6 zones and 3 spawn points.
-- `Story` and `Practice` modes on the same map.
-- Data-driven `.tmx` world, scenario timeline, interactions, NPCs, terms, and localization.
-- Bilingual UI with Chinese primary copy and English secondary copy.
-- Debrief scoring across space choice, official information use, situational awareness, low-risk assistance, and knowledge collection.
-- Save file for language, unlocked terms, best score, completed runs, and accessibility settings.
+- Godot 4.6 rebuild is the primary development target.
+- Chapter 01 focuses on the library and student center as a 10-15 minute narrative stealth education level.
+- Data-driven Tiled level with rooms, walls, cover, interactables, patrol paths, exits, signage, robots, and raiders.
+- Campus-signage UI style with responsive menu, HUD, phone, map terminal, pause, and debrief screens.
+- Playable routes include main exit evacuation, service-route evacuation after clues, and waiting for assistance in a qualified safe space.
+- The Python/Pygame version is preserved as a legacy prototype and wording/mechanics reference.
 
 ## Run
 
@@ -84,8 +84,9 @@ py -3 -m campus_safe_game.main
 
 - `WASD`: move
 - `E`: interact
-- `Tab`: phone + glossary
-- `M`: campus map
+- `Q`: throw bottle noise distraction
+- `Tab`: phone
+- `M`: map terminal near in-scene map boards
 - `Esc`: pause / resume
 - Arrow keys + `Enter`: menu navigation
 
@@ -101,13 +102,15 @@ Godot rebuild checks:
 ./tools/check_godot_rebuild.sh
 ```
 
-## UI Snapshots
+This runs Python data tests, a Godot headless launch, and a Godot UI layout check across `1280x720`, `1600x900`, and `1920x1080`.
+
+## Legacy UI Snapshots
 
 ```bash
 PYTHONPATH=src SDL_VIDEODRIVER=dummy python3 tools/render_ui_snapshots.py
 ```
 
-This exports menu, notice, gameplay, map, phone, pause, and debrief screenshots for `1280x720`, `1600x900`, and `1920x1080` into `artifacts/snapshots/`.
+This exports screenshots for the legacy Python prototype into `artifacts/snapshots/`.
 
 ## Prototype Notes
 

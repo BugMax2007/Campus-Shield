@@ -9,12 +9,16 @@ const COLOR_SAFE := Color8(204, 229, 214)
 const COLOR_RISK := Color8(232, 199, 190)
 const COLOR_SIGN := Color8(238, 189, 61)
 const COLOR_TEXT := Color8(22, 36, 50)
+const COLOR_BOOK := Color8(121, 78, 49)
+const COLOR_TABLE := Color8(138, 111, 82)
+const COLOR_GLASS := Color8(112, 166, 185)
 
 var data: Dictionary = {}
 var world_size: Vector2 = Vector2(3200, 2240)
 var rooms: Array[Dictionary] = []
 var walls: Array[Rect2] = []
 var cover: Array[Rect2] = []
+var cover_details: Array[Dictionary] = []
 var exits: Array[Dictionary] = []
 var signage: Array[Dictionary] = []
 
@@ -24,6 +28,7 @@ func setup(level_data: Dictionary) -> void:
 	rooms = level_data.get("rooms", [])
 	walls = level_data.get("walls", [])
 	cover = level_data.get("cover", [])
+	cover_details = level_data.get("cover_details", [])
 	exits = level_data.get("exits", [])
 	signage = level_data.get("signage", [])
 	queue_redraw()
@@ -86,14 +91,19 @@ func exit_at(point: Vector2) -> Dictionary:
 func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, world_size), COLOR_GRASS)
 	draw_rect(Rect2(150, 190, 2520, 1440), COLOR_WALKWAY)
+	_draw_walkway_lines()
 	for room: Dictionary in rooms:
 		var rect: Rect2 = room["rect"]
 		var color: Color = COLOR_SAFE if str(room.get("risk_level", "")) == "safe" else COLOR_RISK
 		draw_rect(rect, color)
 		draw_rect(rect, COLOR_WALL, false, 5.0)
 		_draw_label(str(room.get("name", "")), rect.position + Vector2(18, 34), 18)
-	for rect: Rect2 in cover:
-		draw_rect(rect, COLOR_COVER)
+	if cover_details.is_empty():
+		for rect: Rect2 in cover:
+			_draw_cover_rect(rect, "")
+	else:
+		for item: Dictionary in cover_details:
+			_draw_cover_rect(item["rect"], str(item.get("name", "")))
 	for rect: Rect2 in walls:
 		draw_rect(rect, COLOR_WALL)
 	for exit_data: Dictionary in exits:
@@ -104,6 +114,38 @@ func _draw() -> void:
 		var sign_rect: Rect2 = sign["rect"]
 		draw_rect(sign_rect, COLOR_SIGN)
 		_draw_label(str(sign.get("label", "Sign")), sign_rect.position + Vector2(8, 30), 14)
+
+
+func _draw_walkway_lines() -> void:
+	for x: int in range(220, int(world_size.x) - 300, 220):
+		draw_line(Vector2(x, 220), Vector2(x, 1600), Color8(151, 166, 159, 90), 2.0)
+	for y: int in range(260, 1600, 180):
+		draw_line(Vector2(180, y), Vector2(2620, y), Color8(151, 166, 159, 80), 2.0)
+
+
+func _draw_cover_rect(rect: Rect2, cover_name: String) -> void:
+	var lowered: String = cover_name.to_lower()
+	var color: Color = COLOR_BOOK if lowered.contains("shelf") else COLOR_TABLE
+	if lowered.contains("booth"):
+		color = COLOR_COVER
+	draw_rect(rect, color)
+	draw_rect(rect, COLOR_WALL, false, 2.0)
+	if lowered.contains("shelf"):
+		_draw_bookshelf_lines(rect)
+	elif lowered.contains("table"):
+		draw_line(rect.position + Vector2(10, rect.size.y * 0.5), rect.position + Vector2(rect.size.x - 10, rect.size.y * 0.5), Color8(223, 202, 151, 180), 2.0)
+	if rect.size.x > 135 and rect.size.y > 30:
+		var label: String = "书架" if lowered.contains("shelf") else "桌面"
+		_draw_label(label, rect.position + Vector2(10, rect.size.y * 0.68), 13)
+
+
+func _draw_bookshelf_lines(rect: Rect2) -> void:
+	if rect.size.x >= rect.size.y:
+		for x: int in range(int(rect.position.x + 12), int(rect.end.x - 6), 24):
+			draw_line(Vector2(x, rect.position.y + 5), Vector2(x, rect.end.y - 5), Color8(230, 192, 104, 160), 2.0)
+	else:
+		for y: int in range(int(rect.position.y + 12), int(rect.end.y - 6), 24):
+			draw_line(Vector2(rect.position.x + 5, y), Vector2(rect.end.x - 5, y), Color8(230, 192, 104, 160), 2.0)
 
 
 func _draw_label(text: String, pos: Vector2, size: int) -> void:

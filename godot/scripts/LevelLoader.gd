@@ -36,7 +36,9 @@ func load_level(path: String) -> Dictionary:
 		"world_size": Vector2(float(raw.get("width", 100)) * tile_width, float(raw.get("height", 70)) * tile_height),
 		"rooms": _parse_rooms(layers["rooms"]),
 		"walls": _parse_rect_layer(layers["walls"]),
+		"wall_details": _parse_named_rect_layer(layers["walls"]),
 		"cover": _parse_rect_layer(layers["cover"]),
+		"cover_details": _parse_named_rect_layer(layers["cover"]),
 		"interactables": _parse_interactables(layers["interactables"]),
 		"spawns": _parse_spawns(layers["spawns"]),
 		"patrol_paths": _parse_patrol_paths(layers["patrol_paths"]),
@@ -77,6 +79,18 @@ func _parse_rect_layer(layer: Dictionary) -> Array[Rect2]:
 		var obj: Dictionary = obj_value as Dictionary
 		rects.append(_rect(obj))
 	return rects
+
+
+func _parse_named_rect_layer(layer: Dictionary) -> Array[Dictionary]:
+	var items: Array[Dictionary] = []
+	for obj_value: Variant in layer.get("objects", []):
+		var obj: Dictionary = obj_value as Dictionary
+		items.append({
+			"name": str(obj.get("name", "")),
+			"type": str(obj.get("type", "")),
+			"rect": _rect(obj),
+		})
+	return items
 
 
 func _parse_interactables(layer: Dictionary) -> Array[Dictionary]:

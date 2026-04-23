@@ -67,6 +67,14 @@ class GodotLevelDataTest(unittest.TestCase):
         self.assertIn("secret", exits)
         self.assertEqual(int(exits["secret"]["required_clues"]), 3)
 
+    def test_level_has_readable_detail_props(self) -> None:
+        cover_names = {obj["name"] for obj in self.layers["cover"]["objects"]}
+        self.assertTrue(any("shelf" in name for name in cover_names), "library needs visible bookshelf cover")
+        self.assertTrue(any("table" in name for name in cover_names), "library/student rooms need visible tables")
+        signage_labels = " ".join(self._props(obj).get("label", "") for obj in self.layers["signage"]["objects"])
+        self.assertIn("出口", signage_labels)
+        self.assertIn("服务通道", signage_labels)
+
     def _props(self, obj: dict) -> dict:
         return {prop["name"]: prop["value"] for prop in obj.get("properties", [])}
 

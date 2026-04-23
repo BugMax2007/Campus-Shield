@@ -6,3 +6,6 @@ GODOT_BIN="/Applications/Godot.app/Contents/MacOS/Godot"
 
 python3 -m unittest discover -s "$ROOT/tests"
 "$GODOT_BIN" --headless --path "$ROOT/godot" --quit
+UI_OUTPUT="$("$GODOT_BIN" --headless --path "$ROOT/godot" --script "$ROOT/godot/tools/ui_layout_check.gd" 2>&1 || true)"
+printf '%s\n' "$UI_OUTPUT"
+grep -q "UI layout check OK" <<< "$UI_OUTPUT"

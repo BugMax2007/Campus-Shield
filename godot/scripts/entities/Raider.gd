@@ -79,6 +79,14 @@ func tick(delta: float, player_position: Vector2, phase: String, noises: Array[D
 	queue_redraw()
 
 
+func force_investigate(target: Vector2) -> void:
+	if state == STATE_CHASE:
+		return
+	state = STATE_INVESTIGATE
+	last_seen = target
+	search_timer = max(search_timer, 5.5)
+
+
 func _target_for_state(player_position: Vector2) -> Vector2:
 	if state == STATE_CHASE:
 		return player_position
@@ -138,4 +146,19 @@ func _draw() -> void:
 	draw_colored_polygon(PackedVector2Array([Vector2.ZERO, left, right]), Color(0.86, 0.12, 0.10, 0.12))
 	draw_circle(Vector2.ZERO, 18.0, Color8(166, 68, 70))
 	draw_circle(Vector2.ZERO, 18.0, Color8(87, 33, 36), false, 3.0)
-	draw_string(ThemeDB.fallback_font, Vector2(-28, -26), state, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color8(250, 246, 240))
+	draw_string(ThemeDB.fallback_font, Vector2(-28, -26), _state_label(), HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color8(250, 246, 240))
+
+
+func _state_label() -> String:
+	match state:
+		STATE_PATROL:
+			return "巡逻"
+		STATE_INVESTIGATE:
+			return "调查"
+		STATE_CHASE:
+			return "追踪"
+		STATE_SEARCH:
+			return "搜索"
+		STATE_RETURN:
+			return "回位"
+	return "巡逻"
