@@ -10,3 +10,6 @@ build/
 dist/
 *.egg-info/
 artifacts/
+.godot/
+godot/.godot/
+*.tmp
