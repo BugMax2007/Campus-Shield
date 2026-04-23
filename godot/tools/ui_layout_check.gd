@@ -23,6 +23,7 @@ func _run() -> void:
 			await process_frame
 			_check_visible_controls(ui.root, screen, resolution)
 			if screen in ["gameplay", "alert"]:
+				_check_hud_visible(ui, screen, resolution)
 				_check_hud_overlap(ui, screen, resolution)
 		ui.queue_free()
 		await process_frame
@@ -90,3 +91,12 @@ func _check_hud_overlap(ui, screen: String, resolution: Vector2i) -> void:
 		for j: int in range(i + 1, rects.size()):
 			if (rects[i]["rect"] as Rect2).intersects(rects[j]["rect"] as Rect2):
 				failures.append("%s HUD overlap at %s: %s vs %s" % [screen, str(resolution), rects[i]["name"], rects[j]["name"]])
+
+
+func _check_hud_visible(ui, screen: String, resolution: Vector2i) -> void:
+	var visible_chips: int = 0
+	for child: Node in ui.hud_panel.get_children():
+		if child is Control and (child as Control).visible:
+			visible_chips += 1
+	if visible_chips < 4:
+		failures.append("%s HUD has only %d visible chips at %s" % [screen, visible_chips, str(resolution)])

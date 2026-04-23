@@ -34,6 +34,7 @@ var objective_label: Label
 var status_label: Label
 var alert_label: Label
 var interaction_label: Label
+var toast_panel: PanelContainer
 var phone_timeline_label: Label
 var phone_side_label: Label
 var map_route_label: Label
@@ -126,10 +127,14 @@ func update_hud(state: Dictionary, interaction_text: String) -> void:
 
 func toast(message: String) -> void:
 	toast_label.text = message
+	toast_panel.visible = true
 	toast_label.visible = true
 	var tween: Tween = create_tween()
 	tween.tween_interval(4.0)
-	tween.tween_callback(func() -> void: toast_label.visible = false)
+	tween.tween_callback(func() -> void:
+		toast_label.visible = false
+		toast_panel.visible = false
+	)
 
 
 func _hide_all() -> void:
@@ -188,7 +193,8 @@ func _build_hud() -> void:
 	status_label = _hud_chip("StatusChip", Rect2(0.715, 0.105, 0.267, 0.060), NAVY, YELLOW, 16)
 	interaction_label = _hud_chip("ActionBar", Rect2(0.28, 0.905, 0.44, 0.068), Color8(20, 43, 57, 238), TEAL, 17)
 	toast_label = _hud_chip("ToastTray", Rect2(0.018, 0.785, 0.47, 0.092), Color8(22, 43, 54, 232), YELLOW, 15)
-	toast_label.visible = false
+	toast_panel = _chip_panel(toast_label)
+	toast_panel.visible = false
 	root.add_child(hud_panel)
 
 
@@ -429,6 +435,7 @@ func _label(text: String, size: int, color: Color = INK) -> Label:
 
 func _hud_chip(node_name: String, anchors: Rect2, fill: Color, accent: Color, font_size: int) -> Label:
 	var panel: PanelContainer = _panel(node_name, anchors, fill, accent)
+	panel.visible = true
 	panel.add_theme_stylebox_override("panel", _style_box(fill, accent, 14, 2))
 	var margin_node: MarginContainer = _margin_container(10)
 	var label: Label = _label("", font_size, Color8(248, 247, 238))
@@ -441,6 +448,10 @@ func _hud_chip(node_name: String, anchors: Rect2, fill: Color, accent: Color, fo
 	panel.add_child(margin_node)
 	hud_panel.add_child(panel)
 	return label
+
+
+func _chip_panel(label: Label) -> PanelContainer:
+	return label.get_parent().get_parent() as PanelContainer
 
 
 func _style_box(fill: Color, border: Color, radius: int = 16, border_width: int = 2) -> StyleBoxFlat:
