@@ -1,0 +1,1381 @@
+{
+  "type": "map",
+  "version": "1.10",
+  "tiledversion": "1.12.1",
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "width": 100,
+  "height": 70,
+  "tilewidth": 32,
+  "tileheight": 32,
+  "infinite": false,
+  "layers": [
+    {
+      "id": 1,
+      "name": "ground",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 1,
+          "name": "campus_bounds",
+          "type": "ground",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 3200.0,
+          "height": 2240.0,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "rooms",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 2,
+          "name": "library_reading",
+          "type": "room",
+          "x": 240.0,
+          "y": 980.0,
+          "width": 920.0,
+          "height": 520.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "library_reading"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "图书馆阅览区 / Library Reading"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "lockable,out_of_sight,not_public_corridor,not_glass_exposed"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "library_stacks",
+          "type": "room",
+          "x": 1200.0,
+          "y": 880.0,
+          "width": 720.0,
+          "height": 620.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "library_stacks"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "书架区 / Library Stacks"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "out_of_sight,not_public_corridor,not_glass_exposed"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "student_hall",
+          "type": "room",
+          "x": 240.0,
+          "y": 280.0,
+          "width": 820.0,
+          "height": 520.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "student_hall"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "学生中心大厅 / Student Center Hall"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "risk"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "public_corridor,glass_exposed"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "classroom_wing",
+          "type": "room",
+          "x": 1120.0,
+          "y": 260.0,
+          "width": 760.0,
+          "height": 500.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "classroom_wing"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "教室区 / Classroom Wing"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "lockable,out_of_sight,not_public_corridor"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "office_corridor",
+          "type": "room",
+          "x": 1940.0,
+          "y": 360.0,
+          "width": 480.0,
+          "height": 360.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "office_corridor"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "办公室走廊 / Office Corridor"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "risk"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "public_corridor"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "service_hall",
+          "type": "room",
+          "x": 2040.0,
+          "y": 900.0,
+          "width": 520.0,
+          "height": 520.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "service_hall"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "服务通道前厅 / Service Hall"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "risk"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "low_visibility,not_glass_exposed"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "seminar_room",
+          "type": "room",
+          "x": 1460.0,
+          "y": 560.0,
+          "width": 320.0,
+          "height": 170.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "seminar_room"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "研讨室 / Seminar Room"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "lockable,out_of_sight,not_public_corridor,not_glass_exposed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "walls",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 9,
+          "name": "north_wall",
+          "type": "wall",
+          "x": 110.0,
+          "y": 150.0,
+          "width": 2620.0,
+          "height": 34.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 10,
+          "name": "west_wall",
+          "type": "wall",
+          "x": 110.0,
+          "y": 150.0,
+          "width": 34.0,
+          "height": 1540.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 11,
+          "name": "south_wall",
+          "type": "wall",
+          "x": 110.0,
+          "y": 1660.0,
+          "width": 2620.0,
+          "height": 34.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 12,
+          "name": "east_wall",
+          "type": "wall",
+          "x": 2700.0,
+          "y": 150.0,
+          "width": 34.0,
+          "height": 1540.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 13,
+          "name": "library_counter",
+          "type": "wall",
+          "x": 300.0,
+          "y": 900.0,
+          "width": 620.0,
+          "height": 38.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 14,
+          "name": "student_center_info_desk",
+          "type": "wall",
+          "x": 430.0,
+          "y": 430.0,
+          "width": 430.0,
+          "height": 48.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 15,
+          "name": "classroom_partition_a",
+          "type": "wall",
+          "x": 1210.0,
+          "y": 390.0,
+          "width": 260.0,
+          "height": 34.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 16,
+          "name": "classroom_partition_b",
+          "type": "wall",
+          "x": 1510.0,
+          "y": 390.0,
+          "width": 260.0,
+          "height": 34.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 17,
+          "name": "classroom_back_wall",
+          "type": "wall",
+          "x": 1190.0,
+          "y": 660.0,
+          "width": 600.0,
+          "height": 38.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 18,
+          "name": "service_storage",
+          "type": "wall",
+          "x": 2140.0,
+          "y": 1120.0,
+          "width": 280.0,
+          "height": 58.0,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "cover",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 19,
+          "name": "reading_table_01",
+          "type": "cover",
+          "x": 430.0,
+          "y": 1060.0,
+          "width": 160.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 20,
+          "name": "reading_table_02",
+          "type": "cover",
+          "x": 430.0,
+          "y": 1170.0,
+          "width": 160.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 21,
+          "name": "reading_table_03",
+          "type": "cover",
+          "x": 670.0,
+          "y": 1060.0,
+          "width": 160.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 22,
+          "name": "reading_table_04",
+          "type": "cover",
+          "x": 670.0,
+          "y": 1170.0,
+          "width": 160.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 23,
+          "name": "bookshelf_01",
+          "type": "cover",
+          "x": 1290.0,
+          "y": 960.0,
+          "width": 70.0,
+          "height": 390.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 24,
+          "name": "bookshelf_02",
+          "type": "cover",
+          "x": 1430.0,
+          "y": 960.0,
+          "width": 70.0,
+          "height": 390.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 25,
+          "name": "bookshelf_03",
+          "type": "cover",
+          "x": 1570.0,
+          "y": 960.0,
+          "width": 70.0,
+          "height": 390.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 26,
+          "name": "student_sofa_01",
+          "type": "cover",
+          "x": 500.0,
+          "y": 580.0,
+          "width": 360.0,
+          "height": 42.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 27,
+          "name": "student_sofa_02",
+          "type": "cover",
+          "x": 500.0,
+          "y": 690.0,
+          "width": 360.0,
+          "height": 42.0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 28,
+          "name": "service_cart",
+          "type": "cover",
+          "x": 2220.0,
+          "y": 970.0,
+          "width": 190.0,
+          "height": 48.0,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "interactables",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 29,
+          "name": "library_map_board",
+          "type": "interactable",
+          "x": 1000.0,
+          "y": 1090.0,
+          "width": 64.0,
+          "height": 64.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "library_map_board"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "map_board"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "图书馆楼层导览 / Library map board"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.map_board"
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "name": "student_map_board",
+          "type": "interactable",
+          "x": 980.0,
+          "y": 500.0,
+          "width": 64.0,
+          "height": 64.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "student_map_board"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "map_board"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "学生中心导览 / Student Center directory"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.map_board"
+            }
+          ]
+        },
+        {
+          "id": 31,
+          "name": "official_alert_phone",
+          "type": "interactable",
+          "x": 610.0,
+          "y": 890.0,
+          "width": 56.0,
+          "height": 56.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "official_alert_phone"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "official_notice"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "手机官方警报 / Official phone alert"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.official_alert"
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "name": "door_lock_demo",
+          "type": "interactable",
+          "x": 1500.0,
+          "y": 560.0,
+          "width": 56.0,
+          "height": 56.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "door_lock_demo"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "door_lock"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "教室门锁检查 / Door lock check"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.door_lock"
+            }
+          ]
+        },
+        {
+          "id": 33,
+          "name": "blue_phone",
+          "type": "interactable",
+          "x": 2260.0,
+          "y": 420.0,
+          "width": 56.0,
+          "height": 56.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "blue_phone"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "support_phone"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "蓝灯求助电话 / Blue light phone"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.support_phone"
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "name": "clue_maintenance_note",
+          "type": "interactable",
+          "x": 1540.0,
+          "y": 690.0,
+          "width": 48.0,
+          "height": 48.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "clue_maintenance_note"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "clue"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "维修便签 / Maintenance note"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.service_route_clue"
+            }
+          ]
+        },
+        {
+          "id": 35,
+          "name": "clue_stack_marker",
+          "type": "interactable",
+          "x": 1670.0,
+          "y": 1180.0,
+          "width": 48.0,
+          "height": 48.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "clue_stack_marker"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "clue"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "书架标记 / Stack marker"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.service_route_clue"
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "name": "clue_robot_log",
+          "type": "interactable",
+          "x": 2260.0,
+          "y": 940.0,
+          "width": 48.0,
+          "height": 48.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "clue_robot_log"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "clue"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "机器人维护记录 / Robot service log"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.service_route_clue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "spawns",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 37,
+          "name": "player_start",
+          "type": "spawn",
+          "x": 550.0,
+          "y": 1260.0,
+          "width": 32.0,
+          "height": 32.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "spawn_id",
+              "type": "string",
+              "value": "player_start"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "patrol_paths",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 38,
+          "name": "gate_guard_path",
+          "type": "patrol",
+          "x": 1320.0,
+          "y": 220.0,
+          "width": 0.0,
+          "height": 0.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "gate_guard_path"
+            },
+            {
+              "name": "raider_role",
+              "type": "string",
+              "value": "guard"
+            },
+            {
+              "name": "path_points",
+              "type": "string",
+              "value": "0,0 280,0 280,180 0,180 0,0"
+            }
+          ],
+          "polyline": [
+            {
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "x": 280.0,
+              "y": 0.0
+            },
+            {
+              "x": 280.0,
+              "y": 180.0
+            },
+            {
+              "x": 0.0,
+              "y": 180.0
+            },
+            {
+              "x": 0.0,
+              "y": 0.0
+            }
+          ]
+        },
+        {
+          "id": 39,
+          "name": "library_search_path",
+          "type": "patrol",
+          "x": 1160.0,
+          "y": 910.0,
+          "width": 0.0,
+          "height": 0.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "library_search_path"
+            },
+            {
+              "name": "raider_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "path_points",
+              "type": "string",
+              "value": "0,0 680,0 680,520 0,520 0,0"
+            }
+          ],
+          "polyline": [
+            {
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "x": 680.0,
+              "y": 0.0
+            },
+            {
+              "x": 680.0,
+              "y": 520.0
+            },
+            {
+              "x": 0.0,
+              "y": 520.0
+            },
+            {
+              "x": 0.0,
+              "y": 0.0
+            }
+          ]
+        },
+        {
+          "id": 40,
+          "name": "student_center_path",
+          "type": "patrol",
+          "x": 360.0,
+          "y": 350.0,
+          "width": 0.0,
+          "height": 0.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "student_center_path"
+            },
+            {
+              "name": "raider_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "path_points",
+              "type": "string",
+              "value": "0,0 620,0 620,420 0,420 0,0"
+            }
+          ],
+          "polyline": [
+            {
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "x": 620.0,
+              "y": 0.0
+            },
+            {
+              "x": 620.0,
+              "y": 420.0
+            },
+            {
+              "x": 0.0,
+              "y": 420.0
+            },
+            {
+              "x": 0.0,
+              "y": 0.0
+            }
+          ]
+        },
+        {
+          "id": 41,
+          "name": "service_hall_path",
+          "type": "patrol",
+          "x": 2020.0,
+          "y": 880.0,
+          "width": 0.0,
+          "height": 0.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "service_hall_path"
+            },
+            {
+              "name": "raider_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "path_points",
+              "type": "string",
+              "value": "0,0 520,0 520,500 0,500 0,0"
+            }
+          ],
+          "polyline": [
+            {
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "x": 520.0,
+              "y": 0.0
+            },
+            {
+              "x": 520.0,
+              "y": 500.0
+            },
+            {
+              "x": 0.0,
+              "y": 500.0
+            },
+            {
+              "x": 0.0,
+              "y": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "exits",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 42,
+          "name": "north_gate",
+          "type": "exit",
+          "x": 1350.0,
+          "y": 80.0,
+          "width": 300.0,
+          "height": 100.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "exit_id",
+              "type": "string",
+              "value": "north_gate"
+            },
+            {
+              "name": "exit_type",
+              "type": "string",
+              "value": "main"
+            },
+            {
+              "name": "required_clues",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "blocked_by",
+              "type": "string",
+              "value": "gate_guard_path"
+            }
+          ]
+        },
+        {
+          "id": 43,
+          "name": "service_tunnel",
+          "type": "exit",
+          "x": 2480.0,
+          "y": 1270.0,
+          "width": 180.0,
+          "height": 130.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "exit_id",
+              "type": "string",
+              "value": "service_tunnel"
+            },
+            {
+              "name": "exit_type",
+              "type": "string",
+              "value": "secret"
+            },
+            {
+              "name": "required_clues",
+              "type": "int",
+              "value": 3
+            },
+            {
+              "name": "blocked_by",
+              "type": "string",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "signage",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 44,
+          "name": "north_exit_sign",
+          "type": "sign",
+          "x": 1390.0,
+          "y": 190.0,
+          "width": 150.0,
+          "height": 46.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "label",
+              "type": "string",
+              "value": "北门出口 / North Gate"
+            }
+          ]
+        },
+        {
+          "id": 45,
+          "name": "service_sign",
+          "type": "sign",
+          "x": 2310.0,
+          "y": 1220.0,
+          "width": 180.0,
+          "height": 46.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "label",
+              "type": "string",
+              "value": "服务通道 / Service Route"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "actors",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "objects": [
+        {
+          "id": 46,
+          "name": "guide_robot",
+          "type": "robot",
+          "x": 690.0,
+          "y": 940.0,
+          "width": 40.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "guide_robot"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "robot"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "guide"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "导览机器人 / Guide Robot"
+            }
+          ]
+        },
+        {
+          "id": 47,
+          "name": "security_robot",
+          "type": "robot",
+          "x": 1740.0,
+          "y": 770.0,
+          "width": 40.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "security_robot"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "robot"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "security"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "安保机器人 / Security Robot"
+            }
+          ]
+        },
+        {
+          "id": 48,
+          "name": "service_robot",
+          "type": "robot",
+          "x": 2180.0,
+          "y": 1040.0,
+          "width": 40.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "service_robot"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "robot"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "service_noise"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "服务机器人 / Service Robot"
+            }
+          ]
+        },
+        {
+          "id": 49,
+          "name": "gate_guard",
+          "type": "raider",
+          "x": 1360.0,
+          "y": 220.0,
+          "width": 40.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "gate_guard"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "raider"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "guard"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "gate_guard_path"
+            }
+          ]
+        },
+        {
+          "id": 50,
+          "name": "library_searcher",
+          "type": "raider",
+          "x": 1220.0,
+          "y": 960.0,
+          "width": 40.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "library_searcher"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "raider"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "library_search_path"
+            }
+          ]
+        },
+        {
+          "id": 51,
+          "name": "student_center_patrol",
+          "type": "raider",
+          "x": 420.0,
+          "y": 380.0,
+          "width": 40.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "student_center_patrol"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "raider"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "student_center_path"
+            }
+          ]
+        },
+        {
+          "id": 52,
+          "name": "service_hall_patrol",
+          "type": "raider",
+          "x": 2070.0,
+          "y": 930.0,
+          "width": 40.0,
+          "height": 40.0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "service_hall_patrol"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "raider"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "service_hall_path"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

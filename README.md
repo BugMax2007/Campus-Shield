@@ -15,7 +15,7 @@ Campus Shield is a playable bilingual 2D campus safety education game. It is des
 
 ### Godot Rebuild
 
-The next-generation version is under `godot/`. This is the preferred direction for the major UI, map, and gameplay rebuild.
+The Godot version under `godot/` is now the primary development target. It contains the rebuilt narrative stealth education level and is the version to improve first.
 
 macOS:
 
@@ -37,7 +37,7 @@ start_godot.bat
 
 ### Python Prototype
 
-The original Python/Pygame prototype is still available as a reference build.
+The original Python/Pygame prototype is now a legacy reference build. Keep it for data, wording, and mechanics reference; do not continue major UI or map work there.
 
 ### macOS
 
@@ -93,6 +93,12 @@ py -3 -m campus_safe_game.main
 
 ```bash
 PYTHONPATH=src python3 -m unittest discover -s tests
+```
+
+Godot rebuild checks:
+
+```bash
+./tools/check_godot_rebuild.sh
 ```
 
 ## UI Snapshots
