@@ -9,6 +9,8 @@ const STATE_INVESTIGATE := "InvestigateNoise"
 const STATE_SEARCH := "Search"
 const STATE_CHASE := "Chase"
 const STATE_RETURN := "Return"
+const STATE_ALERTED := "Alerted"
+const STATE_DISTRACTED := "Distracted"
 
 var actor_id: String = ""
 var role: String = "patrol"
@@ -18,6 +20,7 @@ var patrol_index: int = 0
 var heading: Vector2 = Vector2.RIGHT
 var last_seen: Vector2 = Vector2.ZERO
 var search_timer: float = 0.0
+var seen_cooldown: float = 0.0
 var speed: float = 140.0
 var sight_range: float = 360.0
 var sight_angle: float = 70.0
@@ -37,11 +40,13 @@ func setup(actor: Dictionary, path: Dictionary, active_level) -> void:
 	patrol_index = 0
 	heading = Vector2.RIGHT
 	search_timer = 0.0
+	seen_cooldown = 0.0
 	speed = 125.0 if role == "guard" else 148.0
 
 
 func tick(delta: float, player_position: Vector2, phase: String, noises: Array[Dictionary]) -> void:
-	if phase != "Alert":
+	seen_cooldown = max(0.0, seen_cooldown - delta)
+	if phase not in ["AlertActive", "RouteCommit"]:
 		_follow_patrol(delta)
 		queue_redraw()
 		return
@@ -49,7 +54,9 @@ func tick(delta: float, player_position: Vector2, phase: String, noises: Array[D
 		state = STATE_CHASE
 		last_seen = player_position
 		search_timer = 7.0
-		player_seen.emit(actor_id)
+		if seen_cooldown <= 0.0:
+			player_seen.emit(actor_id)
+			seen_cooldown = 1.5
 	elif state == STATE_CHASE and position.distance_to(player_position) > 520.0:
 		state = STATE_SEARCH
 		search_timer = 6.0
@@ -62,19 +69,27 @@ func tick(delta: float, player_position: Vector2, phase: String, noises: Array[D
 		if search_timer <= 0.0:
 			state = STATE_SEARCH
 			search_timer = 4.0
+	elif state == STATE_DISTRACTED:
+		search_timer -= delta
+		if search_timer <= 0.0:
+			state = STATE_RETURN
+	elif state == STATE_ALERTED:
+		search_timer -= delta
+		if search_timer <= 0.0:
+			state = STATE_RETURN
 
 	if state not in [STATE_CHASE, STATE_SEARCH]:
 		for noise: Dictionary in noises:
 			var noise_pos: Vector2 = noise.get("position", Vector2.ZERO)
 			if position.distance_to(noise_pos) <= hearing_range:
-				state = STATE_INVESTIGATE
+				state = STATE_DISTRACTED if role == "guard" else STATE_INVESTIGATE
 				last_seen = noise_pos
-				search_timer = 4.0
+				search_timer = 5.5 if role == "guard" else 4.0
 				break
 
 	var target: Vector2 = _target_for_state(player_position)
 	_move_toward(target, delta)
-	if phase == "Alert" and position.distance_to(player_position) < 32.0:
+	if phase in ["AlertActive", "RouteCommit"] and position.distance_to(player_position) < 32.0:
 		player_caught.emit(actor_id)
 	queue_redraw()
 
@@ -82,7 +97,7 @@ func tick(delta: float, player_position: Vector2, phase: String, noises: Array[D
 func force_investigate(target: Vector2) -> void:
 	if state == STATE_CHASE:
 		return
-	state = STATE_INVESTIGATE
+	state = STATE_ALERTED
 	last_seen = target
 	search_timer = max(search_timer, 5.5)
 
@@ -90,7 +105,7 @@ func force_investigate(target: Vector2) -> void:
 func _target_for_state(player_position: Vector2) -> Vector2:
 	if state == STATE_CHASE:
 		return player_position
-	if state in [STATE_INVESTIGATE, STATE_SEARCH]:
+	if state in [STATE_INVESTIGATE, STATE_SEARCH, STATE_ALERTED, STATE_DISTRACTED]:
 		return last_seen
 	if state == STATE_RETURN and not patrol_points.is_empty():
 		if position.distance_to(patrol_points[patrol_index]) < 26.0:
@@ -161,4 +176,8 @@ func _state_label() -> String:
 			return "搜索"
 		STATE_RETURN:
 			return "回位"
+		STATE_ALERTED:
+			return "警戒"
+		STATE_DISTRACTED:
+			return "分心"
 	return "巡逻"

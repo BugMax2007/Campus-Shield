@@ -124,7 +124,7 @@ func update_hud(state: Dictionary, interaction_text: String) -> void:
 		int(state.get("clues", 0)),
 		int(state.get("police_eta", 0)),
 	]
-	alert_panel.visible = phase == "Alert"
+	alert_panel.visible = phase in ["AlertActive", "RouteCommit"]
 	alert_label.text = "官方警报：确认位置，避开走廊和主出口暴露区"
 	alert_panel.add_theme_stylebox_override("panel", _style_box(RED, YELLOW, 4, 2))
 	interaction_label.text = interaction_text

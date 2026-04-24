@@ -42,11 +42,35 @@ class GodotLevelDataTest(unittest.TestCase):
         self.assertIn("map_board", interaction_types)
         self.assertIn("official_notice", interaction_types)
         self.assertIn("door_lock", interaction_types)
+        self.assertIn("route_sign", interaction_types)
         self.assertGreaterEqual(sum(1 for obj in interactables if self._props(obj)["interaction_type"] == "clue"), 3)
         for obj in interactables:
             props = self._props(obj)
-            for key in ("interaction_id", "interaction_type", "label", "education_key"):
+            for key in ("interaction_id", "interaction_type", "label", "education_key", "effect_type", "required_phase", "route_value", "feedback_key"):
                 self.assertIn(key, props)
+
+    def test_chapter_one_has_concrete_stealth_spaces(self) -> None:
+        room_names = " ".join(self._props(obj)["room_name"] for obj in self.layers["rooms"]["objects"])
+        for expected in ("图书馆入口", "书架区", "学生中心大厅", "教室 A", "教室 B", "办公室", "储藏间", "服务通道"):
+            self.assertIn(expected, room_names)
+        cover_names = {obj["name"] for obj in self.layers["cover"]["objects"]}
+        self.assertGreaterEqual(sum(1 for name in cover_names if "bookshelf" in name), 4)
+        self.assertGreaterEqual(sum(1 for name in cover_names if "table" in name), 5)
+
+    def test_interaction_effects_cover_gameplay_loop(self) -> None:
+        effects = {self._props(obj)["effect_type"] for obj in self.layers["interactables"]["objects"]}
+        for expected in ("unlock_map", "trigger_alert", "validate_safe_room", "service_clue", "commit_main_exit", "commit_service_route"):
+            self.assertIn(expected, effects)
+
+    def test_raider_roles_cover_gate_library_student_and_service(self) -> None:
+        actors = [self._props(obj) for obj in self.layers["actors"]["objects"]]
+        raiders = [actor for actor in actors if actor["actor_kind"] == "raider"]
+        self.assertGreaterEqual(len(raiders), 4)
+        linked_paths = {actor["patrol_id"] for actor in raiders}
+        self.assertIn("gate_guard_path", linked_paths)
+        self.assertIn("library_search_path", linked_paths)
+        self.assertIn("student_center_path", linked_paths)
+        self.assertIn("service_hall_path", linked_paths)
 
     def test_patrol_paths_and_actors_are_linked(self) -> None:
         paths = {self._props(obj)["patrol_id"] for obj in self.layers["patrol_paths"]["objects"]}

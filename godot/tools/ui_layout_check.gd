@@ -41,7 +41,7 @@ func _show_screen(ui, screen: String, level_data: Dictionary) -> void:
 	var base_state: Dictionary = {
 		"location": "图书馆阅览区 / Library Reading",
 		"objective": "确认官方信息并选择低暴露路线",
-		"phase": "Explore",
+		"phase": "ExploreChecklist",
 		"bottles": 2,
 		"clues": 1,
 		"police_eta": 315,
@@ -57,7 +57,7 @@ func _show_screen(ui, screen: String, level_data: Dictionary) -> void:
 			ui.update_hud(base_state, "E 交互：地图板 / Map Board")
 		"alert":
 			var alert_state: Dictionary = base_state.duplicate()
-			alert_state["phase"] = "Alert"
+			alert_state["phase"] = "AlertActive"
 			ui.show_play()
 			ui.update_hud(alert_state, "Q 抛瓶子制造噪声窗口；Esc 暂停")
 		"phone":

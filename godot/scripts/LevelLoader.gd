@@ -105,6 +105,11 @@ func _parse_interactables(layer: Dictionary) -> Array[Dictionary]:
 			"type": str(props["interaction_type"]),
 			"label": str(props["label"]),
 			"education_key": str(props["education_key"]),
+			"effect_type": str(props.get("effect_type", props["interaction_type"])),
+			"required_phase": str(props.get("required_phase", "any")),
+			"route_value": str(props.get("route_value", "")),
+			"feedback_key": str(props.get("feedback_key", "")),
+			"once": bool(props.get("once", true)),
 			"rect": rect,
 			"position": rect.get_center(),
 		})

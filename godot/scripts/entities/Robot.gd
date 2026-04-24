@@ -28,7 +28,7 @@ func tick(delta: float, player_position: Vector2, phase: String) -> void:
 	if position.distance_to(player_position) < 120.0 and hint_cooldown <= 0.0:
 		hint_requested.emit(_hint_for_phase(phase))
 		hint_cooldown = 9.0
-	if role == "service_noise" and phase == "Alert":
+	if role == "service_noise" and phase in ["AlertActive", "RouteCommit"]:
 		noise_timer -= delta
 		if noise_timer <= 0.0:
 			noise_timer = 14.0
@@ -40,7 +40,7 @@ func _hint_for_phase(phase: String) -> String:
 		return "导览机器人：先找地图板确认位置，不要靠猜测探索。"
 	if role == "security":
 		return "安保机器人：如果附近有巡逻，优先降低暴露并进入可遮挡路线。"
-	if phase == "Alert":
+	if phase in ["AlertActive", "RouteCommit"]:
 		return "服务机器人：移动噪声可能短暂改变搜索方向。"
 	return "服务机器人：服务通道标识通常在后勤区域附近。"
 

@@ -226,6 +226,7 @@ func _interact() -> void:
 
 func _throw_bottle() -> void:
 	if player.throw_bottle():
+		scenario.record_bottle_throw()
 		_on_toast("瓶子已抛出：附近巡逻会短暂调查声音。")
 	else:
 		_on_toast("没有瓶子了。")
@@ -268,7 +269,7 @@ func _check_exits() -> void:
 	var exit_data: Dictionary = level.exit_at(player.position)
 	if exit_data.is_empty():
 		return
-	if scenario.phase != "Alert":
+	if scenario.phase not in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE]:
 		_on_toast("导览阶段不能撤离：先确认官方警报和路线信息。")
 		return
 	var exit_type: String = str(exit_data.get("type", ""))
@@ -287,22 +288,24 @@ func _check_exits() -> void:
 
 func _update_objective_markers() -> void:
 	var target_types: Array[String] = []
-	if scenario.phase == "Explore":
+	if scenario.phase == ScenarioStateScript.PHASE_EXPLORE:
 		if scenario.map_reads <= 0:
 			target_types = ["map_board"]
 		elif not scenario.door_lock_checked:
 			target_types = ["door_lock"]
 		elif not scenario.official_info_read:
 			target_types = ["official_notice"]
-	elif scenario.phase == "Alert" and scenario.clues_found < 3:
+	elif scenario.phase in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE] and scenario.clues_found < 3:
 		target_types = ["clue"]
+	elif scenario.phase in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE]:
+		target_types = ["route_sign"]
 	for item in interactables:
 		var should_highlight: bool = target_types.has(item.interaction_type())
 		if item.interaction_type() == "clue" and item.found:
 			should_highlight = false
 		item.set_highlighted(should_highlight)
 	var active_exits: Array[String] = []
-	if scenario.phase == "Alert":
+	if scenario.phase in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE]:
 		active_exits.append("main")
 		if scenario.clues_found >= 3:
 			active_exits.append("secret")
@@ -312,6 +315,8 @@ func _update_objective_markers() -> void:
 func _main_exit_guarded() -> bool:
 	for raider in raiders:
 		if raider.role == "guard" and raider.position.distance_to(player.position) < 260.0:
+			if raider.state in ["Distracted", "InvestigateNoise", "Search", "Return"]:
+				return false
 			return not level.line_blocked(raider.position, player.position)
 	return false
 
@@ -328,6 +333,7 @@ func _add_noise(noise_position: Vector2) -> void:
 
 
 func _on_player_seen(_raider_id: String) -> void:
+	scenario.record_exposure()
 	_on_toast("你被发现了：立刻打断视线，利用书架或房间遮挡。")
 	for raider in raiders:
 		if raider.actor_id != _raider_id:
@@ -341,7 +347,7 @@ func _on_player_caught(_raider_id: String) -> void:
 func _on_finished(title: String, body: String) -> void:
 	mode = MODE_DEBRIEF
 	player.enabled = false
-	ui.show_debrief(title, body, _hud_state())
+	ui.show_debrief(title, scenario.build_debrief(title, body), _hud_state())
 
 
 func _on_toast(message: String) -> void:
