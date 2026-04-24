@@ -5,8 +5,8 @@ const MapGuideScript := preload("res://scripts/ui/MapGuide.gd")
 
 const INK := Color8(23, 33, 40)
 const MUTED := Color8(76, 87, 94)
-const PAPER := Color8(246, 248, 240, 246)
-const GLASS := Color8(246, 248, 240, 220)
+const PAPER := Color8(248, 249, 242, 255)
+const GLASS := Color8(248, 249, 242, 238)
 const NAVY := Color8(16, 34, 46, 238)
 const BLUE := Color8(36, 113, 150)
 const TEAL := Color8(36, 148, 157)
@@ -29,12 +29,10 @@ var phone_panel: Panel
 var map_panel: Panel
 var pause_panel: Panel
 var debrief_panel: Panel
-var mission_panel: Panel
 var toast_panel: Panel
 var alert_panel: Panel
 var location_label: Label
 var objective_label: Label
-var mission_label: Label
 var status_label: Label
 var alert_label: Label
 var interaction_label: Label
@@ -67,9 +65,7 @@ func show_menu() -> void:
 
 func show_opening() -> void:
 	_hide_all()
-	hud_panel.visible = true
 	opening_panel.visible = true
-	_set_hud_dimmed(true)
 
 
 func show_play() -> void:
@@ -123,14 +119,14 @@ func update_hud(state: Dictionary, interaction_text: String) -> void:
 	var phase: String = str(state.get("phase", "Explore"))
 	location_label.text = str(state.get("location", ""))
 	objective_label.text = str(state.get("objective", ""))
-	mission_label.text = str(state.get("mission", ""))
-	status_label.text = "瓶子 %d  线索 %d/3  ETA %ds" % [
+	status_label.text = "瓶子 %d   线索 %d/3   ETA %ds" % [
 		int(state.get("bottles", 0)),
 		int(state.get("clues", 0)),
 		int(state.get("police_eta", 0)),
 	]
-	alert_label.text = "官方警报：确认信息，避开高暴露区域" if phase == "Alert" else "导览：熟悉地图板、门锁、手机警报"
-	alert_panel.add_theme_stylebox_override("panel", _style_box(RED if phase == "Alert" else NAVY, YELLOW, 8, 2))
+	alert_panel.visible = phase == "Alert"
+	alert_label.text = "官方警报：确认位置，避开走廊和主出口暴露区"
+	alert_panel.add_theme_stylebox_override("panel", _style_box(RED, YELLOW, 4, 2))
 	interaction_label.text = interaction_text
 
 
@@ -149,28 +145,27 @@ func _hide_all() -> void:
 
 
 func _build_menu() -> void:
-	menu_panel = _panel("MainMenu", Rect2(0.06, 0.08, 0.88, 0.82), PAPER, BLUE, 8)
-	_add_label(menu_panel, "Campus Shield", Rect2(0.06, 0.08, 0.56, 0.14), 54, INK)
-	_add_label(menu_panel, "图书馆 + 学生中心 / 潜行教育关卡", Rect2(0.06, 0.22, 0.58, 0.06), 24, BLUE)
-	_add_label(menu_panel, "通过游戏体验，学习在潜在紧急情况下如何确认信息、降低暴露并保护自己。", Rect2(0.06, 0.31, 0.58, 0.12), 22, INK)
-	_add_sign(menu_panel, Rect2(0.06, 0.50, 0.26, 0.12), "主出口", "高风险撤离窗口", RED)
-	_add_sign(menu_panel, Rect2(0.35, 0.50, 0.26, 0.12), "服务通道", "收集 3 条线索", GREEN)
-	_add_sign(menu_panel, Rect2(0.06, 0.66, 0.55, 0.10), "等待援助", "进入合格安全空间，坚持到 ETA 归零", YELLOW)
-	_add_label(menu_panel, "WASD 移动  E 交互  Q 抛瓶子  M 地图板  Tab 手机  Esc 暂停", Rect2(0.06, 0.82, 0.58, 0.06), 17, MUTED)
-	_add_label(menu_panel, "开始", Rect2(0.70, 0.18, 0.20, 0.05), 28, INK)
-	var start_button: Button = _button(menu_panel, "开始游戏", Rect2(0.68, 0.30, 0.24, 0.11), true)
+	menu_panel = _panel("MainMenu", Rect2(0.00, 0.00, 1.00, 1.00), Color8(19, 34, 42, 255), Color.TRANSPARENT, 0)
+	var terminal: Panel = _child_panel(menu_panel, "CampusTerminal", Rect2(0.12, 0.13, 0.76, 0.72), PAPER, Color8(199, 214, 207))
+	_add_label(terminal, "CAMPUS SHIELD", Rect2(0.07, 0.09, 0.56, 0.11), 46, INK)
+	_add_label(terminal, "图书馆 + 学生中心  /  10-15 分钟潜行教育关卡", Rect2(0.07, 0.22, 0.60, 0.05), 19, BLUE)
+	_add_label(terminal, "目标：通过游戏体验，学习在潜在紧急情况下如何确认官方信息、降低暴露并保护自己。", Rect2(0.07, 0.33, 0.54, 0.12), 21, INK)
+	_add_label(terminal, "你需要完成三件事：读地图板、确认手机警报、找到一条低暴露路线。", Rect2(0.07, 0.50, 0.54, 0.08), 17, MUTED)
+	_add_label(terminal, "WASD 移动    E 交互    Q 抛瓶子    Tab 手机    Esc 暂停", Rect2(0.07, 0.79, 0.60, 0.05), 15, MUTED)
+	_add_label(terminal, "关卡入口", Rect2(0.70, 0.17, 0.20, 0.05), 22, INK)
+	var start_button: Button = _button(terminal, "开始游戏", Rect2(0.69, 0.29, 0.22, 0.10), true)
 	start_button.pressed.connect(func() -> void: start_requested.emit())
-	var quit_button: Button = _button(menu_panel, "退出", Rect2(0.68, 0.45, 0.24, 0.09), false)
+	var quit_button: Button = _button(terminal, "退出", Rect2(0.69, 0.43, 0.22, 0.09), false)
 	quit_button.pressed.connect(func() -> void: exit_requested.emit())
-	_add_label(menu_panel, "第一关目标清晰：读地图、确认警报、找线索、避开巡逻、完成三种结局之一。", Rect2(0.68, 0.63, 0.24, 0.18), 18, MUTED)
+	_add_label(terminal, "可选路线：主出口、服务通道、等待援助。游戏不会奖励盲目冒险。", Rect2(0.69, 0.62, 0.22, 0.16), 16, MUTED)
 	root.add_child(menu_panel)
 
 
 func _build_opening() -> void:
-	opening_panel = _panel("Opening", Rect2(0.13, 0.70, 0.74, 0.22), Color8(246, 248, 240, 235), TEAL, 8)
-	_add_label(opening_panel, "导览任务", Rect2(0.035, 0.12, 0.16, 0.16), 25, INK)
-	_add_label(opening_panel, "1. 读最近地图板  2. 查官方手机警报  3. 记住服务通道线索位置", Rect2(0.23, 0.13, 0.64, 0.13), 20, INK)
-	_add_label(opening_panel, "按 Enter 开始。警报后不要盲目冲出口，先确认路线。", Rect2(0.23, 0.52, 0.64, 0.13), 18, MUTED)
+	opening_panel = _panel("Opening", Rect2(0.30, 0.30, 0.40, 0.30), PAPER, TEAL, 6)
+	_add_label(opening_panel, "导览开始", Rect2(0.08, 0.10, 0.70, 0.14), 30, INK)
+	_add_label(opening_panel, "先找到地图板，再确认手机警报。不要把出口当作第一目标。", Rect2(0.08, 0.32, 0.82, 0.22), 19, MUTED)
+	_add_label(opening_panel, "Enter 进入关卡", Rect2(0.08, 0.68, 0.82, 0.12), 20, BLUE)
 	root.add_child(opening_panel)
 
 
@@ -179,23 +174,19 @@ func _build_hud() -> void:
 	hud_panel.name = "HUD"
 	hud_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.add_child(hud_panel)
-	alert_panel = _hud_panel("AlertStrip", Rect2(0.30, 0.020, 0.40, 0.060), NAVY, YELLOW)
-	alert_label = _label(alert_panel, "", Rect2(0.04, 0.18, 0.92, 0.60), 17, WHITE)
-	var location_panel: Panel = _hud_panel("LocationChip", Rect2(0.020, 0.035, 0.25, 0.075), NAVY, TEAL)
-	_add_label(location_panel, "位置", Rect2(0.04, 0.08, 0.25, 0.30), 13, Color8(201, 231, 230))
-	location_label = _label(location_panel, "", Rect2(0.04, 0.40, 0.92, 0.48), 15, WHITE)
-	var objective_panel: Panel = _hud_panel("ObjectiveChip", Rect2(0.020, 0.125, 0.32, 0.100), Color8(21, 48, 54, 235), GREEN)
-	_add_label(objective_panel, "当前目标", Rect2(0.035, 0.08, 0.30, 0.26), 13, Color8(206, 236, 215))
-	objective_label = _label(objective_panel, "", Rect2(0.035, 0.40, 0.92, 0.48), 15, WHITE)
-	mission_panel = _hud_panel("MissionPanel", Rect2(0.020, 0.245, 0.32, 0.135), Color8(244, 248, 240, 226), GREEN)
-	_add_label(mission_panel, "任务清单", Rect2(0.035, 0.08, 0.30, 0.22), 13, GREEN)
-	mission_label = _label(mission_panel, "", Rect2(0.035, 0.33, 0.92, 0.58), 14, INK)
-	var status_panel: Panel = _hud_panel("StatusChip", Rect2(0.735, 0.035, 0.245, 0.075), NAVY, YELLOW)
-	status_label = _label(status_panel, "", Rect2(0.055, 0.25, 0.90, 0.50), 16, WHITE)
-	var action_panel: Panel = _hud_panel("ActionBar", Rect2(0.30, 0.905, 0.40, 0.065), Color8(20, 43, 57, 238), TEAL)
-	interaction_label = _label(action_panel, "", Rect2(0.04, 0.20, 0.92, 0.58), 16, WHITE)
-	toast_panel = _hud_panel("ToastTray", Rect2(0.020, 0.815, 0.42, 0.080), Color8(22, 43, 54, 236), YELLOW)
-	toast_label = _label(toast_panel, "", Rect2(0.04, 0.18, 0.92, 0.62), 15, WHITE)
+	alert_panel = _hud_panel("AlertStrip", Rect2(0.28, 0.028, 0.44, 0.055), RED, YELLOW)
+	alert_label = _label(alert_panel, "", Rect2(0.04, 0.18, 0.92, 0.62), 15, WHITE)
+	alert_panel.visible = false
+	var location_panel: Panel = _hud_panel("LocationChip", Rect2(0.018, 0.026, 0.245, 0.060), Color8(20, 42, 52, 230), TEAL)
+	location_label = _label(location_panel, "", Rect2(0.045, 0.15, 0.91, 0.66), 14, WHITE)
+	var objective_panel: Panel = _hud_panel("ObjectiveChip", Rect2(0.018, 0.100, 0.345, 0.062), Color8(248, 249, 242, 238), GREEN)
+	objective_label = _label(objective_panel, "", Rect2(0.045, 0.14, 0.91, 0.68), 14, INK)
+	var status_panel: Panel = _hud_panel("StatusChip", Rect2(0.745, 0.026, 0.235, 0.060), Color8(20, 42, 52, 230), YELLOW)
+	status_label = _label(status_panel, "", Rect2(0.045, 0.16, 0.91, 0.64), 14, WHITE)
+	var action_panel: Panel = _hud_panel("ActionBar", Rect2(0.35, 0.915, 0.30, 0.055), Color8(20, 42, 52, 235), TEAL)
+	interaction_label = _label(action_panel, "", Rect2(0.05, 0.18, 0.90, 0.62), 15, WHITE)
+	toast_panel = _hud_panel("ToastTray", Rect2(0.018, 0.875, 0.38, 0.060), Color8(20, 42, 52, 235), YELLOW)
+	toast_label = _label(toast_panel, "", Rect2(0.045, 0.17, 0.91, 0.64), 14, WHITE)
 	toast_panel.visible = false
 
 
