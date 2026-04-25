@@ -9,6 +9,8 @@ var speed: float = 270.0
 var facing: Vector2 = Vector2.RIGHT
 var bottles: int = 3
 var enabled: bool = false
+var slow_walking: bool = false
+var moving: bool = false
 
 func setup(active_level, spawn: Vector2) -> void:
 	level = active_level
@@ -16,17 +18,24 @@ func setup(active_level, spawn: Vector2) -> void:
 	facing = Vector2.RIGHT
 	bottles = 3
 	enabled = false
+	slow_walking = false
+	moving = false
 	queue_redraw()
 
 
 func tick(delta: float) -> void:
 	if not enabled:
+		moving = false
 		return
 	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_dir.length() <= 0.0:
+		moving = false
 		return
+	moving = true
+	slow_walking = Input.is_key_pressed(KEY_SHIFT)
 	facing = input_dir.normalized()
-	var move: Vector2 = facing * speed * delta
+	var move_speed: float = speed * (0.48 if slow_walking else 1.0)
+	var move: Vector2 = facing * move_speed * delta
 	_move_axis(Vector2(move.x, 0.0))
 	_move_axis(Vector2(0.0, move.y))
 	queue_redraw()
@@ -49,6 +58,6 @@ func _move_axis(delta_pos: Vector2) -> void:
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, radius, Color8(42, 135, 199))
+	draw_circle(Vector2.ZERO, radius, Color8(42, 135, 199) if not slow_walking else Color8(39, 122, 116))
 	draw_circle(Vector2.ZERO, radius, Color8(237, 246, 252), false, 3.0)
 	draw_line(Vector2.ZERO, facing.normalized() * 28.0, Color8(237, 246, 252), 4.0)

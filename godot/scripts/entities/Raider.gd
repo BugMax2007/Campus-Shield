@@ -14,6 +14,8 @@ const STATE_DISTRACTED := "Distracted"
 
 var actor_id: String = ""
 var role: String = "patrol"
+var floor_id: String = "1F"
+var can_use_stairs: bool = false
 var state: String = STATE_PATROL
 var patrol_points: Array[Vector2] = []
 var patrol_index: int = 0
@@ -31,6 +33,8 @@ var level
 func setup(actor: Dictionary, path: Dictionary, active_level) -> void:
 	actor_id = str(actor.get("id", "raider"))
 	role = str(actor.get("role", "patrol"))
+	floor_id = str(actor.get("floor_id", path.get("floor_id", "1F")))
+	can_use_stairs = bool(actor.get("can_use_stairs", false))
 	position = actor.get("position", Vector2.ZERO)
 	last_seen = position
 	level = active_level
@@ -102,6 +106,17 @@ func force_investigate(target: Vector2) -> void:
 	state = STATE_ALERTED
 	last_seen = target
 	search_timer = max(search_timer, 5.5)
+
+
+func dispatch_to_floor(target_floor: String, stair_entry: Vector2, target: Vector2) -> void:
+	if not can_use_stairs or state == STATE_CHASE:
+		return
+	floor_id = target_floor
+	position = stair_entry
+	state = STATE_ALERTED
+	last_seen = target
+	search_timer = max(search_timer, 6.0)
+	queue_redraw()
 
 
 func _target_for_state(player_position: Vector2) -> Vector2:

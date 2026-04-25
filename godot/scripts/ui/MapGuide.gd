@@ -3,10 +3,12 @@ extends Control
 
 var level_data: Dictionary = {}
 var player_position: Vector2 = Vector2.ZERO
+var current_floor: String = "1F"
 
-func update_map(data: Dictionary, pos: Vector2) -> void:
+func update_map(data: Dictionary, pos: Vector2, floor_id: String = "1F") -> void:
 	level_data = data
 	player_position = pos
+	current_floor = floor_id
 	queue_redraw()
 
 
@@ -17,13 +19,15 @@ func _draw() -> void:
 	var bounds: Rect2 = Rect2(Vector2(18, 18), size - Vector2(36, 36))
 	draw_rect(bounds, Color8(226, 232, 220))
 	draw_rect(bounds, Color8(69, 91, 106), false, 3.0)
-	draw_string(ThemeDB.fallback_font, bounds.position + Vector2(16, 26), "Chapter 01 / Library + Student Center", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color8(24, 38, 52))
+	draw_string(ThemeDB.fallback_font, bounds.position + Vector2(16, 26), "Chapter 01 / Library + Student Center / %s" % current_floor, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color8(24, 38, 52))
 	var map_rect: Rect2 = Rect2(bounds.position + Vector2(16, 42), bounds.size - Vector2(32, 74))
 	var scale: float = min(map_rect.size.x / world_size.x, map_rect.size.y / world_size.y)
 	var scaled_size: Vector2 = world_size * scale
 	var origin: Vector2 = map_rect.position + (map_rect.size - scaled_size) * 0.5
 	draw_rect(Rect2(origin, scaled_size), Color8(191, 204, 190), true)
 	for room: Dictionary in level_data.get("rooms", []):
+		if str(room.get("floor_id", "1F")) != current_floor:
+			continue
 		var rect: Rect2 = room["rect"]
 		var mapped: Rect2 = Rect2(origin + rect.position * scale, rect.size * scale)
 		var color: Color = Color8(196, 225, 204) if str(room.get("risk_level", "")) == "safe" else Color8(232, 198, 190)
@@ -31,13 +35,21 @@ func _draw() -> void:
 		draw_rect(mapped, Color8(69, 91, 106), false, 2.0)
 		if mapped.size.x > 80 and mapped.size.y > 34:
 			draw_string(ThemeDB.fallback_font, mapped.position + Vector2(8, 19), str(room.get("name", "")), HORIZONTAL_ALIGNMENT_LEFT, mapped.size.x - 12, 11, Color8(24, 38, 52))
-	for rect: Rect2 in level_data.get("cover", []):
+	for item: Dictionary in level_data.get("cover_details", []):
+		if str(item.get("floor_id", "1F")) != current_floor:
+			continue
+		var rect: Rect2 = item["rect"]
 		var cover_rect: Rect2 = Rect2(origin + rect.position * scale, rect.size * scale)
 		draw_rect(cover_rect, Color8(122, 88, 55))
-	for rect: Rect2 in level_data.get("walls", []):
+	for item: Dictionary in level_data.get("wall_details", []):
+		if str(item.get("floor_id", "1F")) != current_floor:
+			continue
+		var rect: Rect2 = item["rect"]
 		var wall_rect: Rect2 = Rect2(origin + rect.position * scale, rect.size * scale)
 		draw_rect(wall_rect, Color8(43, 61, 75))
 	for exit_data: Dictionary in level_data.get("exits", []):
+		if str(exit_data.get("floor_id", "1F")) != current_floor:
+			continue
 		var exit_rect: Rect2 = exit_data["rect"]
 		var mapped_exit: Rect2 = Rect2(origin + exit_rect.position * scale, exit_rect.size * scale)
 		draw_rect(mapped_exit, Color8(238, 189, 61), false, 4.0)

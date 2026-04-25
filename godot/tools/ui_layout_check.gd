@@ -46,6 +46,7 @@ func _show_screen(ui, screen: String, level_data: Dictionary) -> void:
 		"clues": 1,
 		"police_eta": 315,
 		"map_reads": 1,
+		"floor_id": "1F",
 	}
 	match screen:
 		"menu":

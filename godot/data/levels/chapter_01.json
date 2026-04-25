@@ -67,6 +67,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "public_corridor,glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -100,6 +105,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "out_of_sight,not_public_corridor,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -133,6 +143,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "out_of_sight,not_public_corridor,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -166,6 +181,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "public_corridor"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -199,6 +219,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "public_corridor,glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -232,6 +257,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "lockable,out_of_sight,not_public_corridor,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -265,6 +295,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "lockable,out_of_sight,not_public_corridor,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -298,6 +333,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "lockable,out_of_sight,not_public_corridor"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -331,6 +371,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "lockable,out_of_sight,not_public_corridor,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -364,6 +409,11 @@
               "name": "safe_tags",
               "type": "string",
               "value": "low_visibility,out_of_sight,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -397,8 +447,203 @@
               "name": "safe_tags",
               "type": "string",
               "value": "public_corridor,glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
+        },
+        {
+          "name": "library_quiet_2f",
+          "type": "room",
+          "x": 700,
+          "y": 1010,
+          "width": 620,
+          "height": 430,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "library_quiet_2f"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "图书馆二层安静学习区 / Quiet Study 2F"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "out_of_sight,not_public_corridor,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 127,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "student_balcony_2f",
+          "type": "room",
+          "x": 240,
+          "y": 250,
+          "width": 650,
+          "height": 470,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "student_balcony_2f"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "学生中心二层平台 / Student Balcony 2F"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "risk"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "public_corridor,glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 128,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "admin_office_2f",
+          "type": "room",
+          "x": 1420,
+          "y": 250,
+          "width": 430,
+          "height": 300,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "admin_office_2f"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "二层办公室 / Admin Office 2F"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "lockable,out_of_sight,not_public_corridor"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 129,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "server_room_2f",
+          "type": "room",
+          "x": 2140,
+          "y": 880,
+          "width": 360,
+          "height": 300,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "server_room_2f"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "机房 / Server Room"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "lockable,out_of_sight,not_public_corridor,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 130,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "service_landing_2f",
+          "type": "room",
+          "x": 2140,
+          "y": 1220,
+          "width": 650,
+          "height": 280,
+          "properties": [
+            {
+              "name": "room_id",
+              "type": "string",
+              "value": "service_landing_2f"
+            },
+            {
+              "name": "room_name",
+              "type": "string",
+              "value": "二层服务门前厅 / Service Landing 2F"
+            },
+            {
+              "name": "risk_level",
+              "type": "string",
+              "value": "safe"
+            },
+            {
+              "name": "safe_tags",
+              "type": "string",
+              "value": "low_visibility,out_of_sight,not_glass_exposed"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 131,
+          "rotation": 0,
+          "visible": true
         }
       ]
     },
@@ -418,7 +663,14 @@
           "width": 1040,
           "height": 34,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 21,
@@ -429,7 +681,14 @@
           "width": 760,
           "height": 34,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 22,
@@ -440,7 +699,14 @@
           "width": 34,
           "height": 1540,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 23,
@@ -451,7 +717,14 @@
           "width": 2580,
           "height": 34,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 24,
@@ -462,7 +735,14 @@
           "width": 34,
           "height": 1360,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 25,
@@ -473,7 +753,14 @@
           "width": 950,
           "height": 28,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 26,
@@ -484,7 +771,14 @@
           "width": 165,
           "height": 30,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 27,
@@ -495,7 +789,14 @@
           "width": 175,
           "height": 30,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 28,
@@ -506,7 +807,14 @@
           "width": 175,
           "height": 30,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 29,
@@ -517,7 +825,14 @@
           "width": 170,
           "height": 30,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 30,
@@ -528,7 +843,14 @@
           "width": 520,
           "height": 30,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 31,
@@ -539,7 +861,14 @@
           "width": 330,
           "height": 42,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 32,
@@ -550,7 +879,14 @@
           "width": 360,
           "height": 30,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 33,
@@ -560,6 +896,67 @@
           "y": 900,
           "width": 34,
           "height": 300,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
+        },
+        {
+          "name": "quiet_study_partition",
+          "type": "wall",
+          "x": 760,
+          "y": 1180,
+          "width": 500,
+          "height": 30,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 132,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "admin_office_wall",
+          "type": "wall",
+          "x": 1420,
+          "y": 550,
+          "width": 430,
+          "height": 30,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 133,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "server_room_wall",
+          "type": "wall",
+          "x": 2140,
+          "y": 1180,
+          "width": 360,
+          "height": 30,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 134,
           "rotation": 0,
           "visible": true
         }
@@ -581,7 +978,14 @@
           "width": 170,
           "height": 46,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 41,
@@ -592,7 +996,14 @@
           "width": 170,
           "height": 46,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 42,
@@ -603,7 +1014,14 @@
           "width": 170,
           "height": 46,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 43,
@@ -614,7 +1032,14 @@
           "width": 170,
           "height": 46,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 44,
@@ -625,7 +1050,14 @@
           "width": 70,
           "height": 440,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 45,
@@ -636,7 +1068,14 @@
           "width": 70,
           "height": 440,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 46,
@@ -647,7 +1086,14 @@
           "width": 70,
           "height": 440,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 47,
@@ -658,7 +1104,14 @@
           "width": 70,
           "height": 440,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 48,
@@ -669,7 +1122,14 @@
           "width": 350,
           "height": 48,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 49,
@@ -680,7 +1140,14 @@
           "width": 350,
           "height": 48,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 50,
@@ -691,7 +1158,14 @@
           "width": 240,
           "height": 40,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 51,
@@ -702,7 +1176,14 @@
           "width": 240,
           "height": 40,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 52,
@@ -713,7 +1194,14 @@
           "width": 250,
           "height": 44,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 53,
@@ -724,7 +1212,14 @@
           "width": 210,
           "height": 46,
           "rotation": 0,
-          "visible": true
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
         },
         {
           "id": 54,
@@ -734,6 +1229,103 @@
           "y": 1330,
           "width": 180,
           "height": 46,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            }
+          ]
+        },
+        {
+          "name": "quiet_table_2f",
+          "type": "cover",
+          "x": 820,
+          "y": 1120,
+          "width": 220,
+          "height": 44,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 135,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "quiet_booth_2f",
+          "type": "cover",
+          "x": 1080,
+          "y": 1260,
+          "width": 180,
+          "height": 50,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 136,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "admin_table_2f",
+          "type": "cover",
+          "x": 1520,
+          "y": 360,
+          "width": 240,
+          "height": 40,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 137,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "server_rack_2f",
+          "type": "cover",
+          "x": 2240,
+          "y": 960,
+          "width": 210,
+          "height": 46,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 138,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "service_crate_2f",
+          "type": "cover",
+          "x": 2360,
+          "y": 1320,
+          "width": 180,
+          "height": 46,
+          "properties": [
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 139,
           "rotation": 0,
           "visible": true
         }
@@ -796,6 +1388,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.map.good"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -849,6 +1471,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.map.good"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -902,6 +1554,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.info.good"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -955,6 +1637,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.safe_room.good"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -1008,6 +1720,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.support.neutral"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -1061,6 +1803,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.clue.good"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -1114,6 +1886,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.clue.good"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -1167,6 +1969,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.clue.good"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -1220,6 +2052,36 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.route.main"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
         },
@@ -1273,8 +2135,1116 @@
               "name": "feedback_key",
               "type": "string",
               "value": "feedback.route.service"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
             }
           ]
+        },
+        {
+          "name": "library_stairs_up",
+          "type": "interactable",
+          "x": 640,
+          "y": 1320,
+          "width": 54,
+          "height": 54,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "library_stairs_up"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "stair"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "图书馆楼梯上行 / Stairs up"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.floor_change"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "floor_change"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "to_2f"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 650
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 1320
+            }
+          ],
+          "id": 140,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "library_stairs_down",
+          "type": "interactable",
+          "x": 640,
+          "y": 1320,
+          "width": 54,
+          "height": 54,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "library_stairs_down"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "stair"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "图书馆楼梯下行 / Stairs down"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.floor_change"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "floor_change"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "to_1f"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 650
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 1320
+            }
+          ],
+          "id": 141,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "student_stairs_up",
+          "type": "interactable",
+          "x": 860,
+          "y": 650,
+          "width": 54,
+          "height": 54,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "student_stairs_up"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "stair"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "学生中心楼梯上行 / Stairs up"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.floor_change"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "floor_change"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "to_2f"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 860
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 650
+            }
+          ],
+          "id": 142,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "student_stairs_down",
+          "type": "interactable",
+          "x": 860,
+          "y": 650,
+          "width": 54,
+          "height": 54,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "student_stairs_down"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "stair"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "学生中心楼梯下行 / Stairs down"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.floor_change"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "floor_change"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "to_1f"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 860
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 650
+            }
+          ],
+          "id": 143,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "lost_student_npc",
+          "type": "interactable",
+          "x": 760,
+          "y": 1180,
+          "width": 48,
+          "height": 48,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "lost_student_npc"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "npc"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "迷路学生 / Lost student"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.low_risk_help"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "npc_lost_student"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": "help_map"
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": "npc_lost_student"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 0
+            }
+          ],
+          "id": 144,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "misinfo_student_npc",
+          "type": "interactable",
+          "x": 420,
+          "y": 500,
+          "width": 48,
+          "height": 48,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "misinfo_student_npc"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "npc"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "惊慌学生 / Panicked student"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.official_info"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "npc_misinfo"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": "correct_misinfo"
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": "misinfo_checked"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 0
+            }
+          ],
+          "id": 145,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "library_staff_npc",
+          "type": "interactable",
+          "x": 880,
+          "y": 1110,
+          "width": 48,
+          "height": 48,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "library_staff_npc"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "npc"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "图书馆员工 / Library staff"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.service_route_clue"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "npc_staff_clue"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": "staff_clue"
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": "staff_clue"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 0
+            }
+          ],
+          "id": 146,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "service_keycard",
+          "type": "interactable",
+          "x": 1600,
+          "y": 420,
+          "width": 42,
+          "height": 42,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "service_keycard"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "keycard"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "服务门禁卡 / Service keycard"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.access_control"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "grant_item"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "service_keycard"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": "feedback.item.good"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": "service_keycard"
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 0
+            }
+          ],
+          "id": 147,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "service_control_box",
+          "type": "interactable",
+          "x": 2260,
+          "y": 1010,
+          "width": 48,
+          "height": 48,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "service_control_box"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "access_panel"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "服务门控制箱 / Service control"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.access_control"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "service_control"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "service_control"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": "feedback.control.good"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": "service_keycard"
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 0
+            }
+          ],
+          "id": 148,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "quiet_hide_spot",
+          "type": "interactable",
+          "x": 1120,
+          "y": 1300,
+          "width": 48,
+          "height": 48,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "quiet_hide_spot"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "hide_spot"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "临时躲藏点 / Temporary hide spot"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.break_line_of_sight"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "hide_spot"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "hide"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": "hide_used"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 0
+            }
+          ],
+          "id": 149,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "broadcast_point",
+          "type": "interactable",
+          "x": 980,
+          "y": 860,
+          "width": 48,
+          "height": 48,
+          "properties": [
+            {
+              "name": "interaction_id",
+              "type": "string",
+              "value": "broadcast_point"
+            },
+            {
+              "name": "interaction_type",
+              "type": "string",
+              "value": "broadcast"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "公共广播 / PA update"
+            },
+            {
+              "name": "education_key",
+              "type": "string",
+              "value": "edu.official_alert"
+            },
+            {
+              "name": "effect_type",
+              "type": "string",
+              "value": "trigger_alert"
+            },
+            {
+              "name": "required_phase",
+              "type": "string",
+              "value": "any"
+            },
+            {
+              "name": "route_value",
+              "type": "string",
+              "value": "official_update"
+            },
+            {
+              "name": "feedback_key",
+              "type": "string",
+              "value": "feedback.info.good"
+            },
+            {
+              "name": "requires_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "grants_item",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "npc_effect",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "noise_level",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "debrief_tag",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "target_floor",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "target_x",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "target_y",
+              "type": "float",
+              "value": 0
+            }
+          ],
+          "id": 150,
+          "rotation": 0,
+          "visible": true
         }
       ]
     },
@@ -1300,6 +3270,11 @@
               "name": "spawn_id",
               "type": "string",
               "value": "player_start"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         }
@@ -1337,6 +3312,11 @@
               "name": "path_points",
               "type": "string",
               "value": "0,0 460,0 460,110 0,110 0,0"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ],
           "polyline": [
@@ -1387,6 +3367,11 @@
               "name": "path_points",
               "type": "string",
               "value": "0,0 650,0 650,560 0,560 0,0"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ],
           "polyline": [
@@ -1437,6 +3422,11 @@
               "name": "path_points",
               "type": "string",
               "value": "0,0 520,0 520,360 0,360 0,0"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ],
           "polyline": [
@@ -1487,6 +3477,11 @@
               "name": "path_points",
               "type": "string",
               "value": "0,0 560,0 560,205 0,205 0,0"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ],
           "polyline": [
@@ -1511,6 +3506,61 @@
               "y": 0
             }
           ]
+        },
+        {
+          "name": "second_floor_path",
+          "type": "patrol",
+          "x": 760,
+          "y": 1030,
+          "width": 0,
+          "height": 0,
+          "properties": [
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "second_floor_path"
+            },
+            {
+              "name": "raider_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "path_points",
+              "type": "string",
+              "value": "0,0 1150,0 1150,430 0,430 0,0"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "polyline": [
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "x": 1150,
+              "y": 0
+            },
+            {
+              "x": 1150,
+              "y": 430
+            },
+            {
+              "x": 0,
+              "y": 430
+            },
+            {
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "id": 154,
+          "rotation": 0,
+          "visible": true
         }
       ]
     },
@@ -1551,6 +3601,11 @@
               "name": "blocked_by",
               "type": "string",
               "value": "gate_guard_path"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -1584,6 +3639,11 @@
               "name": "blocked_by",
               "type": "string",
               "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         }
@@ -1611,6 +3671,11 @@
               "name": "label",
               "type": "string",
               "value": "北门出口 / North Gate"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -1629,6 +3694,11 @@
               "name": "label",
               "type": "string",
               "value": "服务通道 / Service Route"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -1647,6 +3717,11 @@
               "name": "label",
               "type": "string",
               "value": "教室 / Classroom"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
         },
@@ -1665,8 +3740,36 @@
               "name": "label",
               "type": "string",
               "value": "图书馆入口 / Library"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
             }
           ]
+        },
+        {
+          "name": "second_floor_sign",
+          "type": "sign",
+          "x": 700,
+          "y": 960,
+          "width": 210,
+          "height": 46,
+          "properties": [
+            {
+              "name": "label",
+              "type": "string",
+              "value": "二层 / Second Floor"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            }
+          ],
+          "id": 156,
+          "rotation": 0,
+          "visible": true
         }
       ]
     },
@@ -1707,6 +3810,26 @@
               "name": "label",
               "type": "string",
               "value": "导览机器人 / Guide Robot"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": false
             }
           ]
         },
@@ -1740,6 +3863,26 @@
               "name": "label",
               "type": "string",
               "value": "安保机器人 / Security Robot"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": false
             }
           ]
         },
@@ -1773,6 +3916,26 @@
               "name": "label",
               "type": "string",
               "value": "服务机器人 / Service Robot"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": false
             }
           ]
         },
@@ -1811,6 +3974,26 @@
               "name": "label",
               "type": "string",
               "value": "出口守卫 / Gate Guard"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": true
             }
           ]
         },
@@ -1849,6 +4032,26 @@
               "name": "label",
               "type": "string",
               "value": "图书馆巡逻 / Library Patrol"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": true
             }
           ]
         },
@@ -1887,6 +4090,26 @@
               "name": "label",
               "type": "string",
               "value": "学生中心巡逻 / Student Patrol"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": true
             }
           ]
         },
@@ -1925,8 +4148,260 @@
               "name": "label",
               "type": "string",
               "value": "服务区巡逻 / Service Patrol"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": true
             }
           ]
+        },
+        {
+          "name": "npc_lost_student_actor",
+          "type": "npc",
+          "x": 760,
+          "y": 1180,
+          "width": 40,
+          "height": 40,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "npc_lost_student_actor"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "npc"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "lost_student"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "迷路学生 / Lost student"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": "lost_student"
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": "low_risk_help"
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": false
+            }
+          ],
+          "id": 151,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "npc_misinfo_actor",
+          "type": "npc",
+          "x": 420,
+          "y": 500,
+          "width": 40,
+          "height": 40,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "npc_misinfo_actor"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "npc"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "misinfo"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "惊慌学生 / Panicked student"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "1F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": "misinfo"
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": "misinfo_check"
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": false
+            }
+          ],
+          "id": 152,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "npc_staff_actor",
+          "type": "npc",
+          "x": 880,
+          "y": 1110,
+          "width": 40,
+          "height": 40,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "npc_staff_actor"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "npc"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "staff"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "图书馆员工 / Library staff"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": "staff_service_route"
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": "service_clue"
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": false
+            }
+          ],
+          "id": 153,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "name": "second_floor_patrol",
+          "type": "raider",
+          "x": 780,
+          "y": 1050,
+          "width": 40,
+          "height": 40,
+          "properties": [
+            {
+              "name": "actor_id",
+              "type": "string",
+              "value": "second_floor_patrol"
+            },
+            {
+              "name": "actor_kind",
+              "type": "string",
+              "value": "raider"
+            },
+            {
+              "name": "actor_role",
+              "type": "string",
+              "value": "patrol"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "二层巡逻 / 2F Patrol"
+            },
+            {
+              "name": "patrol_id",
+              "type": "string",
+              "value": "second_floor_path"
+            },
+            {
+              "name": "floor_id",
+              "type": "string",
+              "value": "2F"
+            },
+            {
+              "name": "dialogue_id",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "objective_role",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "can_use_stairs",
+              "type": "bool",
+              "value": true
+            }
+          ],
+          "id": 155,
+          "rotation": 0,
+          "visible": true
         }
       ]
     }

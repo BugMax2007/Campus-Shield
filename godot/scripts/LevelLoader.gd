@@ -68,6 +68,7 @@ func _parse_rooms(layer: Dictionary) -> Array[Dictionary]:
 			"name": str(props["room_name"]),
 			"risk_level": str(props["risk_level"]),
 			"safe_tags": _split_tags(str(props["safe_tags"])),
+			"floor_id": str(props.get("floor_id", "1F")),
 			"rect": _rect(obj),
 		})
 	return rooms
@@ -85,9 +86,11 @@ func _parse_named_rect_layer(layer: Dictionary) -> Array[Dictionary]:
 	var items: Array[Dictionary] = []
 	for obj_value: Variant in layer.get("objects", []):
 		var obj: Dictionary = obj_value as Dictionary
+		var props: Dictionary = _props(obj)
 		items.append({
 			"name": str(obj.get("name", "")),
 			"type": str(obj.get("type", "")),
+			"floor_id": str(props.get("floor_id", "1F")),
 			"rect": _rect(obj),
 		})
 	return items
@@ -109,6 +112,15 @@ func _parse_interactables(layer: Dictionary) -> Array[Dictionary]:
 			"required_phase": str(props.get("required_phase", "any")),
 			"route_value": str(props.get("route_value", "")),
 			"feedback_key": str(props.get("feedback_key", "")),
+			"requires_item": str(props.get("requires_item", "")),
+			"grants_item": str(props.get("grants_item", "")),
+			"npc_effect": str(props.get("npc_effect", "")),
+			"noise_level": float(props.get("noise_level", 0.0)),
+			"debrief_tag": str(props.get("debrief_tag", "")),
+			"floor_id": str(props.get("floor_id", "1F")),
+			"target_floor": str(props.get("target_floor", "")),
+			"target_x": float(props.get("target_x", 0.0)),
+			"target_y": float(props.get("target_y", 0.0)),
 			"once": bool(props.get("once", true)),
 			"rect": rect,
 			"position": rect.get_center(),
@@ -122,7 +134,11 @@ func _parse_spawns(layer: Dictionary) -> Dictionary:
 		var obj: Dictionary = obj_value as Dictionary
 		var props: Dictionary = _props(obj)
 		_require_props(props, ["spawn_id"], "spawn")
-		spawns[str(props["spawn_id"])] = _rect(obj).get_center()
+		var rect: Rect2 = _rect(obj)
+		spawns[str(props["spawn_id"])] = {
+			"position": rect.get_center(),
+			"floor_id": str(props.get("floor_id", "1F")),
+		}
 	return spawns
 
 
@@ -143,6 +159,7 @@ func _parse_patrol_paths(layer: Dictionary) -> Dictionary:
 		paths[str(props["patrol_id"])] = {
 			"id": str(props["patrol_id"]),
 			"role": str(props["raider_role"]),
+			"floor_id": str(props.get("floor_id", "1F")),
 			"points": points,
 		}
 	return paths
@@ -159,6 +176,7 @@ func _parse_exits(layer: Dictionary) -> Array[Dictionary]:
 			"type": str(props["exit_type"]),
 			"required_clues": int(props["required_clues"]),
 			"blocked_by": str(props["blocked_by"]),
+			"floor_id": str(props.get("floor_id", "1F")),
 			"rect": _rect(obj),
 		})
 	return exits
@@ -171,6 +189,7 @@ func _parse_signage(layer: Dictionary) -> Array[Dictionary]:
 		var props: Dictionary = _props(obj)
 		signs.append({
 			"label": str(props.get("label", obj.get("name", "Sign"))),
+			"floor_id": str(props.get("floor_id", "1F")),
 			"rect": _rect(obj),
 		})
 	return signs
@@ -188,6 +207,10 @@ func _parse_actors(layer: Dictionary) -> Array[Dictionary]:
 			"role": str(props["actor_role"]),
 			"label": str(props.get("label", props["actor_id"])),
 			"patrol_id": str(props.get("patrol_id", "")),
+			"floor_id": str(props.get("floor_id", "1F")),
+			"dialogue_id": str(props.get("dialogue_id", "")),
+			"objective_role": str(props.get("objective_role", "")),
+			"can_use_stairs": bool(props.get("can_use_stairs", false)),
 			"position": _rect(obj).get_center(),
 		})
 	return actors

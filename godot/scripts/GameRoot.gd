@@ -30,6 +30,9 @@ var raiders: Array = []
 var robots: Array = []
 var noises: Array[Dictionary] = []
 var camera: Camera2D
+var current_floor: String = "1F"
+var hidden_timer: float = 0.0
+var movement_noise_timer: float = 0.0
 
 func _ready() -> void:
 	DisplayServer.window_set_title("Campus Shield")
@@ -51,6 +54,8 @@ func _build_world() -> void:
 	add_child(level)
 	player = PlayerScript.new()
 	player.setup(level, level.spawn_position("player_start"))
+	current_floor = level.spawn_floor("player_start")
+	level.set_floor(current_floor)
 	player.noise_created.connect(_add_noise)
 	add_child(player)
 	for item_data: Dictionary in level_data.get("interactables", []):
@@ -95,10 +100,15 @@ func _build_ui() -> void:
 func _start_game() -> void:
 	mode = MODE_OPENING
 	scenario.reset()
+	current_floor = level.spawn_floor("player_start")
+	level.set_floor(current_floor)
 	player.setup(level, level.spawn_position("player_start"))
 	player.enabled = false
+	hidden_timer = 0.0
+	movement_noise_timer = 0.0
 	noises.clear()
 	_reset_actors()
+	_update_floor_visibility()
 	ui.show_opening()
 	ui.update_hud(_hud_state(), "Enter 开始导览")
 
@@ -149,12 +159,24 @@ func _process(delta: float) -> void:
 
 
 func _update_play(delta: float) -> void:
-	player.tick(delta)
+	if hidden_timer > 0.0:
+		hidden_timer -= delta
+		if hidden_timer <= 0.0:
+			player.enabled = true
+			_on_toast("你离开临时躲藏点。继续按官方信息判断路线。")
+	else:
+		player.tick(delta)
+	_update_player_noise(delta)
 	_update_noises(delta)
 	scenario.tick(delta, level.is_safe_point(player.position))
 	for raider in raiders:
-		raider.tick(delta, player.position, scenario.phase, noises)
+		if raider.floor_id != current_floor:
+			continue
+		var target_position: Vector2 = Vector2(-9000, -9000) if hidden_timer > 0.0 else player.position
+		raider.tick(delta, target_position, scenario.phase, _noises_for_floor(current_floor))
 	for robot in robots:
+		if robot.floor_id != current_floor:
+			continue
 		robot.tick(delta, player.position, scenario.phase)
 	_check_exits()
 	_update_objective_markers()
@@ -210,6 +232,16 @@ func _interact() -> void:
 		_on_toast("附近没有可交互对象。寻找地图板、手机警报、门锁或线索。")
 		return
 	var item_type: String = nearest.interaction_type()
+	if item_type == "stair":
+		_change_floor(nearest.data)
+		return
+	if item_type == "hide_spot":
+		var message: String = scenario.record_interaction(nearest.data)
+		hidden_timer = 6.0
+		player.enabled = false
+		ui.show_dialog("临时躲藏", message)
+		_on_toast(message)
+		return
 	if item_type == "map_board":
 		scenario.record_interaction(nearest.data)
 		mode = MODE_MAP
@@ -217,9 +249,11 @@ func _interact() -> void:
 		ui.show_map(level_data, player.position, _hud_state())
 		return
 	var message: String = scenario.record_interaction(nearest.data)
-	if item_type == "clue":
+	if item_type in ["clue", "keycard"]:
 		nearest.mark_found()
 		nearest.data["found"] = true
+	if item_type == "npc":
+		ui.show_dialog(nearest.label(), message)
 	_on_toast(message)
 	_update_objective_markers()
 
@@ -247,6 +281,8 @@ func _nearest_interactable(type_filter: String = ""):
 	var nearest = null
 	var best_distance: float = 999999.0
 	for item in interactables:
+		if item.floor_id != current_floor:
+			continue
 		if item.found and item.interaction_type() == "clue":
 			continue
 		if type_filter != "" and item.interaction_type() != type_filter:
@@ -281,7 +317,7 @@ func _check_exits() -> void:
 	elif exit_type == "secret":
 		var required: int = int(exit_data.get("required_clues", 3))
 		if not scenario.can_use_secret_exit(required):
-			_on_toast("服务通道未确认：需要三条线索后才能使用。")
+			_on_toast("服务通道未确认：需要三条线索、服务门禁卡和控制箱。")
 			return
 		scenario.finish("服务通道撤离 / Service Route", "你通过线索确认了低暴露服务路线，并避开主出口风险。", "secret_exit")
 
@@ -295,11 +331,20 @@ func _update_objective_markers() -> void:
 			target_types = ["door_lock"]
 		elif not scenario.official_info_read:
 			target_types = ["official_notice"]
-	elif scenario.phase in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE] and scenario.clues_found < 3:
-		target_types = ["clue"]
 	elif scenario.phase in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE]:
-		target_types = ["route_sign"]
+		if scenario.clues_found < 3:
+			target_types = ["clue", "npc", "broadcast"]
+		elif not scenario.inventory.has("service_keycard"):
+			target_types = ["keycard"]
+		elif not scenario.service_control_ready:
+			target_types = ["access_panel"]
+		else:
+			target_types = ["route_sign"]
 	for item in interactables:
+		if item.floor_id != current_floor:
+			item.visible = false
+			continue
+		item.visible = true
 		var should_highlight: bool = target_types.has(item.interaction_type())
 		if item.interaction_type() == "clue" and item.found:
 			should_highlight = false
@@ -307,7 +352,7 @@ func _update_objective_markers() -> void:
 	var active_exits: Array[String] = []
 	if scenario.phase in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE]:
 		active_exits.append("main")
-		if scenario.clues_found >= 3:
+		if scenario.can_use_secret_exit(3):
 			active_exits.append("secret")
 	level.set_active_exit_types(active_exits)
 
@@ -328,8 +373,54 @@ func _update_noises(delta: float) -> void:
 			noises.remove_at(index)
 
 
+func _update_player_noise(delta: float) -> void:
+	if not player.moving:
+		movement_noise_timer = 0.0
+		return
+	if player.slow_walking:
+		scenario.record_slow_walk(delta)
+		movement_noise_timer = 0.0
+		return
+	if scenario.phase not in [ScenarioStateScript.PHASE_ALERT, ScenarioStateScript.PHASE_ROUTE]:
+		return
+	movement_noise_timer -= delta
+	if movement_noise_timer <= 0.0:
+		movement_noise_timer = 1.25
+		noises.append({"position": player.position, "timer": 1.6, "floor_id": current_floor})
+
+
+func _noises_for_floor(floor_id: String) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for noise: Dictionary in noises:
+		if str(noise.get("floor_id", "1F")) == floor_id:
+			result.append(noise)
+	return result
+
+
 func _add_noise(noise_position: Vector2) -> void:
-	noises.append({"position": noise_position, "timer": 4.5})
+	noises.append({"position": noise_position, "timer": 4.5, "floor_id": current_floor})
+
+
+func _change_floor(interaction: Dictionary) -> void:
+	var target_floor: String = str(interaction.get("target_floor", ""))
+	if target_floor == "":
+		_on_toast("楼梯暂时不可用。")
+		return
+	current_floor = target_floor
+	level.set_floor(current_floor)
+	player.position = Vector2(float(interaction.get("target_x", player.position.x)), float(interaction.get("target_y", player.position.y)))
+	scenario.record_floor_change(current_floor)
+	_update_floor_visibility()
+	_on_toast("已到达 %s。重新确认地图板和路线。" % current_floor)
+
+
+func _update_floor_visibility() -> void:
+	for item in interactables:
+		item.visible = item.floor_id == current_floor
+	for robot in robots:
+		robot.visible = robot.floor_id == current_floor
+	for raider in raiders:
+		raider.visible = raider.floor_id == current_floor
 
 
 func _on_player_seen(_raider_id: String) -> void:
@@ -337,7 +428,10 @@ func _on_player_seen(_raider_id: String) -> void:
 	_on_toast("你被发现了：立刻打断视线，利用书架或房间遮挡。")
 	for raider in raiders:
 		if raider.actor_id != _raider_id:
-			raider.force_investigate(player.position)
+			if raider.floor_id == current_floor:
+				raider.force_investigate(player.position)
+			elif raider.can_use_stairs:
+				raider.dispatch_to_floor(current_floor, _stair_entry_for_floor(raider.floor_id, current_floor), player.position)
 
 
 func _on_player_caught(_raider_id: String) -> void:
@@ -357,4 +451,12 @@ func _on_toast(message: String) -> void:
 func _hud_state() -> Dictionary:
 	var state: Dictionary = scenario.hud_state(level.room_name_at(player.position), player.bottles)
 	state["map_reads"] = scenario.map_reads
+	state["floor_id"] = current_floor
 	return state
+
+
+func _stair_entry_for_floor(from_floor: String, to_floor: String) -> Vector2:
+	for item in interactables:
+		if item.interaction_type() == "stair" and item.floor_id == to_floor and str(item.data.get("target_floor", "")) == from_floor:
+			return item.position
+	return player.position

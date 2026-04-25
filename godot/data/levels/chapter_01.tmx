@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="100" height="70" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="127">
+<map version="1.10" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="100" height="70" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="157">
  <objectgroup id="1" name="ground">
   <object id="1" name="chapter_bounds" type="ground" x="0" y="0" width="3200" height="2240"></object>
  </objectgroup>
@@ -10,6 +10,7 @@
     <property name="room_name" type="string" value="图书馆入口 / Library Entry"/>
     <property name="risk_level" type="string" value="risk"/>
     <property name="safe_tags" type="string" value="public_corridor,glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="3" name="library_reading" type="room" x="700" y="1010" width="620" height="430">
@@ -18,6 +19,7 @@
     <property name="room_name" type="string" value="图书馆阅览区 / Reading Room"/>
     <property name="risk_level" type="string" value="safe"/>
     <property name="safe_tags" type="string" value="out_of_sight,not_public_corridor,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="4" name="library_stacks" type="room" x="1360" y="920" width="650" height="620">
@@ -26,6 +28,7 @@
     <property name="room_name" type="string" value="书架区 / Stacks"/>
     <property name="risk_level" type="string" value="safe"/>
     <property name="safe_tags" type="string" value="out_of_sight,not_public_corridor,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="5" name="service_desk" type="room" x="700" y="760" width="430" height="210">
@@ -34,6 +37,7 @@
     <property name="room_name" type="string" value="图书馆服务台 / Service Desk"/>
     <property name="risk_level" type="string" value="risk"/>
     <property name="safe_tags" type="string" value="public_corridor"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="6" name="student_hall" type="room" x="240" y="250" width="650" height="470">
@@ -42,6 +46,7 @@
     <property name="room_name" type="string" value="学生中心大厅 / Student Hall"/>
     <property name="risk_level" type="string" value="risk"/>
     <property name="safe_tags" type="string" value="public_corridor,glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="7" name="classroom_a" type="room" x="940" y="250" width="430" height="300">
@@ -50,6 +55,7 @@
     <property name="room_name" type="string" value="教室 A / Classroom A"/>
     <property name="risk_level" type="string" value="safe"/>
     <property name="safe_tags" type="string" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="8" name="classroom_b" type="room" x="1420" y="250" width="430" height="300">
@@ -58,6 +64,7 @@
     <property name="room_name" type="string" value="教室 B / Classroom B"/>
     <property name="risk_level" type="string" value="safe"/>
     <property name="safe_tags" type="string" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="9" name="office_suite" type="room" x="1920" y="300" width="510" height="390">
@@ -66,6 +73,7 @@
     <property name="room_name" type="string" value="办公室 / Offices"/>
     <property name="risk_level" type="string" value="safe"/>
     <property name="safe_tags" type="string" value="lockable,out_of_sight,not_public_corridor"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="10" name="storage_room" type="room" x="2140" y="880" width="360" height="300">
@@ -74,6 +82,7 @@
     <property name="room_name" type="string" value="储藏间 / Storage"/>
     <property name="risk_level" type="string" value="safe"/>
     <property name="safe_tags" type="string" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="11" name="service_corridor" type="room" x="2140" y="1220" width="650" height="280">
@@ -82,6 +91,7 @@
     <property name="room_name" type="string" value="服务通道 / Service Route"/>
     <property name="risk_level" type="string" value="safe"/>
     <property name="safe_tags" type="string" value="low_visibility,out_of_sight,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="12" name="north_gate_hall" type="room" x="1180" y="90" width="760" height="130">
@@ -90,41 +100,243 @@
     <property name="room_name" type="string" value="北门出口大厅 / North Gate"/>
     <property name="risk_level" type="string" value="risk"/>
     <property name="safe_tags" type="string" value="public_corridor,glass_exposed"/>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="127" name="library_quiet_2f" type="room" x="700" y="1010" width="620" height="430">
+   <properties>
+    <property name="room_id" type="string" value="library_quiet_2f"/>
+    <property name="room_name" type="string" value="图书馆二层安静学习区 / Quiet Study 2F"/>
+    <property name="risk_level" type="string" value="safe"/>
+    <property name="safe_tags" type="string" value="out_of_sight,not_public_corridor,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="128" name="student_balcony_2f" type="room" x="240" y="250" width="650" height="470">
+   <properties>
+    <property name="room_id" type="string" value="student_balcony_2f"/>
+    <property name="room_name" type="string" value="学生中心二层平台 / Student Balcony 2F"/>
+    <property name="risk_level" type="string" value="risk"/>
+    <property name="safe_tags" type="string" value="public_corridor,glass_exposed"/>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="129" name="admin_office_2f" type="room" x="1420" y="250" width="430" height="300">
+   <properties>
+    <property name="room_id" type="string" value="admin_office_2f"/>
+    <property name="room_name" type="string" value="二层办公室 / Admin Office 2F"/>
+    <property name="risk_level" type="string" value="safe"/>
+    <property name="safe_tags" type="string" value="lockable,out_of_sight,not_public_corridor"/>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="130" name="server_room_2f" type="room" x="2140" y="880" width="360" height="300">
+   <properties>
+    <property name="room_id" type="string" value="server_room_2f"/>
+    <property name="room_name" type="string" value="机房 / Server Room"/>
+    <property name="risk_level" type="string" value="safe"/>
+    <property name="safe_tags" type="string" value="lockable,out_of_sight,not_public_corridor,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="131" name="service_landing_2f" type="room" x="2140" y="1220" width="650" height="280">
+   <properties>
+    <property name="room_id" type="string" value="service_landing_2f"/>
+    <property name="room_name" type="string" value="二层服务门前厅 / Service Landing 2F"/>
+    <property name="risk_level" type="string" value="safe"/>
+    <property name="safe_tags" type="string" value="low_visibility,out_of_sight,not_glass_exposed"/>
+    <property name="floor_id" type="string" value="2F"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="3" name="walls">
-  <object id="20" name="north_wall_left" type="wall" x="140" y="160" width="1040" height="34"></object>
-  <object id="21" name="north_gate_lintel" type="wall" x="1940" y="160" width="760" height="34"></object>
-  <object id="22" name="west_wall" type="wall" x="140" y="160" width="34" height="1540"></object>
-  <object id="23" name="south_wall" type="wall" x="140" y="1670" width="2580" height="34"></object>
-  <object id="24" name="east_wall" type="wall" x="2700" y="160" width="34" height="1360"></object>
-  <object id="25" name="student_library_divider" type="wall" x="180" y="735" width="950" height="28"></object>
-  <object id="26" name="classroom_a_front" type="wall" x="940" y="550" width="165" height="30"></object>
-  <object id="27" name="classroom_a_back" type="wall" x="1195" y="550" width="175" height="30"></object>
-  <object id="28" name="classroom_b_front" type="wall" x="1420" y="550" width="175" height="30"></object>
-  <object id="29" name="classroom_b_back" type="wall" x="1680" y="550" width="170" height="30"></object>
-  <object id="30" name="office_partition" type="wall" x="1920" y="700" width="520" height="30"></object>
-  <object id="31" name="library_service_counter" type="wall" x="750" y="840" width="330" height="42"></object>
-  <object id="32" name="storage_south_wall" type="wall" x="2140" y="1180" width="360" height="30"></object>
-  <object id="33" name="service_bend_wall" type="wall" x="2500" y="900" width="34" height="300"></object>
+  <object id="20" name="north_wall_left" type="wall" x="140" y="160" width="1040" height="34">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="21" name="north_gate_lintel" type="wall" x="1940" y="160" width="760" height="34">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="22" name="west_wall" type="wall" x="140" y="160" width="34" height="1540">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="23" name="south_wall" type="wall" x="140" y="1670" width="2580" height="34">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="24" name="east_wall" type="wall" x="2700" y="160" width="34" height="1360">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="25" name="student_library_divider" type="wall" x="180" y="735" width="950" height="28">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="26" name="classroom_a_front" type="wall" x="940" y="550" width="165" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="27" name="classroom_a_back" type="wall" x="1195" y="550" width="175" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="28" name="classroom_b_front" type="wall" x="1420" y="550" width="175" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="29" name="classroom_b_back" type="wall" x="1680" y="550" width="170" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="30" name="office_partition" type="wall" x="1920" y="700" width="520" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="31" name="library_service_counter" type="wall" x="750" y="840" width="330" height="42">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="32" name="storage_south_wall" type="wall" x="2140" y="1180" width="360" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="33" name="service_bend_wall" type="wall" x="2500" y="900" width="34" height="300">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="132" name="quiet_study_partition" type="wall" x="760" y="1180" width="500" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="133" name="admin_office_wall" type="wall" x="1420" y="550" width="430" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="134" name="server_room_wall" type="wall" x="2140" y="1180" width="360" height="30">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="4" name="cover">
-  <object id="40" name="reading_table_01" type="cover" x="780" y="1100" width="170" height="46"></object>
-  <object id="41" name="reading_table_02" type="cover" x="780" y="1240" width="170" height="46"></object>
-  <object id="42" name="reading_table_03" type="cover" x="1040" y="1100" width="170" height="46"></object>
-  <object id="43" name="reading_table_04" type="cover" x="1040" y="1240" width="170" height="46"></object>
-  <object id="44" name="bookshelf_01" type="cover" x="1440" y="990" width="70" height="440"></object>
-  <object id="45" name="bookshelf_02" type="cover" x="1580" y="990" width="70" height="440"></object>
-  <object id="46" name="bookshelf_03" type="cover" x="1720" y="990" width="70" height="440"></object>
-  <object id="47" name="bookshelf_04" type="cover" x="1860" y="990" width="70" height="440"></object>
-  <object id="48" name="student_sofa_01" type="cover" x="360" y="420" width="350" height="48"></object>
-  <object id="49" name="student_sofa_02" type="cover" x="360" y="590" width="350" height="48"></object>
-  <object id="50" name="classroom_table_a" type="cover" x="1030" y="360" width="240" height="40"></object>
-  <object id="51" name="classroom_table_b" type="cover" x="1510" y="360" width="240" height="40"></object>
-  <object id="52" name="office_table" type="cover" x="2040" y="440" width="250" height="44"></object>
-  <object id="53" name="storage_shelf" type="cover" x="2220" y="960" width="210" height="46"></object>
-  <object id="54" name="service_cart" type="cover" x="2350" y="1330" width="180" height="46"></object>
+  <object id="40" name="reading_table_01" type="cover" x="780" y="1100" width="170" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="41" name="reading_table_02" type="cover" x="780" y="1240" width="170" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="42" name="reading_table_03" type="cover" x="1040" y="1100" width="170" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="43" name="reading_table_04" type="cover" x="1040" y="1240" width="170" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="44" name="bookshelf_01" type="cover" x="1440" y="990" width="70" height="440">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="45" name="bookshelf_02" type="cover" x="1580" y="990" width="70" height="440">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="46" name="bookshelf_03" type="cover" x="1720" y="990" width="70" height="440">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="47" name="bookshelf_04" type="cover" x="1860" y="990" width="70" height="440">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="48" name="student_sofa_01" type="cover" x="360" y="420" width="350" height="48">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="49" name="student_sofa_02" type="cover" x="360" y="590" width="350" height="48">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="50" name="classroom_table_a" type="cover" x="1030" y="360" width="240" height="40">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="51" name="classroom_table_b" type="cover" x="1510" y="360" width="240" height="40">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="52" name="office_table" type="cover" x="2040" y="440" width="250" height="44">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="53" name="storage_shelf" type="cover" x="2220" y="960" width="210" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="54" name="service_cart" type="cover" x="2350" y="1330" width="180" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="135" name="quiet_table_2f" type="cover" x="820" y="1120" width="220" height="44">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="136" name="quiet_booth_2f" type="cover" x="1080" y="1260" width="180" height="50">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="137" name="admin_table_2f" type="cover" x="1520" y="360" width="240" height="40">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="138" name="server_rack_2f" type="cover" x="2240" y="960" width="210" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
+  <object id="139" name="service_crate_2f" type="cover" x="2360" y="1320" width="180" height="46">
+   <properties>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="interactables">
   <object id="60" name="library_map_board" type="interactable" x="520" y="1120" width="64" height="64">
@@ -137,6 +349,12 @@
     <property name="required_phase" type="string" value="any"/>
     <property name="route_value" type="string" value="reveals_routes"/>
     <property name="feedback_key" type="string" value="feedback.map.good"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="61" name="student_map_board" type="interactable" x="820" y="500" width="64" height="64">
@@ -149,6 +367,12 @@
     <property name="required_phase" type="string" value="any"/>
     <property name="route_value" type="string" value="reveals_gate"/>
     <property name="feedback_key" type="string" value="feedback.map.good"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="62" name="official_alert_phone" type="interactable" x="610" y="920" width="56" height="56">
@@ -161,6 +385,12 @@
     <property name="required_phase" type="string" value="any"/>
     <property name="route_value" type="string" value="starts_alert"/>
     <property name="feedback_key" type="string" value="feedback.info.good"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="63" name="door_lock_classroom_a" type="interactable" x="1120" y="555" width="56" height="56">
@@ -173,6 +403,12 @@
     <property name="required_phase" type="string" value="any"/>
     <property name="route_value" type="string" value="enables_wait"/>
     <property name="feedback_key" type="string" value="feedback.safe_room.good"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="64" name="blue_phone" type="interactable" x="2240" y="530" width="56" height="56">
@@ -185,6 +421,12 @@
     <property name="required_phase" type="string" value="any"/>
     <property name="route_value" type="string" value="support_info"/>
     <property name="feedback_key" type="string" value="feedback.support.neutral"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="65" name="clue_maintenance_note" type="interactable" x="1520" y="600" width="48" height="48">
@@ -197,6 +439,12 @@
     <property name="required_phase" type="string" value="alert"/>
     <property name="route_value" type="string" value="service_clue_1"/>
     <property name="feedback_key" type="string" value="feedback.clue.good"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="66" name="clue_stack_marker" type="interactable" x="1940" y="1310" width="48" height="48">
@@ -209,6 +457,12 @@
     <property name="required_phase" type="string" value="alert"/>
     <property name="route_value" type="string" value="service_clue_2"/>
     <property name="feedback_key" type="string" value="feedback.clue.good"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="67" name="clue_robot_log" type="interactable" x="2280" y="1060" width="48" height="48">
@@ -221,6 +475,12 @@
     <property name="required_phase" type="string" value="alert"/>
     <property name="route_value" type="string" value="service_clue_3"/>
     <property name="feedback_key" type="string" value="feedback.clue.good"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="68" name="main_exit_route_sign" type="interactable" x="1320" y="240" width="56" height="56">
@@ -233,6 +493,12 @@
     <property name="required_phase" type="string" value="alert"/>
     <property name="route_value" type="string" value="main_exit"/>
     <property name="feedback_key" type="string" value="feedback.route.main"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
    </properties>
   </object>
   <object id="69" name="service_route_sign" type="interactable" x="2140" y="1280" width="56" height="56">
@@ -245,6 +511,243 @@
     <property name="required_phase" type="string" value="alert"/>
     <property name="route_value" type="string" value="service_route"/>
     <property name="feedback_key" type="string" value="feedback.route.service"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+   </properties>
+  </object>
+  <object id="140" name="library_stairs_up" type="interactable" x="640" y="1320" width="54" height="54">
+   <properties>
+    <property name="interaction_id" type="string" value="library_stairs_up"/>
+    <property name="interaction_type" type="string" value="stair"/>
+    <property name="label" type="string" value="图书馆楼梯上行 / Stairs up"/>
+    <property name="education_key" type="string" value="edu.floor_change"/>
+    <property name="effect_type" type="string" value="floor_change"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="to_2f"/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="target_floor" type="string" value="2F"/>
+    <property name="target_x" type="int" value="650"/>
+    <property name="target_y" type="int" value="1320"/>
+   </properties>
+  </object>
+  <object id="141" name="library_stairs_down" type="interactable" x="640" y="1320" width="54" height="54">
+   <properties>
+    <property name="interaction_id" type="string" value="library_stairs_down"/>
+    <property name="interaction_type" type="string" value="stair"/>
+    <property name="label" type="string" value="图书馆楼梯下行 / Stairs down"/>
+    <property name="education_key" type="string" value="edu.floor_change"/>
+    <property name="effect_type" type="string" value="floor_change"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="to_1f"/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="target_floor" type="string" value="1F"/>
+    <property name="target_x" type="int" value="650"/>
+    <property name="target_y" type="int" value="1320"/>
+   </properties>
+  </object>
+  <object id="142" name="student_stairs_up" type="interactable" x="860" y="650" width="54" height="54">
+   <properties>
+    <property name="interaction_id" type="string" value="student_stairs_up"/>
+    <property name="interaction_type" type="string" value="stair"/>
+    <property name="label" type="string" value="学生中心楼梯上行 / Stairs up"/>
+    <property name="education_key" type="string" value="edu.floor_change"/>
+    <property name="effect_type" type="string" value="floor_change"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="to_2f"/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="target_floor" type="string" value="2F"/>
+    <property name="target_x" type="int" value="860"/>
+    <property name="target_y" type="int" value="650"/>
+   </properties>
+  </object>
+  <object id="143" name="student_stairs_down" type="interactable" x="860" y="650" width="54" height="54">
+   <properties>
+    <property name="interaction_id" type="string" value="student_stairs_down"/>
+    <property name="interaction_type" type="string" value="stair"/>
+    <property name="label" type="string" value="学生中心楼梯下行 / Stairs down"/>
+    <property name="education_key" type="string" value="edu.floor_change"/>
+    <property name="effect_type" type="string" value="floor_change"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="to_1f"/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="target_floor" type="string" value="1F"/>
+    <property name="target_x" type="int" value="860"/>
+    <property name="target_y" type="int" value="650"/>
+   </properties>
+  </object>
+  <object id="144" name="lost_student_npc" type="interactable" x="760" y="1180" width="48" height="48">
+   <properties>
+    <property name="interaction_id" type="string" value="lost_student_npc"/>
+    <property name="interaction_type" type="string" value="npc"/>
+    <property name="label" type="string" value="迷路学生 / Lost student"/>
+    <property name="education_key" type="string" value="edu.low_risk_help"/>
+    <property name="effect_type" type="string" value="npc_lost_student"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value=""/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value="help_map"/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value="npc_lost_student"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="target_floor" type="string" value=""/>
+    <property name="target_x" type="int" value="0"/>
+    <property name="target_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="145" name="misinfo_student_npc" type="interactable" x="420" y="500" width="48" height="48">
+   <properties>
+    <property name="interaction_id" type="string" value="misinfo_student_npc"/>
+    <property name="interaction_type" type="string" value="npc"/>
+    <property name="label" type="string" value="惊慌学生 / Panicked student"/>
+    <property name="education_key" type="string" value="edu.official_info"/>
+    <property name="effect_type" type="string" value="npc_misinfo"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value=""/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value="correct_misinfo"/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value="misinfo_checked"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="target_floor" type="string" value=""/>
+    <property name="target_x" type="int" value="0"/>
+    <property name="target_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="146" name="library_staff_npc" type="interactable" x="880" y="1110" width="48" height="48">
+   <properties>
+    <property name="interaction_id" type="string" value="library_staff_npc"/>
+    <property name="interaction_type" type="string" value="npc"/>
+    <property name="label" type="string" value="图书馆员工 / Library staff"/>
+    <property name="education_key" type="string" value="edu.service_route_clue"/>
+    <property name="effect_type" type="string" value="npc_staff_clue"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value=""/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value="staff_clue"/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value="staff_clue"/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="target_floor" type="string" value=""/>
+    <property name="target_x" type="int" value="0"/>
+    <property name="target_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="147" name="service_keycard" type="interactable" x="1600" y="420" width="42" height="42">
+   <properties>
+    <property name="interaction_id" type="string" value="service_keycard"/>
+    <property name="interaction_type" type="string" value="keycard"/>
+    <property name="label" type="string" value="服务门禁卡 / Service keycard"/>
+    <property name="education_key" type="string" value="edu.access_control"/>
+    <property name="effect_type" type="string" value="grant_item"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="service_keycard"/>
+    <property name="feedback_key" type="string" value="feedback.item.good"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value="service_keycard"/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="target_floor" type="string" value=""/>
+    <property name="target_x" type="int" value="0"/>
+    <property name="target_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="148" name="service_control_box" type="interactable" x="2260" y="1010" width="48" height="48">
+   <properties>
+    <property name="interaction_id" type="string" value="service_control_box"/>
+    <property name="interaction_type" type="string" value="access_panel"/>
+    <property name="label" type="string" value="服务门控制箱 / Service control"/>
+    <property name="education_key" type="string" value="edu.access_control"/>
+    <property name="effect_type" type="string" value="service_control"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="service_control"/>
+    <property name="feedback_key" type="string" value="feedback.control.good"/>
+    <property name="requires_item" type="string" value="service_keycard"/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="target_floor" type="string" value=""/>
+    <property name="target_x" type="int" value="0"/>
+    <property name="target_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="149" name="quiet_hide_spot" type="interactable" x="1120" y="1300" width="48" height="48">
+   <properties>
+    <property name="interaction_id" type="string" value="quiet_hide_spot"/>
+    <property name="interaction_type" type="string" value="hide_spot"/>
+    <property name="label" type="string" value="临时躲藏点 / Temporary hide spot"/>
+    <property name="education_key" type="string" value="edu.break_line_of_sight"/>
+    <property name="effect_type" type="string" value="hide_spot"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="hide"/>
+    <property name="feedback_key" type="string" value=""/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value="hide_used"/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="target_floor" type="string" value=""/>
+    <property name="target_x" type="int" value="0"/>
+    <property name="target_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="150" name="broadcast_point" type="interactable" x="980" y="860" width="48" height="48">
+   <properties>
+    <property name="interaction_id" type="string" value="broadcast_point"/>
+    <property name="interaction_type" type="string" value="broadcast"/>
+    <property name="label" type="string" value="公共广播 / PA update"/>
+    <property name="education_key" type="string" value="edu.official_alert"/>
+    <property name="effect_type" type="string" value="trigger_alert"/>
+    <property name="required_phase" type="string" value="any"/>
+    <property name="route_value" type="string" value="official_update"/>
+    <property name="feedback_key" type="string" value="feedback.info.good"/>
+    <property name="requires_item" type="string" value=""/>
+    <property name="grants_item" type="string" value=""/>
+    <property name="npc_effect" type="string" value=""/>
+    <property name="noise_level" type="int" value="0"/>
+    <property name="debrief_tag" type="string" value=""/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="target_floor" type="string" value=""/>
+    <property name="target_x" type="int" value="0"/>
+    <property name="target_y" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>
@@ -252,6 +755,7 @@
   <object id="80" name="player_start" type="spawn" x="360" y="1220" width="32" height="32">
    <properties>
     <property name="spawn_id" type="string" value="player_start"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
  </objectgroup>
@@ -261,6 +765,7 @@
     <property name="patrol_id" type="string" value="gate_guard_path"/>
     <property name="raider_role" type="string" value="guard"/>
     <property name="path_points" type="string" value="0,0 460,0 460,110 0,110 0,0"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
    <polyline points="0,0 460,0 460,110 0,110 0,0"/>
   </object>
@@ -269,6 +774,7 @@
     <property name="patrol_id" type="string" value="library_search_path"/>
     <property name="raider_role" type="string" value="patrol"/>
     <property name="path_points" type="string" value="0,0 650,0 650,560 0,560 0,0"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
    <polyline points="0,0 650,0 650,560 0,560 0,0"/>
   </object>
@@ -277,6 +783,7 @@
     <property name="patrol_id" type="string" value="student_center_path"/>
     <property name="raider_role" type="string" value="patrol"/>
     <property name="path_points" type="string" value="0,0 520,0 520,360 0,360 0,0"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
    <polyline points="0,0 520,0 520,360 0,360 0,0"/>
   </object>
@@ -285,8 +792,18 @@
     <property name="patrol_id" type="string" value="service_hall_path"/>
     <property name="raider_role" type="string" value="patrol"/>
     <property name="path_points" type="string" value="0,0 560,0 560,205 0,205 0,0"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
    <polyline points="0,0 560,0 560,205 0,205 0,0"/>
+  </object>
+  <object id="154" name="second_floor_path" type="patrol" x="760" y="1030" width="0" height="0">
+   <properties>
+    <property name="patrol_id" type="string" value="second_floor_path"/>
+    <property name="raider_role" type="string" value="patrol"/>
+    <property name="path_points" type="string" value="0,0 1150,0 1150,430 0,430 0,0"/>
+    <property name="floor_id" type="string" value="2F"/>
+   </properties>
+   <polyline points="0,0 1150,0 1150,430 0,430 0,0"/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="exits">
@@ -296,6 +813,7 @@
     <property name="exit_type" type="string" value="main"/>
     <property name="required_clues" type="int" value="0"/>
     <property name="blocked_by" type="string" value="gate_guard_path"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="101" name="service_tunnel" type="exit" x="2700" y="1320" width="190" height="140">
@@ -304,6 +822,7 @@
     <property name="exit_type" type="string" value="secret"/>
     <property name="required_clues" type="int" value="3"/>
     <property name="blocked_by" type="string" value=""/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
  </objectgroup>
@@ -311,21 +830,31 @@
   <object id="110" name="north_exit_sign" type="sign" x="1375" y="195" width="185" height="46">
    <properties>
     <property name="label" type="string" value="北门出口 / North Gate"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="111" name="service_sign" type="sign" x="2520" y="1240" width="210" height="46">
    <properties>
     <property name="label" type="string" value="服务通道 / Service Route"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="112" name="classroom_sign" type="sign" x="1040" y="585" width="150" height="40">
    <properties>
     <property name="label" type="string" value="教室 / Classroom"/>
+    <property name="floor_id" type="string" value="1F"/>
    </properties>
   </object>
   <object id="113" name="library_sign" type="sign" x="430" y="1030" width="190" height="46">
    <properties>
     <property name="label" type="string" value="图书馆入口 / Library"/>
+    <property name="floor_id" type="string" value="1F"/>
+   </properties>
+  </object>
+  <object id="156" name="second_floor_sign" type="sign" x="700" y="960" width="210" height="46">
+   <properties>
+    <property name="label" type="string" value="二层 / Second Floor"/>
+    <property name="floor_id" type="string" value="2F"/>
    </properties>
   </object>
  </objectgroup>
@@ -336,6 +865,10 @@
     <property name="actor_kind" type="string" value="robot"/>
     <property name="actor_role" type="string" value="guide"/>
     <property name="label" type="string" value="导览机器人 / Guide Robot"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="false"/>
    </properties>
   </object>
   <object id="121" name="security_robot" type="robot" x="1780" y="760" width="40" height="40">
@@ -344,6 +877,10 @@
     <property name="actor_kind" type="string" value="robot"/>
     <property name="actor_role" type="string" value="security"/>
     <property name="label" type="string" value="安保机器人 / Security Robot"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="false"/>
    </properties>
   </object>
   <object id="122" name="service_robot" type="robot" x="2360" y="1110" width="40" height="40">
@@ -352,6 +889,10 @@
     <property name="actor_kind" type="string" value="robot"/>
     <property name="actor_role" type="string" value="service_noise"/>
     <property name="label" type="string" value="服务机器人 / Service Robot"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="false"/>
    </properties>
   </object>
   <object id="123" name="gate_guard" type="raider" x="1370" y="245" width="40" height="40">
@@ -361,6 +902,10 @@
     <property name="actor_role" type="string" value="guard"/>
     <property name="patrol_id" type="string" value="gate_guard_path"/>
     <property name="label" type="string" value="出口守卫 / Gate Guard"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="true"/>
    </properties>
   </object>
   <object id="124" name="library_patrol" type="raider" x="1360" y="930" width="40" height="40">
@@ -370,6 +915,10 @@
     <property name="actor_role" type="string" value="patrol"/>
     <property name="patrol_id" type="string" value="library_search_path"/>
     <property name="label" type="string" value="图书馆巡逻 / Library Patrol"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="true"/>
    </properties>
   </object>
   <object id="125" name="student_patrol" type="raider" x="330" y="330" width="40" height="40">
@@ -379,6 +928,10 @@
     <property name="actor_role" type="string" value="patrol"/>
     <property name="patrol_id" type="string" value="student_center_path"/>
     <property name="label" type="string" value="学生中心巡逻 / Student Patrol"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="true"/>
    </properties>
   </object>
   <object id="126" name="service_patrol" type="raider" x="2130" y="1245" width="40" height="40">
@@ -388,6 +941,62 @@
     <property name="actor_role" type="string" value="patrol"/>
     <property name="patrol_id" type="string" value="service_hall_path"/>
     <property name="label" type="string" value="服务区巡逻 / Service Patrol"/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="151" name="npc_lost_student_actor" type="npc" x="760" y="1180" width="40" height="40">
+   <properties>
+    <property name="actor_id" type="string" value="npc_lost_student_actor"/>
+    <property name="actor_kind" type="string" value="npc"/>
+    <property name="actor_role" type="string" value="lost_student"/>
+    <property name="label" type="string" value="迷路学生 / Lost student"/>
+    <property name="patrol_id" type="string" value=""/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value="lost_student"/>
+    <property name="objective_role" type="string" value="low_risk_help"/>
+    <property name="can_use_stairs" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="152" name="npc_misinfo_actor" type="npc" x="420" y="500" width="40" height="40">
+   <properties>
+    <property name="actor_id" type="string" value="npc_misinfo_actor"/>
+    <property name="actor_kind" type="string" value="npc"/>
+    <property name="actor_role" type="string" value="misinfo"/>
+    <property name="label" type="string" value="惊慌学生 / Panicked student"/>
+    <property name="patrol_id" type="string" value=""/>
+    <property name="floor_id" type="string" value="1F"/>
+    <property name="dialogue_id" type="string" value="misinfo"/>
+    <property name="objective_role" type="string" value="misinfo_check"/>
+    <property name="can_use_stairs" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="153" name="npc_staff_actor" type="npc" x="880" y="1110" width="40" height="40">
+   <properties>
+    <property name="actor_id" type="string" value="npc_staff_actor"/>
+    <property name="actor_kind" type="string" value="npc"/>
+    <property name="actor_role" type="string" value="staff"/>
+    <property name="label" type="string" value="图书馆员工 / Library staff"/>
+    <property name="patrol_id" type="string" value=""/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="dialogue_id" type="string" value="staff_service_route"/>
+    <property name="objective_role" type="string" value="service_clue"/>
+    <property name="can_use_stairs" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="155" name="second_floor_patrol" type="raider" x="780" y="1050" width="40" height="40">
+   <properties>
+    <property name="actor_id" type="string" value="second_floor_patrol"/>
+    <property name="actor_kind" type="string" value="raider"/>
+    <property name="actor_role" type="string" value="patrol"/>
+    <property name="label" type="string" value="二层巡逻 / 2F Patrol"/>
+    <property name="patrol_id" type="string" value="second_floor_path"/>
+    <property name="floor_id" type="string" value="2F"/>
+    <property name="dialogue_id" type="string" value=""/>
+    <property name="objective_role" type="string" value=""/>
+    <property name="can_use_stairs" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

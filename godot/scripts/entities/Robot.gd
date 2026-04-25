@@ -8,6 +8,7 @@ var actor_id: String = ""
 var role: String = "guide"
 var label: String = "Robot"
 var home: Vector2 = Vector2.ZERO
+var floor_id: String = "1F"
 var hint_cooldown: float = 0.0
 var noise_timer: float = 8.0
 
@@ -16,6 +17,7 @@ func setup(actor: Dictionary) -> void:
 	role = str(actor.get("role", "guide"))
 	label = str(actor.get("label", actor_id))
 	position = actor.get("position", Vector2.ZERO)
+	floor_id = str(actor.get("floor_id", "1F"))
 	home = position
 	hint_cooldown = 0.0
 	noise_timer = 8.0

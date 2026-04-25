@@ -23,6 +23,7 @@ func _run() -> void:
 		var path: Dictionary = level_data.get("patrol_paths", {}).get(patrol_id, {})
 		var raider = RaiderScript.new()
 		raider.setup(actor, path, level)
+		level.set_floor(str(actor.get("floor_id", path.get("floor_id", "1F"))))
 		level.add_child(raider)
 		var start: Vector2 = raider.position
 		for index: int in range(120):

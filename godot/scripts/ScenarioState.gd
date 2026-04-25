@@ -32,6 +32,13 @@ var route_commitment: String = ""
 var ending_type: String = ""
 var outcome_title: String = ""
 var outcome_body: String = ""
+var inventory: Dictionary = {}
+var npc_outcomes: Dictionary = {}
+var misinfo_checked: bool = false
+var slow_walk_time: float = 0.0
+var hide_uses: int = 0
+var floor_changes: int = 0
+var service_control_ready: bool = false
 var found_interactions: Dictionary = {}
 var debrief_events: Array[String] = []
 
@@ -52,6 +59,13 @@ func reset() -> void:
 	ending_type = ""
 	outcome_title = ""
 	outcome_body = ""
+	inventory.clear()
+	npc_outcomes.clear()
+	misinfo_checked = false
+	slow_walk_time = 0.0
+	hide_uses = 0
+	floor_changes = 0
+	service_control_ready = false
 	found_interactions.clear()
 	debrief_events.clear()
 	phase_changed.emit(phase)
@@ -95,6 +109,9 @@ func record_interaction(interaction: Dictionary) -> String:
 	var interaction_type: String = str(interaction.get("type", ""))
 	var effect_type: String = str(interaction.get("effect_type", interaction_type))
 	var required_phase: String = str(interaction.get("required_phase", "any"))
+	var requires_item: String = str(interaction.get("requires_item", ""))
+	if requires_item != "" and not inventory.has(requires_item):
+		return "缺少必要物品：%s。先寻找对应的门禁卡或线索。" % _item_label(requires_item)
 	if not _phase_allowed(required_phase):
 		return "现在不是使用这个信息的时机。先完成当前目标。"
 	if interaction_id != "" and bool(interaction.get("once", true)) and found_interactions.has(interaction_id):
@@ -124,6 +141,37 @@ func record_interaction(interaction: Dictionary) -> String:
 				clues_found = min(3, clues_found + 1)
 				debrief_events.append("你找到服务通道线索 %d/3。" % clues_found)
 			return "服务通道线索 %d/3：三条线索齐全后可使用低暴露路线。" % clues_found
+		"grant_item":
+			var item_id: String = str(interaction.get("grants_item", ""))
+			if item_id != "":
+				inventory[item_id] = true
+			debrief_events.append("你获得了门禁物品：%s。" % _item_label(item_id))
+			return "获得：%s。它可以打开对应门禁或服务控制点。" % _item_label(item_id)
+		"service_control":
+			service_control_ready = true
+			debrief_events.append("你启动了服务门控制箱，服务通道路线具备可执行条件。")
+			return "服务门控制箱已启动：线索齐全并持有门禁卡后可走服务通道。"
+		"npc_lost_student":
+			npc_outcomes["lost_student"] = "helped"
+			map_reads += 1
+			debrief_events.append("你用地图板帮助迷路学生确认位置，没有带对方穿过高风险走廊。")
+			return "迷路学生已结伴确认地图：这属于低风险协助。"
+		"npc_misinfo":
+			npc_outcomes["misinfo_student"] = "corrected"
+			misinfo_checked = true
+			official_info_read = true
+			debrief_events.append("你纠正了错误传言，选择以官方警报为准。")
+			begin_alert()
+			return "错误信息已纠正：以官方警报和现场导视为准。"
+		"npc_staff_clue":
+			npc_outcomes["staff"] = "service_hint"
+			clues_found = min(3, clues_found + 1)
+			debrief_events.append("图书馆员工提供了服务通道线索。")
+			return "员工提示已记录：服务通道线索 %d/3。" % clues_found
+		"hide_spot":
+			hide_uses += 1
+			debrief_events.append("你短暂躲藏以打断视线。")
+			return "你进入临时躲藏点：只能短时使用，不能替代合格安全空间。"
 		"commit_main_exit":
 			route_commitment = "main"
 			phase = PHASE_ROUTE
@@ -136,12 +184,21 @@ func record_interaction(interaction: Dictionary) -> String:
 
 
 func can_use_secret_exit(required_clues: int) -> bool:
-	return clues_found >= required_clues
+	return clues_found >= required_clues and inventory.has("service_keycard") and service_control_ready
 
 
 func record_bottle_throw() -> void:
 	bottle_throws += 1
 	debrief_events.append("你使用瓶子制造噪声窗口。")
+
+
+func record_slow_walk(delta: float) -> void:
+	slow_walk_time += delta
+
+
+func record_floor_change(floor_id: String) -> void:
+	floor_changes += 1
+	debrief_events.append("你切换到 %s，使用楼层信息重新判断路线。" % floor_id)
 
 
 func record_exposure() -> void:
@@ -166,18 +223,26 @@ func build_debrief(title: String, body: String) -> String:
 	var info_text: String = "官方信息：%s" % ("已确认" if official_info_read else "未主动确认")
 	var safe_text: String = "安全空间：%s" % ("检查过门锁" if door_lock_checked else "未检查门锁")
 	var pressure_text: String = "暴露记录：被发现 %d 次，瓶子使用 %d 次。" % [exposures, bottle_throws]
+	var npc_text: String = "NPC 协助：迷路学生 %s，错误信息 %s，员工线索 %s。" % [
+		"已协助" if npc_outcomes.has("lost_student") else "未处理",
+		"已纠正" if misinfo_checked else "未纠正",
+		"已获得" if npc_outcomes.has("staff") else "未获得",
+	]
+	var stealth_text: String = "潜行行为：慢走 %.0fs，躲藏 %d 次，楼层切换 %d 次。" % [slow_walk_time, hide_uses, floor_changes]
 	var advice: Array[String] = [
 		"先确认官方信息，再行动；不要根据传言或好奇心移动。",
 		"路线选择要看暴露度：主出口不一定最安全，服务通道需要证据确认。",
 		"合格避险空间应可上锁、避开视线、远离玻璃和公共走廊。",
 	]
 	var event_text: String = "\n".join(debrief_events.slice(max(0, debrief_events.size() - 5), debrief_events.size()))
-	return "%s\n\n%s\n%s\n%s\n%s\n\n关键记录\n%s\n\n复盘建议\n1. %s\n2. %s\n3. %s\n\n说明：本游戏是教育体验，不能替代学校、当地政府或应急部门的真实指令。" % [
+	return "%s\n\n%s\n%s\n%s\n%s\n%s\n%s\n\n关键记录\n%s\n\n复盘建议\n1. %s\n2. %s\n3. %s\n\n说明：本游戏是教育体验，不能替代学校、当地政府或应急部门的真实指令。" % [
 		body,
 		route_text,
 		info_text,
 		safe_text,
 		pressure_text,
+		npc_text,
+		stealth_text,
 		event_text,
 		advice[0],
 		advice[1],
@@ -186,6 +251,9 @@ func build_debrief(title: String, body: String) -> String:
 
 
 func hud_state(location: String, bottles: int) -> Dictionary:
+	var inventory_labels: PackedStringArray = PackedStringArray()
+	for item_id: String in inventory.keys():
+		inventory_labels.append(_item_label(item_id))
 	return {
 		"phase": phase,
 		"location": location,
@@ -194,6 +262,9 @@ func hud_state(location: String, bottles: int) -> Dictionary:
 		"police_eta": police_eta,
 		"safe_wait": safe_wait_time,
 		"exposures": exposures,
+		"inventory": "、".join(inventory_labels),
+		"npc_count": npc_outcomes.size(),
+		"floor_changes": floor_changes,
 		"objective": _objective_text(),
 		"mission": _mission_text(),
 	}
@@ -229,10 +300,10 @@ func _mission_text() -> String:
 			"✓ 手机警报" if official_info_read else "□ 手机警报",
 		]
 	if phase in [PHASE_ALERT, PHASE_ROUTE]:
-		return "线索 %d/3   安全等待 %.0fs/%ds   ETA %ds" % [
+		return "线索 %d/3   卡 %s   控制 %s   ETA %ds" % [
 			clues_found,
-			safe_wait_time,
-			int(SAFE_WAIT_SECONDS),
+			"有" if inventory.has("service_keycard") else "无",
+			"开" if service_control_ready else "关",
 			int(police_eta),
 		]
 	return "Enter 开始导览"
@@ -243,9 +314,15 @@ func _route_text() -> String:
 		"main_exit":
 			return "主出口撤离，高风险但成功避开守卫窗口"
 		"secret_exit":
-			return "服务通道撤离，依靠三条线索确认低暴露路线"
+			return "服务通道撤离，依靠线索、门禁卡和服务控制确认低暴露路线"
 		"wait_assistance":
 			return "安全等待，留在合格空间直到援助到达"
 		"caught":
 			return "失败，被巡逻持续发现或追上"
 	return "未完成"
+
+
+func _item_label(item_id: String) -> String:
+	if item_id == "service_keycard":
+		return "服务门禁卡"
+	return item_id

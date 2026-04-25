@@ -29,6 +29,7 @@ var phone_panel: Panel
 var map_panel: Panel
 var pause_panel: Panel
 var debrief_panel: Panel
+var dialog_panel: Panel
 var toast_panel: Panel
 var alert_panel: Panel
 var location_label: Label
@@ -42,6 +43,8 @@ var phone_side_label: Label
 var map_route_label: Label
 var debrief_title: Label
 var debrief_body: Label
+var dialog_title: Label
+var dialog_body: Label
 var map_guide
 
 func _ready() -> void:
@@ -55,6 +58,7 @@ func _ready() -> void:
 	_build_map()
 	_build_pause()
 	_build_debrief()
+	_build_dialog()
 	show_menu()
 
 
@@ -91,9 +95,10 @@ func show_map(level_data: Dictionary, player_position: Vector2, state: Dictionar
 	_hide_all()
 	hud_panel.visible = true
 	map_panel.visible = true
-	map_guide.update_map(level_data, player_position)
-	map_route_label.text = "当前位置\n%s\n\n主出口\n高风险。守卫离开视线或被噪声引开后才有窗口。\n\n服务通道\n需要 %d/3 条线索。齐全后可低暴露撤离。\n\n等待援助\n进入合格安全空间，保持低暴露直到 ETA 归零。" % [
+	map_guide.update_map(level_data, player_position, str(state.get("floor_id", "1F")))
+	map_route_label.text = "当前位置\n%s\n\n当前楼层\n%s\n\n主出口\n高风险。守卫被噪声引开后才有窗口。\n\n服务通道\n线索 %d/3，门禁卡与控制箱缺一不可。\n\n等待援助\n进入合格安全空间，保持低暴露。" % [
 		state.get("location", ""),
+		state.get("floor_id", "1F"),
 		int(state.get("clues", 0)),
 	]
 
@@ -113,6 +118,15 @@ func show_debrief(title: String, body: String, state: Dictionary) -> void:
 		int(state.get("clues", 0)),
 		int(state.get("map_reads", 0)),
 	]
+
+
+func show_dialog(title: String, body: String) -> void:
+	dialog_title.text = title
+	dialog_body.text = body
+	dialog_panel.visible = true
+	var tween: Tween = create_tween()
+	tween.tween_interval(5.5)
+	tween.tween_callback(func() -> void: dialog_panel.visible = false)
 
 
 func update_hud(state: Dictionary, interaction_text: String) -> void:
@@ -246,6 +260,14 @@ func _build_debrief() -> void:
 	var menu_button: Button = _button(debrief_panel, "主菜单", Rect2(0.73, 0.43, 0.20, 0.10), false)
 	menu_button.pressed.connect(func() -> void: menu_requested.emit())
 	root.add_child(debrief_panel)
+
+
+func _build_dialog() -> void:
+	dialog_panel = _panel("DialogBar", Rect2(0.23, 0.76, 0.54, 0.13), Color8(248, 249, 242, 246), TEAL, 6)
+	dialog_title = _label(dialog_panel, "", Rect2(0.04, 0.12, 0.30, 0.24), 17, BLUE)
+	dialog_body = _label(dialog_panel, "", Rect2(0.04, 0.40, 0.92, 0.42), 15, INK)
+	dialog_panel.visible = false
+	root.add_child(dialog_panel)
 
 
 func _panel(panel_name: String, anchors: Rect2, fill: Color, border: Color, radius: int) -> Panel:

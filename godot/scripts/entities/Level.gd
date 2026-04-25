@@ -22,6 +22,7 @@ var cover_details: Array[Dictionary] = []
 var exits: Array[Dictionary] = []
 var signage: Array[Dictionary] = []
 var active_exit_types: Array[String] = []
+var current_floor: String = "1F"
 
 func setup(level_data: Dictionary) -> void:
 	data = level_data
@@ -35,17 +36,39 @@ func setup(level_data: Dictionary) -> void:
 	queue_redraw()
 
 
+func set_floor(floor_id: String) -> void:
+	if current_floor == floor_id:
+		return
+	current_floor = floor_id
+	queue_redraw()
+
+
 func spawn_position(spawn_id: String) -> Vector2:
 	var spawns: Dictionary = data.get("spawns", {})
-	return spawns.get(spawn_id, Vector2(550, 1260))
+	var spawn = spawns.get(spawn_id, {})
+	if spawn is Dictionary:
+		return spawn.get("position", Vector2(550, 1260))
+	return spawn
+
+
+func spawn_floor(spawn_id: String) -> String:
+	var spawns: Dictionary = data.get("spawns", {})
+	var spawn = spawns.get(spawn_id, {})
+	if spawn is Dictionary:
+		return str(spawn.get("floor_id", "1F"))
+	return "1F"
 
 
 func point_blocked(point: Vector2, radius: float) -> bool:
 	var probe: Rect2 = Rect2(point - Vector2(radius, radius), Vector2(radius * 2.0, radius * 2.0))
 	for rect: Rect2 in walls:
+		if not _rect_active(rect, "walls"):
+			continue
 		if probe.intersects(rect):
 			return true
 	for rect: Rect2 in cover:
+		if not _rect_active(rect, "cover"):
+			continue
 		if probe.intersects(rect):
 			return true
 	return false
@@ -53,9 +76,13 @@ func point_blocked(point: Vector2, radius: float) -> bool:
 
 func line_blocked(start: Vector2, end: Vector2) -> bool:
 	for rect: Rect2 in walls:
+		if not _rect_active(rect, "walls"):
+			continue
 		if _segment_intersects_rect(start, end, rect):
 			return true
 	for rect: Rect2 in cover:
+		if not _rect_active(rect, "cover"):
+			continue
 		if _segment_intersects_rect(start, end, rect):
 			return true
 	return false
@@ -63,6 +90,8 @@ func line_blocked(start: Vector2, end: Vector2) -> bool:
 
 func room_at(point: Vector2) -> Dictionary:
 	for room: Dictionary in rooms:
+		if str(room.get("floor_id", "1F")) != current_floor:
+			continue
 		var rect: Rect2 = room["rect"]
 		if rect.has_point(point):
 			return room
@@ -83,6 +112,8 @@ func is_safe_point(point: Vector2) -> bool:
 
 func exit_at(point: Vector2) -> Dictionary:
 	for exit_data: Dictionary in exits:
+		if str(exit_data.get("floor_id", "1F")) != current_floor:
+			continue
 		var rect: Rect2 = exit_data["rect"]
 		if rect.has_point(point):
 			return exit_data
@@ -101,6 +132,8 @@ func _draw() -> void:
 	draw_rect(Rect2(150, 190, 2520, 1440), COLOR_WALKWAY)
 	_draw_walkway_lines()
 	for room: Dictionary in rooms:
+		if str(room.get("floor_id", "1F")) != current_floor:
+			continue
 		var rect: Rect2 = room["rect"]
 		var color: Color = COLOR_SAFE if str(room.get("risk_level", "")) == "safe" else COLOR_RISK
 		draw_rect(rect, color)
@@ -111,10 +144,16 @@ func _draw() -> void:
 			_draw_cover_rect(rect, "")
 	else:
 		for item: Dictionary in cover_details:
+			if str(item.get("floor_id", "1F")) != current_floor:
+				continue
 			_draw_cover_rect(item["rect"], str(item.get("name", "")))
 	for rect: Rect2 in walls:
+		if not _rect_active(rect, "walls"):
+			continue
 		draw_rect(rect, COLOR_WALL)
 	for exit_data: Dictionary in exits:
+		if str(exit_data.get("floor_id", "1F")) != current_floor:
+			continue
 		var exit_rect: Rect2 = exit_data["rect"]
 		var exit_type: String = str(exit_data.get("type", ""))
 		var active: bool = active_exit_types.has(exit_type)
@@ -124,6 +163,8 @@ func _draw() -> void:
 		draw_rect(exit_rect, COLOR_SIGN, false, 5.0)
 		_draw_label(_exit_label(exit_data), exit_rect.position + Vector2(12, 36), 16)
 	for sign: Dictionary in signage:
+		if str(sign.get("floor_id", "1F")) != current_floor:
+			continue
 		var sign_rect: Rect2 = sign["rect"]
 		draw_rect(sign_rect, COLOR_SIGN)
 		_draw_label(str(sign.get("label", "Sign")), sign_rect.position + Vector2(8, 30), 14)
@@ -163,6 +204,14 @@ func _draw_bookshelf_lines(rect: Rect2) -> void:
 
 func _draw_label(text: String, pos: Vector2, size: int) -> void:
 	draw_string(ThemeDB.fallback_font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, size, COLOR_TEXT)
+
+
+func _rect_active(rect: Rect2, collection: String) -> bool:
+	var details: Array[Dictionary] = cover_details if collection == "cover" else data.get("wall_details", [])
+	for item: Dictionary in details:
+		if item.get("rect", Rect2()) == rect:
+			return str(item.get("floor_id", "1F")) == current_floor
+	return true
 
 
 func _exit_label(exit_data: Dictionary) -> String:
