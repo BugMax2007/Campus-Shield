@@ -162,10 +162,10 @@ func _build_menu() -> void:
 
 
 func _build_opening() -> void:
-	opening_panel = _panel("Opening", Rect2(0.30, 0.30, 0.40, 0.30), PAPER, TEAL, 6)
-	_add_label(opening_panel, "导览开始", Rect2(0.08, 0.10, 0.70, 0.14), 30, INK)
-	_add_label(opening_panel, "先找到地图板，再确认手机警报。不要把出口当作第一目标。", Rect2(0.08, 0.32, 0.82, 0.22), 19, MUTED)
-	_add_label(opening_panel, "Enter 进入关卡", Rect2(0.08, 0.68, 0.82, 0.12), 20, BLUE)
+	opening_panel = _panel("Opening", Rect2(0.04, 0.70, 0.42, 0.18), PAPER, TEAL, 6)
+	_add_label(opening_panel, "导览开始", Rect2(0.06, 0.10, 0.55, 0.18), 24, INK)
+	_add_label(opening_panel, "先读地图板，再确认手机警报；出口不是第一目标。", Rect2(0.06, 0.36, 0.88, 0.20), 15, MUTED)
+	_add_label(opening_panel, "Enter 开始移动", Rect2(0.06, 0.68, 0.55, 0.16), 17, BLUE)
 	root.add_child(opening_panel)
 
 

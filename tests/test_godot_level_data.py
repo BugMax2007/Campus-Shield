@@ -72,6 +72,21 @@ class GodotLevelDataTest(unittest.TestCase):
         self.assertIn("student_center_path", linked_paths)
         self.assertIn("service_hall_path", linked_paths)
 
+    def test_patrol_points_are_not_inside_obstacles(self) -> None:
+        blockers = [self._rect(obj) for obj in self.layers["walls"]["objects"]]
+        blockers.extend(self._rect(obj) for obj in self.layers["cover"]["objects"])
+        for path_obj in self.layers["patrol_paths"]["objects"]:
+            origin_x = float(path_obj["x"])
+            origin_y = float(path_obj["y"])
+            for point in path_obj.get("polyline", []):
+                x = origin_x + float(point["x"])
+                y = origin_y + float(point["y"])
+                for blocker in blockers:
+                    self.assertFalse(
+                        self._expanded_contains(blocker, x, y, 16),
+                        f"patrol point blocked: {path_obj['name']} at {(x, y)} inside {blocker}",
+                    )
+
     def test_patrol_paths_and_actors_are_linked(self) -> None:
         paths = {self._props(obj)["patrol_id"] for obj in self.layers["patrol_paths"]["objects"]}
         self.assertGreaterEqual(len(paths), 4)
@@ -101,6 +116,13 @@ class GodotLevelDataTest(unittest.TestCase):
 
     def _props(self, obj: dict) -> dict:
         return {prop["name"]: prop["value"] for prop in obj.get("properties", [])}
+
+    def _rect(self, obj: dict) -> tuple[float, float, float, float]:
+        return (float(obj["x"]), float(obj["y"]), float(obj["width"]), float(obj["height"]))
+
+    def _expanded_contains(self, rect: tuple[float, float, float, float], x: float, y: float, margin: float) -> bool:
+        left, top, width, height = rect
+        return left - margin <= x <= left + width + margin and top - margin <= y <= top + height + margin
 
 
 if __name__ == "__main__":

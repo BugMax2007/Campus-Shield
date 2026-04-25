@@ -21,6 +21,7 @@ var heading: Vector2 = Vector2.RIGHT
 var last_seen: Vector2 = Vector2.ZERO
 var search_timer: float = 0.0
 var seen_cooldown: float = 0.0
+var stuck_timer: float = 0.0
 var speed: float = 140.0
 var sight_range: float = 360.0
 var sight_angle: float = 70.0
@@ -41,6 +42,7 @@ func setup(actor: Dictionary, path: Dictionary, active_level) -> void:
 	heading = Vector2.RIGHT
 	search_timer = 0.0
 	seen_cooldown = 0.0
+	stuck_timer = 0.0
 	speed = 125.0 if role == "guard" else 148.0
 
 
@@ -118,7 +120,7 @@ func _patrol_target() -> Vector2:
 	if patrol_points.is_empty():
 		return position
 	var target: Vector2 = patrol_points[patrol_index]
-	if position.distance_to(target) < 22.0:
+	if position.distance_to(target) < 22.0 or _point_is_blocked(target):
 		patrol_index = (patrol_index + 1) % patrol_points.size()
 		target = patrol_points[patrol_index]
 	return target
@@ -131,16 +133,33 @@ func _follow_patrol(delta: float) -> void:
 func _move_toward(target: Vector2, delta: float) -> void:
 	var delta_vec: Vector2 = target - position
 	if delta_vec.length() <= 1.0:
+		stuck_timer = 0.0
 		return
 	heading = delta_vec.normalized()
 	var step: Vector2 = heading * speed * delta
 	var next_position: Vector2 = position + step
 	if level == null or not level.point_blocked(next_position, 16.0):
 		position = next_position
+		stuck_timer = 0.0
 		return
 	var side: Vector2 = Vector2(-heading.y, heading.x) * speed * delta
 	if level != null and not level.point_blocked(position + side, 16.0):
 		position += side
+		stuck_timer = 0.0
+		return
+	var other_side: Vector2 = -side
+	if level != null and not level.point_blocked(position + other_side, 16.0):
+		position += other_side
+		stuck_timer = 0.0
+		return
+	stuck_timer += delta
+	if stuck_timer > 0.7 and state in [STATE_PATROL, STATE_RETURN]:
+		patrol_index = (patrol_index + 1) % patrol_points.size()
+		stuck_timer = 0.0
+
+
+func _point_is_blocked(point: Vector2) -> bool:
+	return level != null and level.point_blocked(point, 16.0)
 
 
 func _can_see_player(player_position: Vector2) -> bool:
